@@ -4,6 +4,6 @@ After you add your credentials, change the filename to creds.js and it will be i
  */
 
 module.exports = {
-  username: APIusernameH,
+  username: APIusername,
   password: APIpassword
 };
