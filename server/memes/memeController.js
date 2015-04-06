@@ -1,7 +1,7 @@
 var http = require('http');
 var querystring = require('querystring');
 
-var creds = require('../config/creds.js');
+var creds = require('../config/server-config.js');
 
 
 module.exports = {
