@@ -9,5 +9,5 @@ module.exports = function (app, express) {
   app.use(bodyParser.json());
 
   app.get('/memes', memeController.getMemes);
-  app.get('/memes/create', memeController.createMeme);
+  app.post('/memes/create', memeController.createMeme);
 };
