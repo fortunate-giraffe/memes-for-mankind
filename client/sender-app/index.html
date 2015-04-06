@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="app">
+  <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link href="../../bower_components/toastr/toastr.css" rel="stylesheet"/>
+      <link href="content/styles.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div ui-view></div>
+
+    <script src="../../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../../bower_components/toastr/toastr.js"></script>
+    <script src="../../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../../bower_components/angular/angular.js"></script>
+    <script src="../../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+
+    <!-- App Module -->
+    <script src="app.module.js"></script>
+
+    <!-- gameplay views -->
+    <script src="waiting/waiting.module.js"></script>
+    <script src="waiting/waiting.js"></script>
+    <script src="creating/creating.module.js"></script>
+    <script src="creating/creating.js"></script>
+    <script src="choosing/choosing.module.js"></script>
+    <script src="choosing/choosing.js"></script>
+    <script src="start/start.module.js"></script>
+    <script src="start/start.js"></script>
+    <script src="prompt/prompt.module.js"></script>
+    <script src="prompt/prompt.js"></script>
+
+    <!-- layout -->
+    <script src="layout/layout.module.js"></script>
+    <script src="layout/shell.js"></script>
+    <script src="layout/footer.js"></script>
+    <script src="layout/header.js"></script>
+
+  </body>
+</html>
