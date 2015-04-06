@@ -1,7 +1,7 @@
 var http = require('http');
 var querystring = require('querystring');
 
-var creds = require('../config/creds.js');
+var creds = require('../config/server-config.js');
 
 
 module.exports = {
@@ -76,10 +76,10 @@ module.exports = {
       'languageCode': 'en',
 
       // Required from client
-      'generatorID': request.body.generator_id || 45,
-      'imageID': request.body.imageID || 20,
-      'text0': request.body.topText || 'toptext',
-      'text1': request.body.bottomText || 'bottomtext'
+      'generatorID': request.body.generatorID,
+      'imageID': request.body.imageID,
+      'text0': request.body.topText,
+      'text1': request.body.bottomText
     });
 
     var options = {
