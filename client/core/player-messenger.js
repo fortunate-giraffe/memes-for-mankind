@@ -1,7 +1,7 @@
 (function (){
 'use strict';
-angular.module('app.player', ['app.messaging'])
-  .factory('player', function (messenger) {
+angular.module('app.player-messenger', ['app.messaging'])
+  .factory('playerMessenger', function (messenger) {
     
     // TODO: get rid of these! make gameRecipient an app constant, user a service, maybe defer to messenger
     var user = 'andy'; 
