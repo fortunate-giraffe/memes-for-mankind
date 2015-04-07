@@ -7,14 +7,14 @@
     "body-parser": "^1.12.2",
     "express": "^4.12.3",
     "ws": "^0.7.1",
-    "bower": "0.6.x"
+    "bower": "1.4.1"
   },
   "devDependencies": {},
   "engines": {
     "node": "0.10.x"
   },
   "scripts": {
-    "postinstall": "bower install",
+    "postinstall": "node node_modules/bower/bin/bower install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
