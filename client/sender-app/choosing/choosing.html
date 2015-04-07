@@ -2,6 +2,6 @@
   <span> {{ vm.title }} </span>
   <br>
   <div class="row top-buffer" ng-repeat="rows in vm.test">
-      <img class="col-lg-6" ng-repeat="item in rows" src="{{ item }}" draggable="false"  ng-click="vm.clickHandler($event)">
+      <img class="col-lg-6" ng-repeat="item in rows" ng-src="{{ item }}" draggable="false"  ng-click="vm.clickHandler($event)">
   </div>
 </section>
