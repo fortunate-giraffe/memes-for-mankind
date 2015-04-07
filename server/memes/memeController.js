@@ -26,14 +26,13 @@ module.exports = {
       },
       {
         ... more meme objects
-      }
-      ]
+      }]
     }
    */
   getMemes: function(request, response, next){
     var options = {
       host: 'version1.api.memegenerator.net',
-      path: '/Instances_Select_ByPopular?languageCode=en',
+      path: '/Generators_Select_ByPopular',
       method: 'GET'
     };
     return http.get(options, function(res){
