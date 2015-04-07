@@ -1,5 +1,6 @@
 (function () {
   angular.module('app.core', [
-    'app.messaging'
+    'app.messaging',
+    'app.player'
   ]);
 })();

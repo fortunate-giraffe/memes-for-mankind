@@ -1,0 +1,77 @@
+(function (){
+'use strict';
+angular.module('app.player', ['app.messaging'])
+  .factory('player', function (messenger) {
+    
+    // TODO: get rid of these! make gameRecipient an app constant, user a service, maybe defer to messenger
+    var user = 'andy'; 
+    var gameRecipient = 'ChromeCast'; 
+
+    var allSet = false;
+    var queuedMessages = [];
+
+    // Supported events: 
+    // - gameStarted (role) - round started
+    // - promptSubmitted (prompt) - register on non-judge players
+    // - startJudging - register on judge, all memes are in
+    // - done - round over
+    var eventHandlers = {};
+
+    init();
+
+    return {
+      join: join,
+      ready: ready,
+      submit: submit,  //prompt or meme
+      selectWinner: selectWinner,
+      on: registerEventHandler
+    };
+
+    function init () {
+
+      messenger.onready(function () { 
+        messenger.initAsUser(user);  
+
+        allSet = true;
+        queuedMessages.forEach(function (msg) {
+          send.apply(undefined, msg);
+        });
+
+        messenger.onmessage(function (type, data, sender) {
+          var handler = eventHandlers[type];
+          handler && handler(data, sender);
+        });
+      });
+    }
+
+    function send (type, data, recipient) {
+      recipient = recipient || gameRecipient; // player almost(?) always send messages to the game
+      if (!allSet) {
+        queuedMessages.push([type, data, recipient]);
+      } else {
+        messenger.send(type, data, recipient);
+      }
+    }
+
+    function join () {
+      send('playerJoined');
+    }
+
+    function ready () {
+      send('ready');
+    }
+
+    function submit (data) {
+      send('submit', data);
+    }
+
+    function selectWinner (winner) {
+      send('selectWinner', winner);
+    }
+
+    function registerEventHandler (event, handler) {
+      eventHandlers[event] = handler;
+    }
+
+  });
+})();
