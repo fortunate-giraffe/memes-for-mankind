@@ -20,7 +20,7 @@ function messenger () {
 
   function initAsUser (user) { 
     sender = user;
-    send('', '', 'signin');
+    send('signin');
   }
  
   function onready (readyHandler) {
@@ -33,11 +33,12 @@ function messenger () {
   function onmessage (messageHandler) {
     socket.onmessage = function (event) {
       var data = JSON.parse(event.data);
-      messageHandler(data.sender, data.data, data.type);
+      messageHandler(data.type, data.data, data.sender);
     };
   }
 
-  function send (recipient, data, type) {
+  function send (type, data, recipient) {
+    if (!type) throw new Error('all messages must have a type');
     if (!sender) throw new Error('must instantiate a sender before you can send a message');
     if (!ready) throw new Error('must wait until socket is open before you can send a message');
 
@@ -51,7 +52,7 @@ function messenger () {
 
   // if recipient is 'broadcast', the message gets sent to everyone except the sender
   function broadcast (data, type) {
-    send('broadcast', data, type);
+    send(type, data, 'broadcast');
   }
 
 }
