@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html data-ng-app="app" ng-strict-di>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="/client/chromecast-app/content/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/client/chromecast-app/content/styles.css">
+</head>
+</html>
+<body>
+  <div>
+    <div ui-view></div>
+  </div>
+
+  <!-- vendor dependencies -->
+  <script src="../../bower_components/angular/angular.js"></script>
+  <script src="../../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+
+  <!-- app module -->
+  <script src="app.module.js"></script>
+
+  <!-- layout -->
+  <script src="layout/layout.module.js"></script>
+  <script src="layout/sidebar.js"></script>
+  <script src="layout/shell.js"></script>
+
+  <!-- gameplay views -->
+  <script src="prompt/prompt.module.js"></script>
+  <script src="prompt/prompt.js"></script>
+  <script src="waiting/waiting.module.js"></script>
+  <script src="waiting/waiting.js"></script>
+  <script src="creating/creating.module.js"></script>
+  <script src="creating/creating.js"></script>
+  <script src="choosing/choosing.module.js"></script>
+  <script src="choosing/choosing.js"></script>
+  <script src="winner/winner.module.js"></script>
+  <script src="winner/winner.js"></script>
+
+</body>

@@ -1,0 +1,12 @@
+<div>
+  <header>
+    <div data-ng-include="'layout/header.html'"></div>
+  </header>
+  <section id="content" class="content">
+    <div data-ng-include="'layout/sidebar.html'" class="sidebar"></div>
+    <div class="main-content">
+      <div ui-view="prompt"></div>
+      <div ui-view="body"></div>
+    </div>
+  </section>
+</div>
