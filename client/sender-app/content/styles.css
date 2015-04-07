@@ -1,0 +1,48 @@
+html {
+  height: 100%;
+}
+
+html body {
+  height: 100%;
+  overflow: hidden;
+  background-color:gray;
+}
+
+html body .container-fluid.body-content {
+  position: absolute;
+  top: 50px;
+  bottom: 30px;
+  right: 0;
+  left: 0;
+  overflow-y: auto;
+}
+
+header {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 50px;
+}
+
+header img {
+  height: 50px;
+  width:50px;
+  float:right;
+}
+
+footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 30px;
+}
+
+img {
+  float:left;
+}
+
+.top-buffer { 
+  margin-top:20px; 
+}
