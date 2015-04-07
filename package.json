@@ -6,13 +6,15 @@
   "dependencies": {
     "body-parser": "^1.12.2",
     "express": "^4.12.3",
-    "ws": "^0.7.1"
+    "ws": "^0.7.1",
+    "bower": "0.6.x"
   },
   "devDependencies": {},
   "engines": {
     "node": "0.10.x"
   },
   "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
