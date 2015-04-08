@@ -4,7 +4,6 @@ angular.module('app.player-messenger', ['app.messaging'])
   .factory('playerMessenger', function (messenger) {
     
     // TODO: get rid of these! make gameRecipient an app constant, user a service, maybe defer to messenger
-    var user = 'andy'; 
     var gameRecipient = 'ChromeCast'; 
 
     var allSet = false;
@@ -17,9 +16,8 @@ angular.module('app.player-messenger', ['app.messaging'])
     // - done - round over
     var eventHandlers = {};
 
-    init();
-
     return {
+      init: init,
       join: join,
       ready: ready,
       submit: submit,  //prompt or meme
@@ -27,10 +25,10 @@ angular.module('app.player-messenger', ['app.messaging'])
       on: registerEventHandler
     };
 
-    function init () {
-
+    function init (name) {
+      console.log('calling init');
       messenger.onready(function () { 
-        messenger.initAsUser(user);  
+        messenger.initAsUser(name);  
 
         allSet = true;
         queuedMessages.forEach(function (msg) {

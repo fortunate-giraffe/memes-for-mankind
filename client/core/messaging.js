@@ -9,6 +9,9 @@ function messenger () {
   var socket = new WebSocket('ws://127.0.0.1:3434');
   var ready = false;
   var sender;
+  socket.onopen = function () {
+    ready = true;
+  };
 
   return {
     initAsUser: initAsUser, // TODO: deprecate once we have a user service
@@ -24,10 +27,14 @@ function messenger () {
   }
  
   function onready (readyHandler) {
-    socket.onopen = function () {
-      ready = true;
+    if (ready) {
       readyHandler();
-    };
+    } else {
+      socket.onopen = function() {
+        ready = true;
+        readyHandler();
+      };
+    }
   }
 
   function onmessage (messageHandler) {
