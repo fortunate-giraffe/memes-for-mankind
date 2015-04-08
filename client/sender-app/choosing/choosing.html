@@ -1,7 +1,10 @@
 <section class="container-fluid body-content">
   <span> {{ vm.title }} </span>
   <br>
-  <div class="row top-buffer" ng-repeat="rows in vm.test">
-      <img class="col-lg-6" ng-repeat="item in rows" ng-src="{{ item }}" draggable="false"  ng-click="vm.clickHandler($event)">
+  <button ng-if="vm.chosenMeme" ng-click="vm.moveOn()">Pick this meme!</button>
+
+  <img class="spinner" ng-hide="vm.memes" src="http://jimpunk.net/Loading/wp-content/uploads/loading45.gif">
+  <div class="row top-buffer" ng-repeat="rows in vm.memes">
+      <img class="col-lg-6" ng-repeat="item in rows" ng-src="{{ item.imageUrl }}" draggable="false"  ng-click="vm.clickHandler($event)" ng-bind="{{ item }}">
   </div>
 </section>

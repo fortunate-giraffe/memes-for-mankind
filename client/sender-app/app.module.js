@@ -15,7 +15,8 @@
       'app.creating',
       'app.choosing',
       'app.start',
-      'app.prompt'
+      'app.prompt',
+      'app.core'
   ])
   .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   //
