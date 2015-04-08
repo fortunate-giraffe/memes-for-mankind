@@ -58,7 +58,7 @@ function messenger () {
   }
 
   // if recipient is 'broadcast', the message gets sent to everyone except the sender
-  function broadcast (data, type) {
+  function broadcast (type, data) {
     send(type, data, 'broadcast');
   }
 
