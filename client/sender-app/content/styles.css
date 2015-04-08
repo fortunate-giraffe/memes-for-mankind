@@ -40,7 +40,14 @@ footer {
 }
 
 img {
+  height:200px;
+  width:300px;
   float:left;
+}
+
+.selected {
+  border-style:outset;
+  border-width:5px;
 }
 
 .top-buffer { 
