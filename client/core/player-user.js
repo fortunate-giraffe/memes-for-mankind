@@ -3,7 +3,7 @@
 angular
   .module('app.player-user', ['app.player-messenger'])
   .factory('playerUser', function (playerMessenger) {
-    
+
     // factory for storing some variable about our user that we need throughout the game flow
     // user's self defined name
     var user = ''; 
@@ -13,6 +13,8 @@ angular
     var role = '';
     // judge's choice or players choice when picking a template, likely a URL
     var memeChoice = '';
+    // list of memes for the judge to review
+    var judgeMemeList = [];
 
     return {
       // getters
@@ -20,11 +22,13 @@ angular
       getRole: getRole,
       getGameRecipient: getGameRecipient,
       getMemeChoice: getMemeChoice,
+      getJudgeMemeList : getJudgeMemeList,
       // setters
       setUser: setUser,
       setRole: setRole,
       setGameRecipient: setGameRecipient,
-      setMemeChoice: setMemeChoice
+      setMemeChoice: setMemeChoice,
+      setJudgeMemeList : setJudgeMemeList
     };
 
     function getUser () {
@@ -41,6 +45,10 @@ angular
 
     function getMemeChoice () {
       return memeChoice;
+    }
+
+    function getJudgeMemeList () {
+      return judgeMemeList;
     }
 
     function setUser (string) {
@@ -60,6 +68,10 @@ angular
 
     function setMemeChoice (url) {
       memeChoice = url;
+    }
+
+    function setJudgeMemeList (array) {
+      judgeMemeList = array;
     }
 
   });
