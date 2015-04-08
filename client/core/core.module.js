@@ -4,6 +4,7 @@
     'app.messaging',
     'app.player-messenger',
     'app.player-user',
-    'app.game-messenger'
+    'app.game-messenger',
+    'app.data-service'
   ]);
 })();
