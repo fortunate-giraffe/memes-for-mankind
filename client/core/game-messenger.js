@@ -19,6 +19,7 @@
 
       return {
         start: start,
+        promptSubmitted: promptSubmitted,
         startJudging: startJudging,
         done: done,
         on: registerEventHandler
@@ -48,10 +49,14 @@
         send('gameStarted', role, recipient);
       }
       
+      function promptSubmitted (recipient, prompt) {
+        send('promptSubmitted', prompt, recipient);
+      }
+
       // Question: do we pass the memes, or just trigger the judge
       // to retrieve the memes from the server?
       function startJudging (judge, memes) {
-        send('startJudging', memes);
+        send('startJudging', memes, judge);
       }
 
       function done () {
