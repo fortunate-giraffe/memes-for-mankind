@@ -5,9 +5,10 @@
   "main": "index.js",
   "dependencies": {
     "body-parser": "^1.12.2",
+    "bower": "1.4.1",
+    "cors": "^2.5.3",
     "express": "^4.12.3",
-    "ws": "^0.7.1",
-    "bower": "1.4.1"
+    "ws": "^0.7.1"
   },
   "devDependencies": {},
   "engines": {
