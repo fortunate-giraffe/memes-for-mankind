@@ -1,6 +1,11 @@
 <section class="container-fluid body-content">
   <span> {{ vm.test }} </span>
-  <div class="row">
+  <br>
+  <input type="text" ng-model="vm.userName" placeholder="What's yo name?"></input>
+  <button ng-click="vm.setUser()" ng-disabled="vm.btnShow">Set Username</button>
+  <br>
+  <br>
+  <div class="row" ng-show="vm.btnShow">
     <button class="col-lg-2" id="start" ng-click="vm.startGame()">Press here to start the game!</button>
   </div>
 </section>
