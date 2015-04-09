@@ -5,9 +5,9 @@
       .module('app.choosing')
       .controller('Choosing', Choosing);
 
-  Choosing.$inject = ['dataService', 'playerUser', '$state'];
+  Choosing.$inject = ['dataService', 'playerMessenger', 'playerUser', '$state'];
 
-  function Choosing(dataService, playerUser, $state) {
+  function Choosing(dataService, playerMessenger, playerUser, $state) {
     /*jshint validthis: true */
     var vm = this;
     vm.title = 'Choosing!';
@@ -17,7 +17,8 @@
     vm.moveOn = moveOn;
 
     // calling dataservice with getmemes to get the memes we want to show
-    dataService.getMemes().success(function(data){
+    dataService.getMemes().then(function(data){
+      console.log('data from getMemes:', data);
       vm.memes = chunkData(data.result, 2);
     });
 
@@ -33,6 +34,7 @@
     // once a template is chosen, move to the next state (either creating or waiting)
     function moveOn() {
       if (playerUser.getRole() === 'judge') {
+        playerMessenger.selectWinner(vm.chosenMeme);
         $state.go('home.waiting');
       } else {
         $state.go('home.creating');
@@ -47,7 +49,7 @@
       $(e.target).addClass('selected');
       vm.chosenMeme = JSON.parse(e.target.attributes['ng-bind'].nodeValue);
       playerUser.setMemeChoice(vm.chosenMeme);
-      toastr.info('you picked url: ' + vm.chosenMeme.generatorID);
+      toastr.info('you picked: ' + vm.chosenMeme);
     }
 
   }

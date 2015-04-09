@@ -5,9 +5,9 @@
     .module('app.waiting')
     .controller('Waiting', Waiting);
 
-    Waiting.$inject = ['gameState'];
+    Waiting.$inject = ['gameState', 'game'];
 
-    function Waiting(gameState) {
+    function Waiting(gameState, game) {
       var vm = this;
       //mainContent object - state: text, image
       vm.mainContent = {

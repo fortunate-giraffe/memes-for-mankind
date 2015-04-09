@@ -24,6 +24,7 @@
       playerUser.setUser(vm.userName);
       // unhide btn
       vm.btnShow = true;
+      playerMessenger.join();
     }
 
     // player clicking the start button indicating they're ready
@@ -35,7 +36,7 @@
     // listener for game to indicate what role they should have
     function changeStateListener() {
       // on start msg from Chromecast, decide where to go
-      playerMessenger.on('start', function(data) {
+      playerMessenger.on('gameStarted', function(data) {
         // if role is judge, go to prompt view
         if (data.role === 'judge') {
           playerUser.setRole('judge');

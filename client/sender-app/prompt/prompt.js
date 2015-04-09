@@ -13,22 +13,14 @@
     vm.prompt = '';
     vm.submitPrompt = submitPrompt;
 
-    // establishing listener
-    changeStateListener();
-
     // example to handle prompt submission
     function submitPrompt() {
       var prompt = {
         prompt: vm.prompt
       };
       playerMessenger.submit(prompt);
+      $state.go('home.waiting');
       toastr.info('submitted this prompt: ' + vm.prompt);
-    }
-
-    function changeStateListener(){
-      playerMessenger.on('promptSubmitted', function(){
-        $state.go('home.waiting');
-      });
     }
   }
 })();

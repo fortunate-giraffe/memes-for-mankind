@@ -26,7 +26,7 @@
         dataService
           .createMeme(vm.topText, vm.bottomText, generatorID, imageID)
           .success(function(data){
-            playerMessenger.submit(data);
+            playerMessenger.submit({meme: data.result});
           });
 
         $state.go('home.waiting');
