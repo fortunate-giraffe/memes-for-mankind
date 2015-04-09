@@ -5,9 +5,9 @@
     .module('app.winner')
     .controller('Winner', Winner);
 
-    Winner.$inject = ['game', '$state'];
+    Winner.$inject = ['game'];
 
-    function Winner(game, state) {
+    function Winner(game) {
       var vm = this;
 
       vm.winner = game.getWinner();
