@@ -27,9 +27,10 @@
       });
 
       // on startJudging msg from Chromecast, judge goes to the choosing page, everyone else stays
-      playerMessenger.on('startJudging', function() {
+      playerMessenger.on('startJudging', function(message) {
         // if role is judge, go to prompt
         if (playerUser.getRole() === 'judge') {
+          playerUser.setJudgeMemeList(message.memes); 
           $state.go('home.choosing');
         }
       });

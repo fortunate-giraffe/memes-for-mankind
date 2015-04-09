@@ -9,6 +9,9 @@
       'app.layout',
       'app.waiting',
       'app.winner',
+      'app.game-messenger',
+      'app.messaging',
+      'app.game',
       'ui.router'
     ])
 

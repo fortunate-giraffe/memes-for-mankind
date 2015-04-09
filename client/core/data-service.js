@@ -19,11 +19,28 @@
         // TODO rethink where/how we store these
         console.log('calling getMemes');
         if (playerUser.getRole() === 'judge') {
-          //return promise to grab the meme URLs from the factory (even though it's not async)
-          return $q.when(playerUser.getJudgeMemeList());
+          console.log('player is judge');
+
+          // Here we grab the list of memes to judge from the playerUser factory
+          var memeList = playerUser.getJudgeMemeList();
+          var returnObj = {
+            result: memeList
+          };
+          // now we construct a 'fake' promise with the synchronously grabbed memes to judge
+          // we need to do this because the controller is expecting a promise (doesn't hurt)
+          var deferred = $q.defer();
+          deferred.resolve(returnObj);
+          return deferred.promise;
         } else { //otherwise get 10 memes
           // return promise for the async call to the server
-          return $http.get(serverPath + '/memes');
+          // we wrap the $http promise with a $q promise for continuity with the above
+          var deferred = $q.defer();
+          $http.get(serverPath + '/memes')
+            .success(function(data) {
+              deferred.resolve(data);
+            })
+            .error(deferred.resolve);
+          return deferred.promise;
         }
       }    
 
