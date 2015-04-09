@@ -5,9 +5,9 @@
     .module('app.waiting')
     .controller('Waiting', Waiting);
 
-    Waiting.$inject = ['game'];
+    Waiting.$inject = ['game', '$state'];
 
-    function Waiting(game) {
+    function Waiting(game, $state) {
       var vm = this;
 
       vm.mainContent = {
@@ -33,6 +33,10 @@
 
     game.on('gameStart', function() {
       vm.currentDisplay = vm.mainContent['waitingForPrompt'];
+    });
+
+    game.on('promptSubmitted', function() {
+      $state.go('home.creating');
     });
 
     }

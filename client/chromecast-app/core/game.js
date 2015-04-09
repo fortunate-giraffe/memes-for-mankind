@@ -7,7 +7,8 @@
       var playersReady = 0;
       var judge;
       var prompt;
-      var memes = [];      
+      var memes = [];   
+      var winner;   
 
       gameMessenger.on('playerJoined', function(data, sender) {
         var player = { name: sender };
@@ -39,6 +40,7 @@
           }
         }
         if (data.meme) {
+          trigger('memeSubmitted', sender);
           for (var i=0; i<players.length; i++) {
             if (players[i].name === sender) {
               players[i].meme = data.meme;
@@ -47,12 +49,14 @@
             }
           }
           if (memes.length === players.length-1) {
+            trigger('allSubmitted');
             gameMessenger.startJudging(judge.name, { memes: memes });
           }
         }
       });
 
       gameMessenger.on('selectWinner', function(data, sender) {
+        winner = data;
         gameMessenger.done();
       });
 
@@ -72,8 +76,23 @@
         }
       };
 
+      var getPrompt = function() {
+        return prompt;
+      };
+
+      var getMemes = function() {
+        return memes;
+      };
+
+      var getWinner = function() {
+        return winner;
+      };
+
       return {
-        on: registerEventHandler
+        on: registerEventHandler,
+        getPrompt: getPrompt,
+        getMemes: getMemes,
+        getWinner: getWinner
       };
 
     });
