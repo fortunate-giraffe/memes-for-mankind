@@ -5,12 +5,12 @@
     .module('app.prompt')
     .controller('Prompt', Prompt);
 
-    Prompt.$inject = [];
+    Prompt.$inject = ['game'];
 
-    function Prompt() {
+    function Prompt(game) {
       var vm = this;
 
-      vm.prompt = "This will be the prompt."
+      vm.prompt = game.getPrompt();
     }
 
 })();

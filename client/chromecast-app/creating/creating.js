@@ -5,13 +5,21 @@
     .module('app.creating')
     .controller('Creating', Creating);
 
-    Creating.$inject = [];
+    Creating.$inject = ['game', '$state'];
 
-    function Creating() {
+    function Creating(game, $state) {
       var vm = this;
       
-      //example data
-      vm.players = ["Rich", "Roger", "Andy", "Rebecca"];
+      vm.players = [];
+
+      game.on('memeSubmitted', function(player) {
+        vm.players.push(player);
+      });
+
+      game.on('allSubmitted', function() {
+        $state.go('home.choosing');
+      });
+
     }
 
 })();
