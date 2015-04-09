@@ -5,11 +5,11 @@
     .module('app.waiting')
     .controller('Waiting', Waiting);
 
-    Waiting.$inject = ['gameState', 'game'];
+    Waiting.$inject = ['game'];
 
-    function Waiting(gameState, game) {
+    function Waiting(game) {
       var vm = this;
-      //mainContent object - state: text, image
+
       vm.mainContent = {
         waitingForPlayers: {
           text: "Where are your friends? You've gotta have at least 3!",
@@ -23,10 +23,17 @@
           text: "Judge: Choose the prompt!",
           image: ""
         }
-
       }
 
-    vm.currentDisplay = vm.mainContent[gameState.value];
+    vm.currentDisplay = vm.mainContent['waitingForPlayers'];
+
+    game.on('enoughPlayers', function() {
+      vm.currentDisplay = vm.mainContent['readyToPlay'];
+    });
+
+    game.on('gameStart', function() {
+      vm.currentDisplay = vm.mainContent['waitingForPrompt'];
+    });
 
     }
 
