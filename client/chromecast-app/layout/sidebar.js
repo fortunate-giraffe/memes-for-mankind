@@ -5,12 +5,15 @@
     .module('app.layout')
     .controller('Sidebar', Sidebar);
 
-    Sidebar.$inject = [];
+    Sidebar.$inject = ['game'];
 
-    function Sidebar() {
+    function Sidebar(game) {
       var vm = this;
-      //vm.players will call function to get players
-      vm.players = ['Rich', 'Roger', 'Andy', 'Rebecca'];
+      vm.players = [];
+
+      game.on('playerJoined', function(player) {
+        vm.players.push(player);
+      });
     }
   
 })();

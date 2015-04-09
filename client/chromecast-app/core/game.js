@@ -1,8 +1,8 @@
  (function(){
   'use strict';
-  angular.module('app.game', ['app.game-messenger'])
-    .factory('game', function (gameMessenger) {
-      //player joins
+  angular.module('app.game', [])
+    .factory('game', function (gameMessenger, $rootScope) {
+
       var players = [];
       var playersReady = 0;
       var judge;
@@ -10,14 +10,19 @@
       var memes = [];      
 
       gameMessenger.on('playerJoined', function(data, sender) {
-        //add player to storage array
-        players.push({ name: sender });
+        var player = { name: sender };
+        players.push(player);
+        trigger('playerJoined', player);
+        if (players.length === 3) {
+          trigger('enoughPlayers');
+        }
       });
 
       gameMessenger.on('ready', function(data, sender) {
         playersReady++;
         if (playersReady >= 3 && playersReady === players.length) {
           judge = players[0];
+          trigger('gameStart');
           for (var i=0; i<players.length; i++) {
             gameMessenger.start(players[i].name, { role: players[i] === judge ? 'judge' : 'player' });
           }
@@ -51,8 +56,25 @@
         gameMessenger.done();
       });
 
+      // Building event handling system
 
-      return {};
+      var eventHandlers = {};
+
+      var registerEventHandler = function(event, handler) {
+        eventHandlers[event] = handler;
+      };
+
+      var trigger = function(event, data) {
+        if (eventHandlers[event]) {
+          $rootScope.$apply(function() {
+            eventHandlers[event](data)
+          });
+        }
+      };
+
+      return {
+        on: registerEventHandler
+      };
 
     });
   })();

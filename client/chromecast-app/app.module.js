@@ -2,17 +2,15 @@
   'use strict'
 
   angular.module('app', [
-      // 'app.core',
       'app.prompt',
       'app.choosing',
       'app.creating',
       'app.layout',
       'app.waiting',
       'app.winner',
-      'app.game-messenger',
-      'app.messaging',
+      'ui.router',
       'app.game',
-      'ui.router'
+      'app.game-messenger'
     ])
 
   .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
@@ -33,12 +31,6 @@
                 controller: 'Waiting'      
               }
             },
-            resolve: {
-              //function would get game state
-              gameState: function() {
-                return { value: 'waitingForPlayers' }
-              }
-            }
         })
         .state('home.creating', {
           url: '/creating',
