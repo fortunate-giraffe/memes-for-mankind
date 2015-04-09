@@ -10,8 +10,7 @@
     function Creating(game, $state) {
       var vm = this;
       
-      //example data
-      vm.players = ["Rich", "Roger", "Andy", "Rebecca"];
+      vm.players = [];
 
       game.on('memeSubmitted', function(player) {
         vm.players.push(player);

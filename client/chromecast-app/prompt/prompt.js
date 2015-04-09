@@ -11,5 +11,6 @@
       var vm = this;
 
       vm.prompt = game.getPrompt();
+    }
 
 })();

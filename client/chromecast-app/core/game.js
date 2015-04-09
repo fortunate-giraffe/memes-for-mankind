@@ -32,6 +32,7 @@
 
       gameMessenger.on('submit', function(data, sender) {
         if (data.prompt) {
+          trigger('promptSubmitted', data.prompt);
           prompt = data.prompt;
           for (var i=0; i<players.length; i++) {
             if (players[i] !== judge) {
@@ -56,6 +57,7 @@
       });
 
       gameMessenger.on('selectWinner', function(data, sender) {
+        trigger('winnerSelected', data);
         winner = data;
         gameMessenger.done();
       });
