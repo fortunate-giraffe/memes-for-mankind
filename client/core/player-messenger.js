@@ -27,9 +27,9 @@ angular.module('app.player-messenger', [])
     // - done - round over
     var eventHandlers = {};
     var trigger = function (event, data, sender) {
-      var handler = eventHandlers[type];
+      var handler = eventHandlers[event];
       handler && handler(data, sender);      
-    }
+    };
 
     return {
       connect: !localDev ? connectCast : function () {},
@@ -52,11 +52,11 @@ angular.module('app.player-messenger', [])
             send.apply(undefined, msg);
           });
 
-          messenger.onmessage(trigger)
+          messenger.onmessage(trigger);
 
         });        
       } else {
-        allSet = true;
+        allSet = true; // assumes we've already connected to ChromeCast
         username = name;
       }
     }
@@ -130,7 +130,7 @@ angular.module('app.player-messenger', [])
         chrome.cast.initialize(
           apiConfig, 
           function() {console.log('init success!');}, //onInitSuccess
-          function() {console.log('initerror!');} // onError
+          function() {console.log('init error!');} // onError
         ); 
       }
 
@@ -145,9 +145,12 @@ angular.module('app.player-messenger', [])
 
     function sessionListener (e) {
       session = e;
-      console.log('got session')
-      // session.addUpdateListener(updateListener);
+      console.log('got session');
+      session.addUpdateListener(function (isAlive) {
+        console.log('session update', isAlive, session);
+      });
       session.addMessageListener(namespace, function (namespace, message) {
+        console.log('got message!', namespace, message)
         message = JSON.parse(message);
         trigger(message.type, message.data, message.sender);
       });
@@ -157,8 +160,9 @@ angular.module('app.player-messenger', [])
     function connectCast () {
       chrome.cast.requestSession(
         sessionListener, 
-        function() {
+        function(err) {
           console.log('failed to create session');
+          console.dir(err);
         }
       );
     }
