@@ -1,7 +1,15 @@
 (function (){
 'use strict';
-angular.module('app.player-messenger', ['app.messaging'])
-  .factory('playerMessenger', function (messenger) {
+angular.module('app.player-messenger', [])
+  .factory('playerMessenger', playerMessenger);
+
+  playerMessenger.$inject = ['messenger', 'localDev', 'appID'];  
+
+  function playerMessenger (messenger, localDev, appID) {
+
+    if (!localDev) {
+      setUpChromeCast();
+    }
     
     // TODO: get rid of these! make gameRecipient an app constant, user a service, maybe defer to messenger
     var gameRecipient = 'ChromeCast'; 
@@ -17,6 +25,7 @@ angular.module('app.player-messenger', ['app.messaging'])
     var eventHandlers = {};
 
     return {
+      connect: !localDev ? connectCast : function () {},
       init: init,
       join: join,
       ready: ready,
@@ -71,5 +80,60 @@ angular.module('app.player-messenger', ['app.messaging'])
       eventHandlers[event] = handler;
     }
 
-  });
+    function setUpChromeCast () {
+      window['__onGCastApiAvailable'] = function(loaded, errorInfo) {
+        if (loaded) {
+          initializeCastApi();
+        } else {
+          console.log(errorInfo);
+        }
+      };
+      
+      function initializeCastApi () {
+        var sessionRequest = new chrome.cast.SessionRequest(appID);
+        var apiConfig = new chrome.cast.ApiConfig(
+                                sessionRequest, 
+                                function(e){  // sessionListener, 
+                                  var session = e;
+                                  console.dir(session);
+                                },
+                                receiverListener);
+                              
+        chrome.cast.initialize(
+          apiConfig, 
+          function() {console.log('init success!');}, //onInitSuccess
+          function() {console.log('initerror!');}); // onError); 
+      }
+
+      function receiverListener(e) {
+        if( e === chrome.cast.ReceiverAvailability.AVAILABLE) {
+          console.log('Found a receiver!!!');
+          // TODO: trigger devices available event
+        }
+      }
+      
+    }
+  
+    function connectCast () {
+      chrome.cast.requestSession(
+        function(ccSessionObj) {
+          console.log('creating session!');
+          console.dir(ccSessionObj);
+        }, 
+        function() {
+          console.log('failed to create session');
+        }
+      );
+    }
+
+  };
 })();
+
+
+
+
+
+
+
+
+

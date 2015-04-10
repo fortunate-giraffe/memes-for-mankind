@@ -5,11 +5,15 @@
       .module('app.layout')
       .controller('Header', Header);
 
-  Header.$inject = [];
+  Header.$inject = ['playerMessenger'];
 
-  function Header() {
+  function Header(playerMessenger) {
     /*jshint validthis: true */
     var vm = this;
     vm.test = 'MemesForMankind';
+
+    vm.connect = function () {
+      playerMessenger.connect();
+    };
   }
 })();

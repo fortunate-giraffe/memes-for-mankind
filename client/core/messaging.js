@@ -4,7 +4,11 @@
 angular.module('app.messaging', [])
   .factory('messenger', messenger);
 
-function messenger () {
+messenger.$inject = ['localDev'];
+
+function messenger (localDev) {
+  // if not doing local dev, don't use messenger
+  if (!localDev) return {};
 
   var socket = new WebSocket('ws://127.0.0.1:3434');
   var ready = false;
