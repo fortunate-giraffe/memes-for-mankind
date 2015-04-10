@@ -1,8 +1,11 @@
 (function(){
   'use strict';
-  angular.module('app.game-messenger', ['app.messaging'])
-    .factory('gameMessenger', function (messenger) {
+  angular.module('app.game-messenger', [])
+    .factory('gameMessenger', gameMessenger);
 
+    gameMessenger.$inject = ['messenger', 'localDev', 'appID'];  
+
+    function gameMessenger (messenger, localDev, appID) {
       // TODO: move message queueing to messenger, issue #79
       var allSet = false;
       var queuedMessages = [];
@@ -15,7 +18,15 @@
       // - selectWinner (winner)
       var eventHandlers = {};
 
-      init();
+      // object to store senderIds with human readable names as keys
+      var senders = {};
+
+      if (!localDev) {
+        console.log('not local dev!');
+        setUpChromeCast(); // set up chromecast messaging
+      } else {
+        init(); // set up sockets
+      }
 
       return {
         start: start,
@@ -38,15 +49,20 @@
       }
 
       function send (type, data, recipient) {
-        if (!allSet) {
-          queuedMessages.push([type, data, recipient]);
-        } else {
-          messenger.send(type, data, recipient);
+        // if chromecast send using ccSend
+        if (!localDev) {
+          ccSend(type, data, recipient);
+        } else { // if sockets, check all set
+          if (!allSet) { 
+            queuedMessages.push([type, data, recipient]);
+          } else {
+            messenger.send(type, data, recipient);    
+          }
         }
       }
 
       function start (recipient, role) {
-        send('gameStarted', role, recipient);
+        send('gameStarted', role, recipient);  
       }
       
       function promptSubmitted (recipient, prompt) {
@@ -60,13 +76,84 @@
       }
 
       function done () {
-        messenger.broadcast('done');
+        if (!localDev) {
+          window.messageBus.broadcast('done');
+        } else {
+          messenger.broadcast('done');  
+        }
       }
 
       function registerEventHandler (event, handler) {
         eventHandlers[event] = handler;
       }
 
-    })
+      function ccSend (type, data, recipient) {
+        toastr.info('sending msg via CC: ' + type + ' ' + data + ' ' + recipient + ' ' + senders[recipient]);
+        if (!type) throw new Error('all messages must have a type');
+        if (!recipient) throw new Error('message must have a receipient before you can send a message');
+        try {
+          window.messageBus.send(senders[recipient], JSON.stringify({
+          recipient: recipient,
+          data: data,
+          type: type,
+          sender: 'ChromeCast'
+        }));
+        } catch(e) {
+          toastr.info('Error sending! ' + e);
+        }
+      }
 
+      function setUpChromeCast() {
+        console.log('setting up chromecast!');
+        cast.receiver.logger.setLevelValue(0);
+        window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
+
+        // handler for the 'ready' event
+        castReceiverManager.onReady = function(event) {
+          //toastr.info('Received Ready event: ' + JSON.stringify(event.data));
+          window.castReceiverManager.setApplicationState('Application status is ready...');
+        };
+
+        // handler for 'senderconnected' event
+        castReceiverManager.onSenderConnected = function(event) {
+          //toastr.info('Received Sender Connected event: ' + event.data);
+          //toastr.info(window.castReceiverManager.getSender(event.data).userAgent);
+        };
+
+        // handler for 'senderdisconnected' event
+        castReceiverManager.onSenderDisconnected = function(event) {
+          //toastr.info('Received Sender Disconnected event: ' + event.data);
+          if (window.castReceiverManager.getSenders().length == 0 &&
+            event.reason == cast.receiver.system.DisconnectReason.REQUESTED_BY_SENDER) {
+          window.close();
+          }
+        };
+        // create a CastMessageBus to handle messages for a custom namespace
+        // toastr.info('cast receiver manager: ' + window.castReceiverManager);
+        window.messageBus = window.castReceiverManager.getCastMessageBus('urn:x-cast:vandelay.industries');
+        // initialize the CastReceiverManager with an application status message
+        window.castReceiverManager.start({statusText: 'Application is starting'});
+
+        // function ccOnMessage (messsageHandler) {
+        //   window.messageBus.onMessage = function(event) {
+        //     var data = JSON.parse(event.data);
+        //     messsageHandler(data.type, data.data, data.sender); 
+        //   };
+        // }
+        // toastr.info('messageBus: ' + window.messageBus);
+        // toastr.info('setting up on message handler');
+
+        window.messageBus.onMessage = function(event) {
+          //toastr.info('Message Received!');
+          //toastr.info(event.data);
+          var data = JSON.parse(event.data);
+          // saving a mapping of usernames to senderId's to allow message passing
+          senders[data.sender] = event.senderId;
+          var handler = eventHandlers[data.type];
+          handler && handler(data.data, data.sender);
+          // ccSend(data.type, data.data, data.sender);
+        };
+
+      }
+    }
 })();

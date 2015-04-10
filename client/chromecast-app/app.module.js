@@ -10,13 +10,15 @@
       'app.winner',
       'ui.router',
       'app.game',
-      'app.game-messenger'
+      'app.game-messenger',
+      'app.messaging'
     ])
-
+  .constant('localDev', false)
+  .constant('appID', '1FA8E626')
   .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/waiting');
- 
+
     $stateProvider
         .state('home', {
             templateUrl: 'layout/shell.html',
