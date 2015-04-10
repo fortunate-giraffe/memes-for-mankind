@@ -1,7 +1,10 @@
 <div>
-  <h2>The Judge is choosing the winner</h2>
-  <!-- display submitted memes in a grid-->
-  <div data-ng-repeat="player in vm.submissions">
-    <img src="{{player.meme.instanceImageUrl}}">
+  <h2>Hey, Judge. Choose the winner!</h2>
+  <div id="grid-container">
+    <ul id="submission-grid" data-ng-repeat="player in vm.submissions">
+      <li>
+        <img src="{{player.meme.instanceImageUrl}}">
+      </li>
+    </ul>
   </div>
 </div>

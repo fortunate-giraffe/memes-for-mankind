@@ -1,9 +1,17 @@
 body {
-  background-color: #333;
+  background-color: #292929;
   color: white;
   margin: 0px; 
-  padding:0px; 
+  padding: 0px; 
   width: auto;
+}
+
+h2, .prompt {
+  margin: 5%;
+}
+
+ul {
+  list-style: none;
 }
 
 header {
@@ -15,14 +23,19 @@ header {
   padding: 2px;
 }
 
+header h1 {
+  margin-top: 24px;
+  margin-left: 10px;
+}
+
 .header-content {
   margin: 12px;
   padding: 2px;
 }
 
 .sidebar {
-  display: inline-block;
   width: 20%;
+  margin-top: 5%;
 }
 
 .players {
@@ -31,11 +44,77 @@ header {
 }
 
 .player {
-  margin: 30px 15px;
+  margin: 40px 20px;
+  font-size: 1.5em;
+}
+
+.content {
+  display: flex;
 }
 
 .main-content {
   display: inline-block;
   height: 100%;
-  width: 50%;
+  width: 100%;
+  text-align: center;
+}
+
+.prompt {
+  text-align: center;
+}
+
+.submissions {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.submissions li {
+  float: left;
+  width: 45%;
+  margin: 2.5%;
+  background-color: #292929;
+  color: #bdc3c7;
+}
+
+.submissions img {
+  height: 300px;
+}
+
+.players-submitted li {
+  display: inline-block;
+  margin: 5% 5% 0 0 ;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.creating-message {
+  margin-top: 5%;
+}
+
+.grid-container {
+  max-height: 100%;
+}
+
+#submission-grid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#submission-grid li {
+  float: left;
+  width: 45%;
+  margin: 2.5%;
+  background-color: #292929;
+  color: #bdc3c7;
+}
+
+#submission-grid li img {
+  height: 200px;
+  background-color: 
+}
+
+.winner {
+  height: 450px;
 }
