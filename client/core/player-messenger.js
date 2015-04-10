@@ -6,9 +6,12 @@ angular.module('app.player-messenger', [])
   playerMessenger.$inject = ['messenger', 'localDev', 'appID'];  
 
   function playerMessenger (messenger, localDev, appID) {
-
+  
     if (!localDev) {
       setUpChromeCast();
+      var session;
+      var namespace = 'urn:x-cast:vandelay.industries';
+      var username;
     }
     
     // TODO: get rid of these! make gameRecipient an app constant, user a service, maybe defer to messenger
@@ -23,6 +26,10 @@ angular.module('app.player-messenger', [])
     // - startJudging - register on judge, all memes are in
     // - done - round over
     var eventHandlers = {};
+    var trigger = function (event, data, sender) {
+      var handler = eventHandlers[type];
+      handler && handler(data, sender);      
+    }
 
     return {
       connect: !localDev ? connectCast : function () {},
@@ -36,27 +43,50 @@ angular.module('app.player-messenger', [])
 
     function init (name) {
       console.log('calling init');
-      messenger.onready(function () { 
-        messenger.initAsUser(name);  
+      if (localDev) {
+        messenger.onready(function () { 
+          messenger.initAsUser(name);  
 
+          allSet = true;
+          queuedMessages.forEach(function (msg) {
+            send.apply(undefined, msg);
+          });
+
+          messenger.onmessage(trigger)
+
+        });        
+      } else {
         allSet = true;
-        queuedMessages.forEach(function (msg) {
-          send.apply(undefined, msg);
-        });
+        username = name;
+      }
+    }
 
-        messenger.onmessage(function (type, data, sender) {
-          var handler = eventHandlers[type];
-          handler && handler(data, sender);
-        });
-      });
+    function success (data) {
+      console.log('sendMessage success ', data);
+    }
+    function error (err) {
+      console.log('sendMessage error', err);
     }
 
     function send (type, data, recipient) {
       recipient = recipient || gameRecipient; // player almost(?) always send messages to the game
       if (!allSet) {
         queuedMessages.push([type, data, recipient]);
+
       } else {
-        messenger.send(type, data, recipient);
+
+        if (localDev) {
+          messenger.send(type, data, recipient);
+        } else {
+          session.sendMessage(namespace, JSON.stringify({
+            type: type, 
+            data: data,
+            recipient: recipient,
+            sender: username
+          }), 
+          success, 
+          error);
+        }
       }
     }
 
@@ -93,19 +123,18 @@ angular.module('app.player-messenger', [])
         var sessionRequest = new chrome.cast.SessionRequest(appID);
         var apiConfig = new chrome.cast.ApiConfig(
                                 sessionRequest, 
-                                function(e){  // sessionListener, 
-                                  var session = e;
-                                  console.dir(session);
-                                },
-                                receiverListener);
+                                sessionListener,
+                                receiverListener
+                                );
                               
         chrome.cast.initialize(
           apiConfig, 
           function() {console.log('init success!');}, //onInitSuccess
-          function() {console.log('initerror!');}); // onError); 
+          function() {console.log('initerror!');} // onError
+        ); 
       }
 
-      function receiverListener(e) {
+      function receiverListener (e) {
         if( e === chrome.cast.ReceiverAvailability.AVAILABLE) {
           console.log('Found a receiver!!!');
           // TODO: trigger devices available event
@@ -113,13 +142,21 @@ angular.module('app.player-messenger', [])
       }
       
     }
+
+    function sessionListener (e) {
+      session = e;
+      console.log('got session')
+      // session.addUpdateListener(updateListener);
+      session.addMessageListener(namespace, function (namespace, message) {
+        message = JSON.parse(message);
+        trigger(message.type, message.data, message.sender);
+      });
+    }
+
   
     function connectCast () {
       chrome.cast.requestSession(
-        function(ccSessionObj) {
-          console.log('creating session!');
-          console.dir(ccSessionObj);
-        }, 
+        sessionListener, 
         function() {
           console.log('failed to create session');
         }
