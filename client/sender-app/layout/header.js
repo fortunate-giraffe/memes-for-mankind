@@ -18,9 +18,7 @@
     };
 
     playerMessenger.on('chromecastConnection', function(){
-      $rootScope.$apply(function() {
-        vm.castButtonState = playerMessenger.getConnectionStatus();
-      });
+      vm.castButtonState = playerMessenger.getConnectionStatus();
     });
   }
 })();
