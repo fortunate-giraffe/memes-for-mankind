@@ -1,6 +1,9 @@
 <header data-ng-controller="Header as vm">
   <div>
     <span> {{ vm.test }} </span>
-    <button ng-click="vm.connect()">Connect</button>
+    <div id="icon">
+      <img src="content/ic_cast_grey_24dp.png" ng-if="!vm.castButtonState" alt="Chromecast icon" ng-click="vm.connect()">
+      <img src="content/ic_cast_connected_black_24dp.png" ng-if="vm.castButtonState" alt="Chromecast icon" ng-click="vm.connect()">
+    </div>
   </div>
 </header>
