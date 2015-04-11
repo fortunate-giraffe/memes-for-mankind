@@ -3,13 +3,13 @@
   angular.module('app.game-messenger', [])
     .factory('gameMessenger', gameMessenger);
 
-    gameMessenger.$inject = ['messenger', 'localDev', 'appID'];  
+    gameMessenger.$inject = ['messenger', 'localDev', 'appID'];
 
     function gameMessenger (messenger, localDev, appID) {
       // TODO: move message queueing to messenger, issue #79
       var allSet = false;
       var queuedMessages = [];
-  
+
       // TODO: see if we can move event handling to messenger, issue #82
       // Supported Events:
       // - playerJoined
@@ -53,18 +53,18 @@
         if (!localDev) {
           ccSend(type, data, recipient);
         } else { // if sockets, check all set
-          if (!allSet) { 
+          if (!allSet) {
             queuedMessages.push([type, data, recipient]);
           } else {
-            messenger.send(type, data, recipient);    
+            messenger.send(type, data, recipient);
           }
         }
       }
 
       function start (recipient, role) {
-        send('gameStarted', role, recipient);  
+        send('gameStarted', role, recipient);
       }
-      
+
       function promptSubmitted (recipient, prompt) {
         send('promptSubmitted', prompt, recipient);
       }
@@ -77,9 +77,14 @@
 
       function done () {
         if (!localDev) {
-          window.messageBus.broadcast('done');
+          window.messageBus
+            .broadcast(JSON.stringify({
+              type:'done',
+              data:'done',
+              sender: 'ChromeCast'
+            }));
         } else {
-          messenger.broadcast('done');  
+          messenger.broadcast('done');
         }
       }
 
@@ -137,7 +142,7 @@
         // function ccOnMessage (messsageHandler) {
         //   window.messageBus.onMessage = function(event) {
         //     var data = JSON.parse(event.data);
-        //     messsageHandler(data.type, data.data, data.sender); 
+        //     messsageHandler(data.type, data.data, data.sender);
         //   };
         // }
         // toastr.info('messageBus: ' + window.messageBus);
