@@ -39,6 +39,12 @@ footer {
   height: 30px;
 }
 
+#icon {
+  margin-right: 30px;
+  margin-top: 20px;
+  float:right;
+}
+
 img {
   height:200px;
   width:300px;
@@ -50,6 +56,6 @@ img {
   border-width:5px;
 }
 
-.top-buffer { 
-  margin-top:20px; 
+.top-buffer {
+  margin-top:20px;
 }

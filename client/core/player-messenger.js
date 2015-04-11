@@ -3,24 +3,25 @@
 angular.module('app.player-messenger', [])
   .factory('playerMessenger', playerMessenger);
 
-  playerMessenger.$inject = ['messenger', 'localDev', 'appID', '$rootScope'];  
+  playerMessenger.$inject = ['messenger', 'localDev', 'appID', '$rootScope'];
 
   function playerMessenger (messenger, localDev, appID, $rootScope) {
-  
+
     if (!localDev) {
       setUpChromeCast();
       var session;
       var namespace = 'urn:x-cast:vandelay.industries';
       var username;
+      var connected;
     }
-    
+
     // TODO: get rid of these! make gameRecipient an app constant, user a service, maybe defer to messenger
-    var gameRecipient = 'ChromeCast'; 
+    var gameRecipient = 'ChromeCast';
 
     var allSet = false;
     var queuedMessages = [];
 
-    // Supported events: 
+    // Supported events:
     // - gameStarted (role) - round started
     // - promptSubmitted (prompt) - register on non-judge players
     // - startJudging - register on judge, all memes are in
@@ -45,14 +46,15 @@ angular.module('app.player-messenger', [])
       submit: submit,  //prompt or meme
       selectWinner: selectWinner,
       startNextRound: startNextRound,
-      on: registerEventHandler
+      on: registerEventHandler,
+      getConnectionStatus: getConnectionStatus
     };
 
     function init (name) {
       console.log('calling init');
       if (localDev) {
-        messenger.onready(function () { 
-          messenger.initAsUser(name);  
+        messenger.onready(function () {
+          messenger.initAsUser(name);
 
           allSet = true;
           queuedMessages.forEach(function (msg) {
@@ -61,7 +63,7 @@ angular.module('app.player-messenger', [])
 
           messenger.onmessage(trigger);
 
-        });        
+        });
       } else {
         allSet = true; // assumes we've already connected to ChromeCast
         username = name;
@@ -86,16 +88,17 @@ angular.module('app.player-messenger', [])
           messenger.send(type, data, recipient);
         } else {
           session.sendMessage(namespace, JSON.stringify({
-            type: type, 
+            type: type,
             data: data,
             recipient: recipient,
             sender: username
-          }), 
-          success, 
+          }),
+          success,
           error);
         }
       }
     }
+
 
     function join () {
       send('playerJoined');
@@ -123,6 +126,10 @@ angular.module('app.player-messenger', [])
       send('startNextRound');
     }
 
+    function getConnectionStatus(){
+      return connected;
+    }
+
     // *** CHROMECAST STUFF BELOW *** //
     function setUpChromeCast () {
       window['__onGCastApiAvailable'] = function(loaded, errorInfo) {
@@ -132,20 +139,20 @@ angular.module('app.player-messenger', [])
           console.log(errorInfo);
         }
       };
-      
+
       function initializeCastApi () {
         var sessionRequest = new chrome.cast.SessionRequest(appID);
         var apiConfig = new chrome.cast.ApiConfig(
-                                sessionRequest, 
+                                sessionRequest,
                                 sessionListener,
                                 receiverListener
                                 );
-                              
+
         chrome.cast.initialize(
-          apiConfig, 
+          apiConfig,
           function() {console.log('init success!');}, //onInitSuccess
           function() {console.log('init error!');} // onError
-        ); 
+        );
       }
 
       function receiverListener (e) {
@@ -154,26 +161,28 @@ angular.module('app.player-messenger', [])
           // TODO: trigger devices available event
         }
       }
-      
+
     }
 
     function sessionListener (e) {
       session = e;
-      console.log('got session');
+      console.log('got session', session);
       session.addUpdateListener(function (isAlive) {
         console.log('session update', isAlive, session);
+        connected = isAlive;
+        trigger('chromecastConnection');
       });
       session.addMessageListener(namespace, function (namespace, message) {
-        console.log('got message!', namespace, message)
+        console.log('got message!', namespace, message);
         message = JSON.parse(message);
         trigger(message.type, message.data, message.sender);
       });
     }
 
-  
+
     function connectCast () {
       chrome.cast.requestSession(
-        sessionListener, 
+        sessionListener,
         function(err) {
           console.log('failed to create session');
           console.dir(err);
