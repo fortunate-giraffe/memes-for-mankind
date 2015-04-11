@@ -5,11 +5,22 @@
       .module('app.layout')
       .controller('Footer', Footer);
 
-  Footer.$inject = [];
+  Footer.$inject = ['playerMessenger'];
 
-  function Footer() {
+  function Footer(playerMessenger) {
     /*jshint validthis: true */
     var vm = this;
     vm.test = 'Footer';
+    
+    vm.allowNextRound = false;
+    playerMessenger.on('gameStarted', function () {
+      vm.allowNextRound = false;
+    });
+
+    playerMessenger.on('done', function () {
+      vm.allowNextRound = true;
+    });
+
+    vm.startNextRound = playerMessenger.startNextRound;
   }
 })();

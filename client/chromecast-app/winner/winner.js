@@ -5,12 +5,16 @@
     .module('app.winner')
     .controller('Winner', Winner);
 
-    Winner.$inject = ['game'];
+    Winner.$inject = ['$state', 'game'];
 
-    function Winner(game) {
+    function Winner($state, game) {
       var vm = this;
 
       vm.winner = game.getWinner();
+
+      game.on('startNextRound', function() {
+        $state.go('home.waiting');
+      });
 
     }
 

@@ -1,3 +1,4 @@
 <footer data-ng-controller="Footer as vm">
   <span> This is the: {{ vm.test }} </span>
+  <button ng-if="vm.allowNextRound" ng-click="vm.startNextRound()">New Round</button>
 </footer>
