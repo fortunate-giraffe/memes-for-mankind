@@ -3,9 +3,9 @@
 angular.module('app.player-messenger', [])
   .factory('playerMessenger', playerMessenger);
 
-  playerMessenger.$inject = ['messenger', 'localDev', 'appID'];  
+  playerMessenger.$inject = ['messenger', 'localDev', 'appID', '$rootScope'];  
 
-  function playerMessenger (messenger, localDev, appID) {
+  function playerMessenger (messenger, localDev, appID, $rootScope) {
   
     if (!localDev) {
       setUpChromeCast();
@@ -27,8 +27,14 @@ angular.module('app.player-messenger', [])
     // - done - round over
     var eventHandlers = {};
     var trigger = function (event, data, sender) {
-      var handler = eventHandlers[event];
-      handler && handler(data, sender);      
+      var handlers = eventHandlers[event];
+      if (handlers) {
+        $rootScope.$apply(function () {
+          handlers.forEach(function (fn) {
+            fn(data, sender);
+          });
+        });
+      }
     };
 
     return {
@@ -38,6 +44,7 @@ angular.module('app.player-messenger', [])
       ready: ready,
       submit: submit,  //prompt or meme
       selectWinner: selectWinner,
+      startNextRound: startNextRound,
       on: registerEventHandler
     };
 
@@ -107,9 +114,16 @@ angular.module('app.player-messenger', [])
     }
 
     function registerEventHandler (event, handler) {
-      eventHandlers[event] = handler;
+      // eventHandlers[event] = handler;
+      eventHandlers[event] = eventHandlers[event] || [];
+      eventHandlers[event].push(handler);
     }
 
+    function startNextRound () {
+      send('startNextRound');
+    }
+
+    // *** CHROMECAST STUFF BELOW *** //
     function setUpChromeCast () {
       window['__onGCastApiAvailable'] = function(loaded, errorInfo) {
         if (loaded) {

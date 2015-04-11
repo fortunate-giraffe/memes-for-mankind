@@ -25,7 +25,8 @@
         }
       }
 
-    vm.currentDisplay = vm.mainContent['waitingForPlayers'];
+    var status = game.started() ? 'waitingForPrompt' : 'waitingForPlayers';
+    vm.currentDisplay = vm.mainContent[status]
 
     game.on('enoughPlayers', function() {
       vm.currentDisplay = vm.mainContent['readyToPlay'];
