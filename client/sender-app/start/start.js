@@ -10,10 +10,10 @@
   function Start(playerMessenger, playerUser, $state) {
     /*jshint validthis: true */
     var vm = this;
-    vm.test = 'Start';
     vm.startGame = startGame;
     vm.userName = '';
-    vm.btnShow = false;
+    vm.nameSubmitted = false;
+    vm.playerStarted = false;
     vm.setUser = setUser;
 
     changeStateListener();
@@ -22,8 +22,7 @@
     function setUser(event) {
       // set username in playerUser factory
       playerUser.setUser(vm.userName);
-      // unhide btn
-      vm.btnShow = true;
+      vm.nameSubmitted = !vm.nameSubmitted;
       playerMessenger.join();
     }
 
@@ -31,6 +30,7 @@
     function startGame() {
       playerMessenger.ready();
       toastr.info(playerUser.getUser() + ' wants to play!');
+      vm.playerStarted = !vm.playerStarted;
     }
 
     // listener for game to indicate what role they should have

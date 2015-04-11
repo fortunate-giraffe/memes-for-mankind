@@ -12,7 +12,7 @@ angular.module('app.player-messenger', [])
       var session;
       var namespace = 'urn:x-cast:vandelay.industries';
       var username;
-      var connected;
+      var connected = false;
     }
 
     // TODO: get rid of these! make gameRecipient an app constant, user a service, maybe defer to messenger
@@ -167,6 +167,9 @@ angular.module('app.player-messenger', [])
     function sessionListener (e) {
       session = e;
       console.log('got session', session);
+      if( session.status === 'connected' ) connected = true;
+      console.log('connected should be here', connected);
+      trigger('chromecastConnection');
       session.addUpdateListener(function (isAlive) {
         console.log('session update', isAlive, session);
         connected = isAlive;
