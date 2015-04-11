@@ -16,6 +16,7 @@
       'app.choosing',
       'app.start',
       'app.prompt',
+      'app.done',
       'app.core'
   ])
   .constant('localDev', false)
@@ -43,7 +44,7 @@
     })
     .state('home.choosing', {
       url: '/home/choosing',
-      views: { 
+      views: {
         body: {
           controller: 'Choosing',
           controllerAs: 'vm',
@@ -53,7 +54,7 @@
     })
     .state('home.waiting', {
       url: '/home/waiting',
-      views: { 
+      views: {
         body: {
           controller: 'Waiting',
           controllerAs: 'vm',
@@ -63,13 +64,13 @@
       resolve: {
         simpleObj:  function(){
                     return {value: 'simple!'};
-                 } 
+                 }
       }
-      
+
     })
     .state('home.start', {
       url: '/home/start',
-      views: { 
+      views: {
         body: {
           controller: 'Start',
           controllerAs: 'vm',
@@ -79,11 +80,21 @@
     })
     .state('home.prompt', {
       url: '/home/prompt',
-      views: { 
+      views: {
         body: {
           controller: 'Prompt',
           controllerAs: 'vm',
           templateUrl: 'prompt/prompt.html'
+        }
+      }
+    })
+    .state('home.done', {
+      url: '/home/done',
+      views: {
+        body: {
+          controller: 'Done',
+          controllerAs: 'vm',
+          templateUrl: 'done/done.html'
         }
       }
     });
