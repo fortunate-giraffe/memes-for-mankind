@@ -37,6 +37,7 @@ module.exports = function(config) {
 
       // our Core code
       'client/core/*.js',
+      'client/core/**/*.js',
       'client/core/*.module.js',
 
       // specs

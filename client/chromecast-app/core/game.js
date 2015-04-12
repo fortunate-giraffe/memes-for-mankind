@@ -92,9 +92,13 @@
 
       var trigger = function(event, data) {
         if (eventHandlers[event]) {
-          $rootScope.$apply(function() {
+          if (!$rootScope.$$phase) {  // don't use $apply if already in a digest cycle
+            $rootScope.$apply(function() {
+              eventHandlers[event](data);
+            });
+          } else {
             eventHandlers[event](data);
-          });
+          }
         }
       };
 

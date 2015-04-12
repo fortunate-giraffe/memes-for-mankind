@@ -1,10 +1,7 @@
 (function () {
   'use strict';
   angular.module('app.core', [
-    'app.messaging',
-    'app.player-messenger',
-    'app.player-user',
-    'app.game-messenger',
-    'app.data-service'
+    'app.events',
+    'app.sockets'
   ]);
 })();
