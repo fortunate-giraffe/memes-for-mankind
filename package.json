@@ -10,13 +10,20 @@
     "express": "^4.12.3",
     "ws": "^0.7.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-concurrent": "^1.0.0",
+    "grunt-contrib-jshint": "^0.11.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-env": "^0.4.4",
+    "grunt-ng-constant": "^1.1.0",
+    "grunt-nodemon": "^0.4.0"
+  },
   "engines": {
     "node": "0.10.x"
   },
   "scripts": {
-    "postinstall": "node node_modules/bower/bin/bower install",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "node node_modules/bower/bin/bower install"
   },
   "repository": {
     "type": "git",

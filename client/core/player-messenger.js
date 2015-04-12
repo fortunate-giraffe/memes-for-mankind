@@ -3,14 +3,14 @@
 angular.module('app.player-messenger', [])
   .factory('playerMessenger', playerMessenger);
 
-  playerMessenger.$inject = ['messenger', 'localDev', 'appID', '$rootScope'];
+  playerMessenger.$inject = ['messenger', 'socketDev', 'chromecastNamespace', 'appId', '$rootScope'];
 
-  function playerMessenger (messenger, localDev, appID, $rootScope) {
+  function playerMessenger (messenger, socketDev, chromecastNamespace, appId, $rootScope) {
 
-    if (!localDev) {
+    if (!socketDev) {
       setUpChromeCast();
       var session;
-      var namespace = 'urn:x-cast:vandelay.industries';
+      var namespace = chromecastNamespace;
       var username;
       var connected = false;
     }
@@ -39,7 +39,7 @@ angular.module('app.player-messenger', [])
     };
 
     return {
-      connect: !localDev ? connectCast : function () {},
+      connect: !socketDev ? connectCast : function () {},
       init: init,
       join: join,
       ready: ready,
@@ -52,7 +52,7 @@ angular.module('app.player-messenger', [])
 
     function init (name) {
       console.log('calling init');
-      if (localDev) {
+      if (socketDev) {
         messenger.onready(function () {
           messenger.initAsUser(name);
 
@@ -84,7 +84,7 @@ angular.module('app.player-messenger', [])
 
       } else {
 
-        if (localDev) {
+        if (socketDev) {
           messenger.send(type, data, recipient);
         } else {
           session.sendMessage(namespace, JSON.stringify({
@@ -141,7 +141,7 @@ angular.module('app.player-messenger', [])
       };
 
       function initializeCastApi () {
-        var sessionRequest = new chrome.cast.SessionRequest(appID);
+        var sessionRequest = new chrome.cast.SessionRequest(appId);
         var apiConfig = new chrome.cast.ApiConfig(
                                 sessionRequest,
                                 sessionListener,
