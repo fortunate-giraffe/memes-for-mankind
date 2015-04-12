@@ -13,16 +13,13 @@ module.exports = {
       success: true
       result: [
       {
-        generatorID: 3466964,
-        displayName: "Kermit The Frog Drinking Tea",
-        urlName: "Kermit-The-Frog-Drinking-Tea",
-        totalVotesScore: 21,
-        imageUrl: "http://cdn.meme.am/images/400x/11590722.jpg", // IMAGE WITHOUT WORDS
-        instanceID: 60884204,
-        textO: "Hilarious top text", // TOP TEXT
-        text1: "More hilarious bottom text", // BOTTOM TEXT
-        instanceImageUrl: "http://cdn.meme.am/instances/400x/60884204.jpg",
-        instanceUrl: "http://memegenerator.net/instance/60884204"
+        generatorID:2,
+        displayName:"Y U No",
+        urlName:"Y-U-No",
+        totalVotesScore:9290,
+        imageUrl:"http://cdn.meme.am/images/400x/166088.jpg",
+        instancesCount:2285339,
+        ranking:1
       },
       {
         ... more meme objects
