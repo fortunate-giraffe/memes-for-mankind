@@ -30,14 +30,14 @@
       playerMessenger.on('startJudging', function(message) {
         // if role is judge, go to prompt
         if (playerUser.getRole() === 'judge') {
-          playerUser.setJudgeMemeList(message.memes); 
+          playerUser.setJudgeMemeList(message.memes);
           $state.go('home.choosing');
         }
       });
 
       // on done msg from Chromecast, go to start page
       playerMessenger.on('done', function() {
-        $state.go('home.start');
+        $state.go('home.done');
       });
     }
   }
