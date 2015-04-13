@@ -1,8 +1,6 @@
+'use strict';
 var http = require('http');
 var querystring = require('querystring');
-
-var creds = require('../config/server-config.js');
-
 
 module.exports = {
 
@@ -67,8 +65,8 @@ module.exports = {
   createMeme: function(request, response, next){
 
     var postData = querystring.stringify({
-      'username': creds.username,
-      'password': creds.password,
+      'username': process.env.memegenUsername,
+      'password': process.env.memegenPassword,
       'languageCode': 'en',
 
       // Required from client

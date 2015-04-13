@@ -1,8 +1,8 @@
 'use strict';
 var WebSocketServer = require('ws').Server;
-var wsServer = new WebSocketServer({ port: 3434 });
+var wsServer = new WebSocketServer({ port: process.env.devSocketPort });
 
-// Utility function to broadcast a message to all connected clients, 
+// Utility function to broadcast a message to all connected clients,
 // totally indiscriminately
 // wsServer.broadcast = function (data) {
 //   this.clients.forEach(function (client) {

@@ -11,10 +11,9 @@
       'ui.router',
       'app.game',
       'app.game-messenger',
-      'app.messaging'
+      'app.messaging',
+      'app.config'
     ])
-  .constant('localDev', false)
-  .constant('appID', '1FA8E626')
   .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/waiting');
@@ -30,7 +29,7 @@
               'body': {
                 templateUrl: 'waiting/waiting.html',
                 controllerAs: 'vm',
-                controller: 'Waiting'      
+                controller: 'Waiting'
               }
             },
         })
@@ -45,7 +44,7 @@
            'body': {
               templateUrl: 'creating/creating.html',
               controllerAs: 'vm',
-              controller: 'Creating'      
+              controller: 'Creating'
             }
           }
         })
@@ -60,7 +59,7 @@
            'body': {
               templateUrl: 'choosing/choosing.html',
               controllerAs: 'vm',
-              controller: 'Choosing'      
+              controller: 'Choosing'
             }
           }
         })
@@ -75,11 +74,11 @@
            'body': {
               templateUrl: 'winner/winner.html',
               controllerAs: 'vm',
-              controller: 'Winner'  
+              controller: 'Winner'
             }
           }
         })
-        
+
   }]);
 
 })();

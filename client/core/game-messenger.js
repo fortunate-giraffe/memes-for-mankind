@@ -3,9 +3,9 @@
   angular.module('app.game-messenger', [])
     .factory('gameMessenger', gameMessenger);
 
-    gameMessenger.$inject = ['messenger', 'localDev', 'appID'];
+    gameMessenger.$inject = ['messenger', 'socketDev', 'chromecastNamespace'];
 
-    function gameMessenger (messenger, localDev, appID) {
+    function gameMessenger (messenger, socketDev, chromecastNamespace) {
       // TODO: move message queueing to messenger, issue #79
       var allSet = false;
       var queuedMessages = [];
@@ -21,7 +21,7 @@
       // object to store senderIds with human readable names as keys
       var senders = {};
 
-      if (!localDev) {
+      if (!socketDev) {
         console.log('not local dev!');
         setUpChromeCast(); // set up chromecast messaging
       } else {
@@ -50,7 +50,7 @@
 
       function send (type, data, recipient) {
         // if chromecast send using ccSend
-        if (!localDev) {
+        if (!socketDev) {
           ccSend(type, data, recipient);
         } else { // if sockets, check all set
           if (!allSet) {
@@ -76,7 +76,7 @@
       }
 
       function done () {
-        if (!localDev) {
+        if (!socketDev) {
           window.messageBus
             .broadcast(JSON.stringify({
               type:'done',
@@ -93,7 +93,6 @@
       }
 
       function ccSend (type, data, recipient) {
-        toastr.info('sending msg via CC: ' + type + ' ' + data + ' ' + recipient + ' ' + senders[recipient]);
         if (!type) throw new Error('all messages must have a type');
         if (!recipient) throw new Error('message must have a receipient before you can send a message');
         try {
@@ -135,7 +134,7 @@
         };
         // create a CastMessageBus to handle messages for a custom namespace
         // toastr.info('cast receiver manager: ' + window.castReceiverManager);
-        window.messageBus = window.castReceiverManager.getCastMessageBus('urn:x-cast:vandelay.industries');
+        window.messageBus = window.castReceiverManager.getCastMessageBus(chromecastNamespace);
         // initialize the CastReceiverManager with an application status message
         window.castReceiverManager.start({statusText: 'Application is starting'});
 

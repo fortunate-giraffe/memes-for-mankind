@@ -17,10 +17,9 @@
       'app.start',
       'app.prompt',
       'app.done',
-      'app.core'
+      'app.core',
+      'app.config'
   ])
-  .constant('localDev', false)
-  .constant('appID', '1FA8E626')
   .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   //
   // For any unmatched url, redirect to /state1
