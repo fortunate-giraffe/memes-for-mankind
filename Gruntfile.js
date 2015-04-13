@@ -21,8 +21,6 @@ module.exports = function(grunt) {
     env: {
       all: {
         add: {
-          memegenUsername: gruntConfig.memegenUsername, // process.ENV.memegenUsername
-          memegenPassword: gruntConfig.memegenPassword, // process.ENV.memegenPassword
           devSocketPort: gruntConfig.devSocketPort // process.ENV.devSocketPort
         }
       }

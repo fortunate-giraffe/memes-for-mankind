@@ -8,16 +8,15 @@
     "bower": "1.4.1",
     "cors": "^2.5.3",
     "express": "^4.12.3",
-    "ws": "^0.7.1"
-  },
-  "devDependencies": {
     "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
     "grunt-concurrent": "^1.0.0",
     "grunt-contrib-jshint": "^0.11.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-env": "^0.4.4",
     "grunt-ng-constant": "^1.1.0",
-    "grunt-nodemon": "^0.4.0"
+    "grunt-nodemon": "^0.4.0",
+    "ws": "^0.7.1"
   },
   "engines": {
     "node": "0.10.x"

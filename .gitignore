@@ -9,9 +9,6 @@ pids
 *.pid
 *.seed
 
-# Private configs
-grunt_config.js
-
 # Generated constants file from Grunt
 /client/core/config.js
 
