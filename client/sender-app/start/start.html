@@ -1,11 +1,10 @@
 <section class="container-fluid body-content">
-  <span> {{ vm.test }} </span>
   <br>
-  <input type="text" ng-model="vm.userName" placeholder="What's yo name?"></input>
-  <button ng-click="vm.setUser()" ng-disabled="vm.btnShow">Set Username</button>
-  <br>
-  <br>
-  <div class="row" ng-show="vm.btnShow">
-    <button class="col-lg-2" id="start" ng-click="vm.startGame()">Press here to start the game!</button>
+  <div ng-if="!vm.nameSubmitted">
+    <input type="text" ng-model="vm.userName" placeholder="What's your name?"></input>
+    <button ng-click="vm.setUser()">Set Username</button>
+  </div>
+  <div class="row" ng-if="vm.nameSubmitted">
+    <button class="col-lg-2 " id="start" ng-click="vm.startGame()" ng-class="{{ vm.playerStarted ? 'startButtonClicked' : 'startButton' }}" ng-disabled="vm.playerStarted">{{ vm.playerStarted ? 'Press here to start the game!' : 'Ready to play!' }}</button>
   </div>
 </section>
