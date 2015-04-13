@@ -9,7 +9,7 @@
 
     function Creating(game, $state) {
       var vm = this;
-      
+
       vm.players = [];
 
       game.on('memeSubmitted', function(player) {

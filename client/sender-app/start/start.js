@@ -10,6 +10,8 @@
   function Start(playerMessenger, playerUser, $state) {
     /*jshint validthis: true */
     var vm = this;
+
+    vm.test = 'Great fun is about to ensue.';
     vm.startGame = startGame;
     vm.userName = '';
     vm.nameSubmitted = false;

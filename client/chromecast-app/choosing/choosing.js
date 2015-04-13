@@ -9,7 +9,7 @@
 
     function Choosing(game, $state) {
       var vm = this;
-      
+
       vm.submissions = game.getMemes();
 
       game.on('winnerSelected', function() {

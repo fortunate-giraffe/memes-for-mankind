@@ -10,7 +10,7 @@
   function Choosing(dataService, playerMessenger, playerUser, $state) {
     /*jshint validthis: true */
     var vm = this;
-    vm.title = 'Choosing!';
+    vm.title = 'Choose your meme!';
     vm.role = playerUser.getRole();
     vm.chosenMeme = null;
     vm.clickHandler = clickHandler;

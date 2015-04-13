@@ -13,15 +13,15 @@
       vm.mainContent = {
         waitingForPlayers: {
           text: "Where are your friends? You've gotta have at least 3!",
-          image: "http://cdn.meme.am/instances/500x/60894524.jpg" 
+          image: "http://cdn.meme.am/instances/500x/60894524.jpg"
         },
         readyToPlay: {
-          text: "Ready to play?",
-          image: ""
+          text: "Press your button when all players are ready to play!",
+          image: "http://www.gunwalls.com/wp-content/uploads/2015/02/meme_are_you_sure-12.jpg"
         },
         waitingForPrompt:  {
           text: "Judge: Choose the prompt!",
-          image: ""
+          image: "http://cdn.meme.am/instances/54302540.jpg"
         }
       }
 

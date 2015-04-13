@@ -1,10 +1,8 @@
 <div>
   <h2>Hey, Judge. Choose the winner!</h2>
-  <div id="grid-container">
-    <ul id="submission-grid" data-ng-repeat="player in vm.submissions">
-      <li>
-        <img src="{{player.meme.instanceImageUrl}}">
-      </li>
-    </ul>
+  <div class="container-container">
+    <div class="container-fluid">
+      <img class=".col-lg-4 submissions" data-ng-repeat="player in vm.submissions" src="{{player.meme.instanceImageUrl}}">
+    </div>
   </div>
 </div>

@@ -5,7 +5,9 @@ html {
 html body {
   height: 100%;
   overflow: hidden;
-  background-color:gray;
+  background-color: #292929;
+  color: #fff;
+  font-size: 1.5em;
 }
 
 html body .container-fluid.body-content {
@@ -17,18 +19,48 @@ html body .container-fluid.body-content {
   overflow-y: auto;
 }
 
+button, input {
+  border-radius: none;
+  border: 0 none;
+  display: block;
+  margin: 0 auto;
+}
+
+button {
+  padding: 0 15px;
+  width: 200px;
+  height: 40px;
+}
+
+input {
+  padding: 15px;
+  width: 250px;
+  height: 35px;
+  color: black;
+}
+
 header {
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
-  height: 50px;
+  height: 45px;
+  background-color: #777;
+}
+
+header h1 {
+  font-size: 1.75em;
+  margin: 8px;
 }
 
 header img {
-  height: 50px;
-  width:50px;
-  float:right;
+  height: 30px;
+  width:30px;
+  /*float:right;*/
+  /*margin-top: -20px;*/
+  position: absolute;
+  top: 8px;
+  right: 8px;
 }
 
 footer {
@@ -45,12 +77,6 @@ footer {
   float:right;
 }
 
-img {
-  height:200px;
-  width:300px;
-  float:left;
-}
-
 .selected {
   border-style:outset;
   border-width:5px;
@@ -59,3 +85,60 @@ img {
 .top-buffer {
   margin-top:20px;
 }
+
+/*start controls*/
+
+.controls {
+  width: 300px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 300px;
+  margin-top: -150px;
+  margin-left: -150px;
+}
+
+.controls input {
+  margin: 30px auto;
+}
+
+.username-button {
+  margin: -15px auto;
+}
+
+#start {
+  margin-top: 15px;
+  line-height: 1;
+}
+
+/*waiting*/
+.waiting-img {
+  max-width: 100%;
+  margin-top: 50px;
+}
+
+/*choosing*/
+.memes img {
+ margin-bottom: 5%;
+}
+
+.memes {
+  text-align: center;
+}
+
+.memes button, .creating button {
+  margin: 25px auto;
+}
+
+/*creating*/
+.creating input {
+  margin: 10px auto;
+}
+
+.creating button {
+  margin-top: -5px;
+}
+
+
+
