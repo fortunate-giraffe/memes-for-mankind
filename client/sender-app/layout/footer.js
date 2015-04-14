@@ -5,9 +5,9 @@
       .module('app.layout')
       .controller('Footer', Footer);
 
-  Footer.$inject = ['playerMessenger'];
+  Footer.$inject = [];
 
-  function Footer(playerMessenger) {
+  function Footer() {
     /*jshint validthis: true */
     var vm = this;
     vm.test = 'Footer';

@@ -5,9 +5,9 @@
       .module('app.layout')
       .controller('Header', Header);
 
-  Header.$inject = ['playerMessenger', '$rootScope'];
+  Header.$inject = ['playerMessenger'];
 
-  function Header(playerMessenger, $rootScope) {
+  function Header(playerMessenger) {
     /*jshint validthis: true */
     var vm = this;
     vm.test = 'MemesForMankind';

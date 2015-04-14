@@ -24,7 +24,7 @@ module.exports = {
       }]
     }
    */
-  getMemes: function(request, response, next){
+  getMemes: function(request, response){ // next
     var options = {
       host: 'version1.api.memegenerator.net',
       path: '/Generators_Select_ByPopular',
@@ -62,7 +62,7 @@ module.exports = {
         }
     }
    */
-  createMeme: function(request, response, next){
+  createMeme: function(request, response){ // next
 
     var postData = querystring.stringify({
       'username': process.env.memegenUsername,

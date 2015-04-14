@@ -78,5 +78,5 @@ angular
       judgeMemeList = array;
     }
 
-  };
+  }
 })();

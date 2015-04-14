@@ -8,7 +8,6 @@
     Shell.$inject = [];
 
     function Shell() {
-      var vm = this;
     }
 
     // setting toastr defaults across all views via the shell
