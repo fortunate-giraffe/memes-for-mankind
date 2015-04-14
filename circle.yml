@@ -1,3 +1,6 @@
+checkout:
+  post:
+    - grunt ngconstant:prod
 test:
   override:
     - grunt test
