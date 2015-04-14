@@ -1,3 +1,6 @@
+Circle CI [![Circle CI](https://circleci.com/gh/fortunate-giraffe/memes-for-mankind/tree/master.svg?style=svg)](https://circleci.com/gh/fortunate-giraffe/memes-for-mankind/tree/master) Waffle.io  [![Stories in Ready](https://badge.waffle.io/fortunate-giraffe/memes-for-mankind.svg?label=ready&title=Ready)](http://waffle.io/fortunate-giraffe/memes-for-mankind)
+=========
+
 # MemesForMankind
 
 > Grab a Chromecast, grab some friends, and have a great time making awkward/inappropriate/terrible memes!
