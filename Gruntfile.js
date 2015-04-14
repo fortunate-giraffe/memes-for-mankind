@@ -6,6 +6,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-env');
+  grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ng-constant');
   grunt.loadNpmTasks('grunt-nodemon');
 
@@ -37,7 +38,13 @@ module.exports = function(grunt) {
       files: ['Gruntfile.js', 'client/**/*.js', 'server/**/*.js'],
       options: {
         force: 'true',
-        jshintrc: true
+        jshintrc: '.jshintrc',
+        reporter: require('jshint-stylish')
+      }
+    },
+    karma: {
+      unit: {
+        configFile: 'karma.conf.js'
       }
     },
     ngconstant: {
@@ -102,7 +109,7 @@ module.exports = function(grunt) {
   // checking value of input parameters to determine which API to use (local or production)
   var apiEnv = grunt.option('api') || 'dev'; // if running grunt task with --api=prod then look at the production API
 
-  grunt.registerTask('test', ['jshint']);
+  grunt.registerTask('test', ['jshint', 'karma']);
   // run server with socket comms
   grunt.registerTask('devSocket', ['env:all', 'test', 'ngconstant:devSocket' + apiEnv + 'Api', 'concurrent:socketServer']);
   // run server with chromecast
