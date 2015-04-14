@@ -1,3 +1,8 @@
+deployment:
+  prod:
+    branch: master
+    heroku:
+      appname: thawing-eyrie-5425
 checkout:
   post:
     - grunt ngconstant:prod
