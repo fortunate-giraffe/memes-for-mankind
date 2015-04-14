@@ -1,7 +1,9 @@
 <section class="container-fluid body-content">
-  <span> {{ vm.test }} </span>
-  <div class="row">
-    <input class="col-lg-2" id="prompt" ng-model="vm.prompt" placeholder="Enter your prompt here!"></input>
-    <button class="col-lg-2" id="submit" ng-click="vm.submitPrompt()">Submit</button>
+  <div class="">
+    <span> {{ vm.test }} </span>
+    <div class="row small-center">
+      <input id="prompt" ng-model="vm.prompt" placeholder="Enter your prompt here!"></input>
+      <button id="submit" ng-click="vm.submitPrompt()">Submit</button>
+    </div>
   </div>
 </section>

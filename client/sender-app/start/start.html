@@ -1,5 +1,5 @@
 <section class="container-fluid body-content">
-  <div class=" controls">
+  <div class="controls small-center">
     <h4>WARNING:</h4>
     <h4> {{ vm.test }} </h4>
     <div ng-if="!vm.nameSubmitted">
@@ -7,7 +7,7 @@
       <button class="username-button" ng-click="vm.setUser()">Set Username</button>
     </div>
     <div class="row" ng-if="vm.nameSubmitted">
-      <button class="col-lg-2 " id="start" ng-click="vm.startGame()" ng-class="{{ vm.playerStarted ? 'startButtonClicked' : 'startButton' }}" ng-disabled="vm.playerStarted">{{ vm.playerStarted === false ? 'Press here to start the game!' : 'Ready to play!' }}</button>
+      <button id="start" ng-click="vm.startGame()" ng-class="{{ vm.playerStarted ? 'start-button-clicked' : 'start-button' }}" ng-disabled="vm.playerStarted">{{ vm.playerStarted === false ? 'Press here to start the game!' : 'Ready to play!' }}</button>
     </div>
   </div>
 </section>

@@ -1,14 +1,14 @@
 <section class="container-fluid body-content creating">
   <!-- <span> {{ vm.title }} </span> -->
-  <br>
-  <div class="row">
-    <img class="col-lg-12 center-block img-responsive" src="{{ vm.meme }}">
+  <div class="creating-container center-block">
+    <div class="row">
+      <img class="col-12 img-responsive center-block" src="{{ vm.meme }}">
+    </div>
+
+    <div class="row">
+      <input ng-model="vm.topText" id="topText" placeholder="Top Text"></input>
+      <input ng-model="vm.bottomText" id="bottomText" placeholder="Bottom Text"></input>
+    </div>
+    <button ng-click="vm.submitCreation()">Submit your entry!</button>
   </div>
-  <br>
-  <div class="row">
-    <input class="col-md-6" ng-model="vm.topText" id="topText" placeholder="Top Text"></input>
-    <input class="col-md-6" ng-model="vm.bottomText" id="bottomText" placeholder="Bottom Text"></input>
-  </div>
-  <br>
-  <button ng-click="vm.submitCreation()">Submit your entry!</button>
 </section>
