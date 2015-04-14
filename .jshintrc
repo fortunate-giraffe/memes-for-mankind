@@ -28,6 +28,9 @@
     "require"   : false,
     "window"    : false,
     "toastr"    : false,
-    "chrome"    : false
+    "chrome"    : false,
+    "cast"      : false,
+    "WebSocket" : false,
+    "castReceiverManager" : false
   }
 }

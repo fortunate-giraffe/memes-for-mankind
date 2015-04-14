@@ -2,6 +2,8 @@
   'use strict';
 
   angular.module('app', [
+
+      // feature areas
       'app.prompt',
       'app.choosing',
       'app.creating',
@@ -9,10 +11,18 @@
       'app.waiting',
       'app.winner',
       'ui.router',
+
+      // game logic
       'app.game',
+
+      // messaging
       'app.game-messenger',
+      'app.cast-receiver',
       'app.messaging',
-      'app.config'
+
+      // core
+      'app.config',
+      'app.core'
     ])
   .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
