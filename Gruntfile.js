@@ -115,7 +115,7 @@ module.exports = function(grunt) {
   // run server with chromecast
   grunt.registerTask('devCc', ['env:all', 'test', 'ngconstant:devCc' + apiEnv + 'Api', 'nodemon:regServer']);
   // this should only be run by the server in production
-  grunt.registerTask('prod', ['env:all', 'test', 'ngconstant:prod', 'nodemon:regServer']);
+  grunt.registerTask('prod', ['env:all', 'ngconstant:prod', 'nodemon:regServer']);
   // default to the dev server with chromecast
   grunt.registerTask('default', ['devCc']);
 
