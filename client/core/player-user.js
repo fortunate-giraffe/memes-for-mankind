@@ -58,7 +58,6 @@ angular
     function setUser (string) {
       user = string;
       // initializing the messaging system once we know a user's name
-      console.log('calling setUser');
       playerMessenger.init(string);
     }
 
