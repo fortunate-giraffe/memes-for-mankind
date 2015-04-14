@@ -16,6 +16,6 @@
         $state.go('home.winner');
       });
 
-    };
+    }
 
 })();

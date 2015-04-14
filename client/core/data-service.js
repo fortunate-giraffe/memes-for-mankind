@@ -33,9 +33,9 @@
         };
         // now we construct a 'fake' promise with the synchronously grabbed memes to judge
         // we need to do this because the controller is expecting a promise (doesn't hurt)
-        var deferred = $q.defer();
-        deferred.resolve(returnObj);
-        return deferred.promise;
+        var fakeDeferred = $q.defer();
+        fakeDeferred.resolve(returnObj);
+        return fakeDeferred.promise;
       } else { //otherwise get 10 memes
         // return promise for the async call to the server
         // we wrap the $http promise with a $q promise for continuity with the above

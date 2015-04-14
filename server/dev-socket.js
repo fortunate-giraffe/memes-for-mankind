@@ -37,7 +37,7 @@ wsServer.on('connection', function (ws) {
     } else {
 
       var client = connections[msg.recipient];
-      if (client) client.send(messageStr);
+      if (client) { client.send(messageStr); }
 
     }
   });

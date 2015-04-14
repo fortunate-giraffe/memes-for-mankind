@@ -39,7 +39,7 @@
         }
       });
 
-      gameMessenger.on('ready', function(data, sender) {
+      gameMessenger.on('ready', function() { // data, sender
         playersReady++;
         if (playersReady >= 3 && playersReady === players.length) {
           startRound();
@@ -59,10 +59,10 @@
         }
         if (data.meme) {
           trigger('memeSubmitted', sender);
-          for (var i=0; i<players.length; i++) {
-            if (players[i].name === sender) {
-              players[i].meme = data.meme;
-              currentRound.memes.push({ name: players[i].name, meme: data.meme });
+          for (var k=0; k<players.length; k++) {
+            if (players[k].name === sender) {
+              players[k].meme = data.meme;
+              currentRound.memes.push({ name: players[k].name, meme: data.meme });
               break;
             }
           }
@@ -73,7 +73,7 @@
         }
       });
 
-      gameMessenger.on('selectWinner', function(data, sender) {
+      gameMessenger.on('selectWinner', function(data) { // sender
         currentRound.winner = data;
         trigger('winnerSelected', data);
         gameMessenger.done();
@@ -93,7 +93,7 @@
       var trigger = function(event, data) {
         if (eventHandlers[event]) {
           $rootScope.$apply(function() {
-            eventHandlers[event](data)
+            eventHandlers[event](data);
           });
         }
       };
@@ -112,7 +112,8 @@
 
       var started = function() {
         return rounds.length > 0;
-      }
+      };
+
       return {
         on: registerEventHandler,
         getPrompt: getPrompt,

@@ -21,7 +21,7 @@
     changeStateListener();
 
     // user setting their name and revealing the start game button
-    function setUser(event) {
+    function setUser() { // event
       // set username in playerUser factory
       playerUser.setUser(vm.userName);
       vm.nameSubmitted = !vm.nameSubmitted;

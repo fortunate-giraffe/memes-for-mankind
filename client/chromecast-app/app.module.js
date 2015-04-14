@@ -1,5 +1,5 @@
 (function() {
-  'use strict'
+  'use strict';
 
   angular.module('app', [
       'app.prompt',
@@ -77,7 +77,7 @@
               controller: 'Winner'
             }
           }
-        })
+        });
 
   }]);
 
