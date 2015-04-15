@@ -8,6 +8,12 @@
     "bower": "1.4.1",
     "cors": "^2.5.3",
     "express": "^4.12.3",
+    "mongoose": "^4.0.1",
+    "mongoose-random": "^0.1.1",
+    "request": "^2.55.0",
+    "ws": "^0.7.1"
+  },
+  "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "grunt-concurrent": "^1.0.0",
