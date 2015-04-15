@@ -5,14 +5,9 @@
       .module('app.waiting')
       .controller('Waiting', Waiting);
 
-  Waiting.$inject = ['simpleObj', 'playerMessenger', 'playerUser', '$state'];
+  Waiting.$inject = ['playerMessenger', 'playerUser', '$state'];
 
-  function Waiting(simpleObj, playerMessenger, playerUser, $state) {
-    /*jshint validthis: true */
-    var vm = this;
-    vm.test = 'Waiting';
-    vm.simple = simpleObj;
-    toastr.info(simpleObj.value);
+  function Waiting(playerMessenger, playerUser, $state) {
     toastr.info(playerUser.getUser());
 
     changeStateListener();

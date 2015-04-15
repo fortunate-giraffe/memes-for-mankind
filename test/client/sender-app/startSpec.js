@@ -1,15 +1,30 @@
 'use strict';
 
 describe('Start Controller', function() {
-  var scope, ctrl, playerMessenger, playerUser; // using this in our tests
+  var scope, state, ctrl, playerMessenger, playerUser, events; // using this in our tests
 
   // mock app
   beforeEach(function() {
     angular.mock.module('app');
 
-    inject(function($rootScope, $controller, $state, _playerMessenger_, _playerUser_) {
+    inject(function($rootScope, $controller, $state, $httpBackend, _playerMessenger_, _playerUser_, _events_) {
       playerMessenger = _playerMessenger_;
       playerUser = _playerUser_;
+      events = _events_;
+      // spy on player messenger's methods that are used
+      spyOn(playerMessenger, 'join').and.callFake(function() {
+            return 'joined!';
+          });
+      spyOn(playerMessenger, 'ready').and.callFake(function() {
+            return 'ready!';
+          });
+      state = $state;
+      spyOn(state, 'go').and.callFake(function() {
+            return 'went!';
+          });
+
+      $httpBackend.whenGET(/./).respond(200, { Response: "a response" });
+
       scope = $rootScope.$new();
       ctrl = $controller('Start', {$scope: scope});
     });
@@ -43,6 +58,12 @@ describe('Start Controller', function() {
       expect(ctrl.nameSubmitted).toBe(true);
     });
 
+    it('setUser should call the playerMessenger.join method', function() {
+      ctrl.userName = 'Bobby Darrin';
+      ctrl.setUser();
+      expect(playerMessenger.join).toHaveBeenCalled();
+    });
+
     it('setUser should change the user value in the playerUser factory', function() {
       ctrl.userName = 'Michael Bolton';
       playerUser.setUser(ctrl.userName);
@@ -57,6 +78,33 @@ describe('Start Controller', function() {
       ctrl.setUser();
       ctrl.startGame();
       expect(ctrl.playerStarted).toBe(true);
+    });
+
+    it('startGame should call the playerMessenger.ready method', function() {
+      ctrl.userName = 'Bobby Darrin';
+      ctrl.setUser();
+      ctrl.startGame();
+      expect(playerMessenger.ready).toHaveBeenCalled();
+    });
+  });
+
+  describe('the state listeners', function() {
+
+    it('should move to home.prompt if the user is a judge', function() {
+      // user is judge
+      var data = {role: 'judge'};
+      events.trigger('gameStarted', data); // gameStarted
+      expect(state.go).toHaveBeenCalled();
+      expect(state.go).toHaveBeenCalledWith('home.prompt');
+      state.go.calls.reset();
+    });
+
+    it('should move to home.waiting if the user is a player', function() {
+      // switching to player
+      var data = {role: 'player'};
+      events.trigger('gameStarted', data); // gameStarted
+      expect(state.go).toHaveBeenCalled();
+      expect(state.go).toHaveBeenCalledWith('home.waiting');
     });
   });
 

@@ -1,7 +1,11 @@
  (function(){
   'use strict';
   angular.module('app.game', [])
-    .factory('game', function (gameMessenger, $rootScope) {
+    .factory('game', game);
+
+    game.$inject = ['$rootScope', 'gameMessenger'];
+
+    function game ($rootScope, gameMessenger) {
 
       // setup once per game
       var players = [];
@@ -126,5 +130,5 @@
         started: started
       };
 
-    });
+    }
   })();
