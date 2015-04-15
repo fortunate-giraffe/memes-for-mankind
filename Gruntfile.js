@@ -43,8 +43,54 @@ module.exports = function(grunt) {
       }
     },
     karma: {
-      unit: {
-        configFile: 'karma.conf.js'
+
+      options: {
+        configFile: 'karma.conf.js',
+        files: [
+          // vendor stuff
+          'bower_components/angular/angular.js',
+          'bower_components/angular-ui-router/release/angular-ui-router.js',
+          'bower_components/angular-mocks/angular-mocks.js',
+          'bower_components/jquery/dist/jquery.js',
+          'bower_components/bootstrap/dist/js/bootstrap.js',
+          'bower_components/toastr/toastr.js',
+
+          // shared app files
+          'client/core/*.js',
+          'client/core/**/*.js',
+          'client/core/*.module.js',
+        ]
+      },
+
+      receiver: {
+        files: [
+          { src:
+            [ // Receiver-specifc files
+              'client/chromecast-app/**/*.module.js',
+              'client/chromecast-app/*.js',
+              'client/chromecast-app/**/*.js',
+
+              // Receiver specs
+              'test/client/chromecast-app/*.js'
+            ]
+          }
+        ]
+      },
+
+      sender: {
+        files: [
+          { src:
+            [ // Sender-specifc files
+              // 'client/sender-app/app.module.js',
+              'client/sender-app/**/*.module.js',
+              'client/sender-app/*.js',
+              'client/sender-app/**/*.js',
+
+              // Sender specs
+              'test/client/sender-app/*.js'
+            ]
+          }
+        ]
       }
     },
     ngconstant: {
@@ -109,7 +155,7 @@ module.exports = function(grunt) {
   // checking value of input parameters to determine which API to use (local or production)
   var apiEnv = grunt.option('api') || 'dev'; // if running grunt task with --api=prod then look at the production API
 
-  grunt.registerTask('test', ['jshint', 'karma']);
+  grunt.registerTask('test', ['jshint', 'karma:sender', 'karma:receiver']);
   // run server with socket comms
   grunt.registerTask('devSocket', ['env:all', 'test', 'ngconstant:devSocket' + apiEnv + 'Api', 'concurrent:socketServer']);
   // run server with chromecast

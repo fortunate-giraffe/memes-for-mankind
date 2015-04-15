@@ -15,33 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      // vendor stuff
-      'bower_components/angular/angular.js',
-      'bower_components/angular-ui-router/release/angular-ui-router.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'bower_components/jquery/dist/jquery.js',
-      'bower_components/bootstrap/dist/js/bootstrap.js',
-      'bower_components/toastr/toastr.js',
-
-      // our CC Client code
-      'client/chromecast-app/app.module.js',
-      'client/chromecast-app/**/*.module.js',
-      'client/chromecast-app/*.js',
-      'client/chromecast-app/**/*.js',
-
-      // our Sender Client code
-      'client/sender-app/app.module.js',
-      'client/sender-app/**/*.module.js',
-      'client/sender-app/*.js',
-      'client/sender-app/**/*.js',
-
-      // our Core code
-      'client/core/*.js',
-      'client/core/**/*.js',
-      'client/core/*.module.js',
-
-      // specs
-      'test/**/*.js'
+      //See Gruntfile.js for files loaded
     ],
 
 
