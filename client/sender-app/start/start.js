@@ -12,6 +12,7 @@
     var vm = this;
 
     vm.test = 'Great fun is about to ensue.';
+    vm.connectionStatus = playerMessenger.getConnectionStatus;
     vm.startGame = startGame;
     vm.userName = '';
     vm.nameSubmitted = false;
@@ -19,6 +20,10 @@
     vm.setUser = setUser;
 
     changeStateListener();
+
+    vm.connect = function () {
+      playerMessenger.connect();
+    };
 
     // user setting their name and revealing the start game button
     function setUser() { // event

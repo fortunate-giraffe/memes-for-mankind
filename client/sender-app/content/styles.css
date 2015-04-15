@@ -85,6 +85,7 @@ header {
   top: 0;
   height: 45px;
   background-color: #777;
+  text-align: left;
 }
 
 header h1 {
@@ -131,6 +132,14 @@ START CONTROLS
 
 .start-button-clicked {
   font-size: 1.5em;
+}
+
+.controls img {
+  height: 200px;
+}
+
+.controls img:hover {
+  cursor: pointer;
 }
 
 
