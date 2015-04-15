@@ -30,6 +30,13 @@
       playerMessenger.connect();
     };
 
+    vm.keyPress = function(e){
+      if( e.which === 13 ){
+        setUser();
+        e.preventDefault();
+      }
+    };
+
     // user setting their name and revealing the start game button
     function setUser() { // event
       // set username in playerUser factory
