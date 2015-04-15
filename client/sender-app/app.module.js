@@ -72,13 +72,7 @@
           controllerAs: 'vm',
           templateUrl: 'waiting/waiting.html'
         }
-      },
-      resolve: {
-        simpleObj:  function(){
-                    return {value: 'simple!'};
-                 }
       }
-
     })
     .state('home.start', {
       url: '/home/start',
