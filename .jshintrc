@@ -31,6 +31,11 @@
     "chrome"    : false,
     "cast"      : false,
     "WebSocket" : false,
-    "castReceiverManager" : false
+    "castReceiverManager" : false,
+    "it"        : false,
+    "describe"  : false,
+    "beforeEach": false,
+    "inject"    : false,
+    "expect"    : false
   }
 }
