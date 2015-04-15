@@ -1,7 +1,10 @@
 module.exports = {
   // server process.env.XXXX
+  // these already exist as environment variables on the server but will need to be added locally
   memegenUsername: process.env.memegenUsername,
   memegenPassword: process.env.memegenPassword,
+  dbUsername: process.env.dbUsername,
+  dbPassword: process.env.dbPassword,
   devSocketPort: 3434, // whatever your socket port of choice is
   // client ng-constant
   appId: '1FA8E626', // retrieved from google cast developer dashboard
