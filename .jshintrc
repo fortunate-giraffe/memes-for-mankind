@@ -36,6 +36,7 @@
     "describe"  : false,
     "beforeEach": false,
     "inject"    : false,
-    "expect"    : false
+    "expect"    : false,
+    "spyOn"     : false
   }
 }

@@ -11,8 +11,8 @@
     /*jshint validthis: true */
     var vm = this;
 
-    vm.test = 'Great fun is about to ensue.';
-    vm.connectionStatus = playerMessenger.getConnectionStatus;
+    vm.title = 'Great fun is about to ensue.';
+    vm.connectionStatus = playerMessenger.getConnectionStatus();
     vm.startGame = startGame;
     vm.userName = '';
     vm.nameSubmitted = false;
@@ -20,6 +20,11 @@
     vm.setUser = setUser;
 
     changeStateListener();
+
+    playerMessenger.on('chromecastConnection', function(){
+      vm.connectionStatus = playerMessenger.getConnectionStatus();
+      console.log('connection status updated', vm.connectionStatus);
+    });
 
     vm.connect = function () {
       playerMessenger.connect();

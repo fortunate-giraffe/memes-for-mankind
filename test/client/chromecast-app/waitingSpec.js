@@ -37,7 +37,7 @@ describe('Waiting Controller', function() {
   });
 
   it('should have a status variable', function() {
-    expect(status).toBeDefined();
+    expect(status).toBeDefined(); // jshint ignore:line
   });
 
   it('should have a currentDisplay property', function() {

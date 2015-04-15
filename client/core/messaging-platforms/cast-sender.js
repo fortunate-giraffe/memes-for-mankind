@@ -70,12 +70,17 @@
     function sessionListener (e) {
       session = e;
       console.log('got session', session);
+      connected = true;
+      console.log('on ready handler', onreadyHandler);
+      if (onreadyHandler) {
+        onreadyHandler();
+      }
       session.addUpdateListener(function (isAlive) {
         console.log('session update', isAlive, session);
         connected = isAlive;
         // trigger('chromecastConnection');
         if (onreadyHandler) {
-          onreadyHandler();
+        onreadyHandler();
         }
       });
       session.addMessageListener(chromecastNamespace, function (namespace, message) {

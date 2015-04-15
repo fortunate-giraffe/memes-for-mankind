@@ -10,7 +10,6 @@
   function Header(playerMessenger) {
     /*jshint validthis: true */
     var vm = this;
-    vm.test = 'MemesForMankind';
     vm.castButtonState = playerMessenger.getConnectionStatus();
 
     vm.connect = function () {
