@@ -1,7 +1,7 @@
 <section class="container-fluid body-content">
   <div class="controls small-center">
-    <img ng-show="!vm.connectionStatus()" ng-click="vm.connect()" src="content/ic_cast_grey_24dp.png" alt="chromecast icon">
-    <div ng-show="vm.connectionStatus()">
+    <img ng-show="!vm.connectionStatus" ng-click="vm.connect()" src="content/ic_cast_grey_24dp.png" alt="chromecast icon">
+    <div ng-show="vm.connectionStatus">
       <h4>WARNING:</h4>
       <h4> {{ vm.title }} </h4>
       <div ng-if="!vm.nameSubmitted">

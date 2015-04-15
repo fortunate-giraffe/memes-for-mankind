@@ -35,7 +35,13 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      files: ['Gruntfile.js', 'client/**/*.js', 'server/**/*.js', 'test/**/*.js'],
+      files: [
+        'Gruntfile.js',
+        'client/**/*.js',
+        'server/**/*.js',
+        'test/**/*.js',
+        '!test/client/chromecast-app/testCastReceiver.js', // ignore this file from GOOG, just for testing
+      ],
       options: {
         force: 'true',
         jshintrc: '.jshintrc',
