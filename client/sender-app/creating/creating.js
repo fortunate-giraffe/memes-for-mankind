@@ -10,7 +10,6 @@
   function Creating(playerMessenger, playerUser, dataService, $state) {
     /*jshint validthis: true */
     var vm = this;
-    vm.title = 'Creating';
     vm.meme = playerUser.getMemeChoice().imageUrl;
     vm.submitCreation = submitCreation;
     vm.bottomText = '';
@@ -25,7 +24,7 @@
 
         dataService
           .createMeme(vm.topText, vm.bottomText, generatorID, imageID)
-          .success(function(data){
+          .then(function(data){
             playerMessenger.submit({meme: data.result});
           });
 

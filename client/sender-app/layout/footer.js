@@ -8,8 +8,5 @@
   Footer.$inject = [];
 
   function Footer() {
-    /*jshint validthis: true */
-    var vm = this;
-    vm.test = 'Footer';
   }
 })();

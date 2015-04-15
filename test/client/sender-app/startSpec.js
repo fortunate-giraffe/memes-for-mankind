@@ -23,7 +23,7 @@ describe('Start Controller', function() {
             return 'went!';
           });
 
-      $httpBackend.whenGET(/./).respond(200, { Response: "a response" });
+      $httpBackend.whenGET(/./).respond(200, { Response: 'a response' });
 
       scope = $rootScope.$new();
       ctrl = $controller('Start', {$scope: scope});

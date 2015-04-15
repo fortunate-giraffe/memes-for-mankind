@@ -3,7 +3,7 @@
     <img ng-show="!vm.connectionStatus()" ng-click="vm.connect()" src="content/ic_cast_grey_24dp.png" alt="chromecast icon">
     <div ng-show="vm.connectionStatus()">
       <h4>WARNING:</h4>
-      <h4> {{ vm.test }} </h4>
+      <h4> {{ vm.title }} </h4>
       <div ng-if="!vm.nameSubmitted">
         <input type="text" ng-model="vm.userName" placeholder="What's your name?"></input>
         <button class="username-button" ng-click="vm.setUser()">Set Username</button>

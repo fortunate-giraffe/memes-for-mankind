@@ -11,7 +11,7 @@
     /*jshint validthis: true */
     var vm = this;
 
-    vm.test = 'Great fun is about to ensue.';
+    vm.title = 'Great fun is about to ensue.';
     vm.connectionStatus = playerMessenger.getConnectionStatus;
     vm.startGame = startGame;
     vm.userName = '';
