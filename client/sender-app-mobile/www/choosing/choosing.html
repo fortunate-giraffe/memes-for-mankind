@@ -1,0 +1,27 @@
+<section class="container-fluid body-content memes">
+  <h3> {{ vm.title }} </h3>
+  <button class="meme-button" ng-if="vm.chosenMeme" ng-click="vm.moveOn()">Pick this meme!</button>
+    <img class="spinner" ng-hide="vm.memes" src="http://jimpunk.net/Loading/wp-content/uploads/loading45.gif">
+
+    <div class="row top-buffer choosing-memes center-block" ng-repeat="rows in vm.memes">
+        <!-- these images repeat if you're not the judge -->
+        <div ng-repeat="item in rows">
+          <div ng-if="item.imageUrl" class="col-xs-12 center-block">
+            <h4>{{item.displayName}}</h4>
+            <img class="img-responsive meme-template" ng-src="{{ item.imageUrl }}" draggable="false"  ng-click="vm.clickHandler($event)" ng-bind="{{ item }}">
+            <div ng-show="item.context.length > 50">
+              <img class="info" src="content/question_mark.png" ng-click="show = !show">
+              <img ng-show="show" class="info rich" src="content/rich.jpeg" ng-click="show = !show">
+            </div>
+            <p ng-show="show">{{item.context}}</p>
+          </div>
+        </div>
+        <!-- these repeat if you're the judge, as their meme objects are one level lower -->
+        <div ng-repeat="item in rows">
+          <div ng-if="item.meme.imageUrl" class="col-lg-6 center-block">
+            <img class="img-responsive" ng-src="{{ item.meme.instanceImageUrl }}" draggable="false"  ng-click="vm.clickHandler($event)" ng-bind="{{ item }}">
+          </div>
+        </div>
+
+    </div>
+</section>
