@@ -51,6 +51,8 @@
 
     // function for getting url of newly created meme
     function createMeme(topText, bottomText, generatorID, imageID) {
+      // wrap in q so that it can be handled with 'then'
+      var postDeferred = $q.defer();
       // return promise on the async call to the server to create a meme
       var requestData = {
         'generatorID': generatorID,
@@ -58,9 +60,14 @@
         'topText': topText,
         'bottomText': bottomText
       };
-      return $http.post(serverPath + '/memes/create', requestData);
+
+      $http.post(serverPath + '/memes/create', requestData)
+        .success(function(data) {
+          postDeferred.resolve(data);
+        })
+        .error(postDeferred.resolve);
+
+      return postDeferred.promise;
     }
-
-
   }
 })();
