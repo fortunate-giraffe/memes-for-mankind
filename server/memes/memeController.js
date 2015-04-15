@@ -1,14 +1,14 @@
 'use strict';
 var http = require('http');
 var querystring = require('querystring');
+var Meme = require('./memeModel.js');
 
 module.exports = {
 
   /*
-  method: getMemes retrieves the 12 most popular memes from API
+  method: getMemes retrieves 10 random memes from DB
   return: JSON array of meme objects
     {
-      success: true
       result: [
       {
         generatorID:2,
@@ -18,27 +18,17 @@ module.exports = {
         imageUrl:"http://cdn.meme.am/images/400x/166088.jpg",
         instancesCount:2285339,
         ranking:1
+        context: 'context for meme goes here'
       },
       {
         ... more meme objects
       }]
     }
    */
-  getMemes: function(request, response){ // next
-    var options = {
-      host: 'version1.api.memegenerator.net',
-      path: '/Generators_Select_ByPopular',
-      method: 'GET'
-    };
-    return http.get(options, function(res){
-      var body = '';
-      res.on('data', function(chunk){
-        body += chunk;
-      }).on('error', function(e){
-        console.log('GOT ERROR: ' + e.message);
-      }).on('end', function(){
-        response.status(200).send(body);
-      });
+  getMemes: function(request, response){
+    Meme.findRandom().limit(10).exec(function(err, memes){
+      if( err ) { return err; }
+      response.status(200).send({ result: memes });
     });
   },
 
@@ -62,8 +52,7 @@ module.exports = {
         }
     }
    */
-  createMeme: function(request, response){ // next
-
+  createMeme: function(request, response){
     var postData = querystring.stringify({
       'username': process.env.memegenUsername,
       'password': process.env.memegenPassword,
@@ -108,9 +97,9 @@ module.exports = {
     req.write(postData);
     req.end();
   },
-
-  memeInfo: function(){
-    // PASS
-  }
 };
+
+
+
+
 
