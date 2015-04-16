@@ -166,9 +166,23 @@ CHOOSING
   max-width: 900px;
 }
 
-.choosing-memes img {
+.choosing-memes p {
+  padding-bottom: 20px;
+}
+
+.meme-template {
   margin: 0 auto;
-  margin-bottom: 5%;
+  margin-bottom: 2%;
+}
+
+.info {
+  height: 30px;
+  margin-bottom: 2%;
+}
+
+.rich {
+  margin-left: -32px;
+  height: 40px;
 }
 
 
