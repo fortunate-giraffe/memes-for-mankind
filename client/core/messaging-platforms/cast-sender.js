@@ -11,6 +11,7 @@
     var username;
     var session;
     var connected;
+    var castInitialized;
     var messageHandler;
     var onreadyHandler;
 
@@ -61,6 +62,12 @@
 
     // Cast Setup Functions
     function connectCast () {
+      // checking if we still need to initialize and the cast api has already loaded
+      if (!connected && chrome.cast && !castInitialized) {
+        console.log('bootstrapping chromecast initialization!');
+        initializeCastApi();
+      }
+
       chrome.cast.requestSession(
         sessionListener,
         function(err) { console.dir(err); }
@@ -78,7 +85,6 @@
       session.addUpdateListener(function (isAlive) {
         console.log('session update', isAlive, session);
         connected = isAlive;
-        // trigger('chromecastConnection');
         if (onreadyHandler) {
         onreadyHandler();
         }
@@ -100,28 +106,30 @@
           console.log(errorInfo);
         }
       };
+    }
 
-      function initializeCastApi () {
-        var sessionRequest = new chrome.cast.SessionRequest(appId);
-        var apiConfig = new chrome.cast.ApiConfig(
-                                sessionRequest,
-                                sessionListener,
-                                receiverListener
-                                );
+    function initializeCastApi () {
+      var sessionRequest = new chrome.cast.SessionRequest(appId);
+      var apiConfig = new chrome.cast.ApiConfig(
+                              sessionRequest,
+                              sessionListener,
+                              receiverListener
+                              );
 
-        chrome.cast.initialize(
-          apiConfig,
-          function() { console.log('init success!'); },
-          function() { console.log('init error!'); }
-        );
+      chrome.cast.initialize(
+        apiConfig,
+        function() {
+          console.log('init success!');
+          castInitialized = true;
+        },
+        function() { console.log('init error!'); }
+      );
+    }
+
+    function receiverListener (e) {
+      if( e === chrome.cast.ReceiverAvailability.AVAILABLE) {
+        console.log('Found a receiver!!!');
       }
-
-      function receiverListener (e) {
-        if( e === chrome.cast.ReceiverAvailability.AVAILABLE) {
-          console.log('Found a receiver!!!');
-        }
-      }
-
     }
   }
 
