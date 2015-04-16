@@ -17,7 +17,7 @@
 
     // example function to submit created meme
     function submitCreation() {
-      if( vm.bottomText && vm.topText ){
+      if( vm.bottomText || vm.topText ){
 
         var generatorID = playerUser.getMemeChoice().generatorID;
         var imageID = retrieveImageID(playerUser.getMemeChoice().imageUrl);
