@@ -163,9 +163,9 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test', ['jshint', 'karma:sender', 'karma:receiver']);
   // run server with socket comms
-  grunt.registerTask('devSocket', ['env:all', 'test', 'ngconstant:devSocket' + apiEnv + 'Api', 'concurrent:socketServer']);
+  grunt.registerTask('devSocket', ['env:all', 'ngconstant:devSocket' + apiEnv + 'Api', 'test', 'concurrent:socketServer']);
   // run server with chromecast
-  grunt.registerTask('devCc', ['env:all', 'test', 'ngconstant:devCc' + apiEnv + 'Api', 'nodemon:regServer']);
+  grunt.registerTask('devCc', ['env:all', 'ngconstant:devCc' + apiEnv + 'Api', 'test', 'nodemon:regServer']);
   // this should only be run by the server in production
   grunt.registerTask('prod', ['env:all', 'ngconstant:prod', 'nodemon:regServer']);
   // default to the dev server with chromecast

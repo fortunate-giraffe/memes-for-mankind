@@ -54,7 +54,7 @@
       // create a CastMessageBus to handle messages for a custom namespace
       window.messageBus = window.castReceiverManager.getCastMessageBus(chromecastNamespace);
       window.messageBus.onMessage = function(event) {
-        toastr.info('Message Received!' + event.data);
+        // toastr.info('Message Received!' + event.data);
         var data = JSON.parse(event.data);
         // saving a mapping of usernames to senderId's to allow message passing
         senders[data.sender] = event.senderId;
