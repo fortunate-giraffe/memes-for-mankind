@@ -180,6 +180,10 @@ CHOOSING
   margin-bottom: 2%;
 }
 
+.info:hover {
+  cursor: pointer;
+}
+
 .rich {
   margin-left: -32px;
   height: 40px;
