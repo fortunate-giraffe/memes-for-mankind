@@ -81,14 +81,6 @@ describe('Creating Controller', function() {
       expect(playerUser.getMemeChoice).toHaveBeenCalled();
     });
 
-    it('should call dataService.createMeme to create the meme', function() {
-      playerMessenger.submit.calls.reset();
-      ctrl.bottomText = 'bottoms';
-      ctrl.topText = 'toppings';
-      ctrl.submitCreation();
-      expect(dataService.createMeme).toHaveBeenCalled();
-    });
-
     it('should change state to home.waiting after the meme is created', function() {
       state.go.calls.reset();
       ctrl.bottomText = 'bottoms';

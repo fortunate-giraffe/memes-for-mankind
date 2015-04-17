@@ -1,12 +1,12 @@
 (function (){
 'use strict';
 angular
-  .module('app.player-user', ['app.player-messenger'])
+  .module('app.player-user', [])
   .factory('playerUser', playerUser);
 
-  playerUser.$inject = ['playerMessenger'];
+  playerUser.$inject = [];
 
-  function playerUser(playerMessenger) {
+  function playerUser() {
 
     // factory for storing some variable about our user that we need throughout the game flow
     // user's self defined name
@@ -57,8 +57,6 @@ angular
 
     function setUser (string) {
       user = string;
-      // initializing the messaging system once we know a user's name
-      playerMessenger.init(string);
     }
 
     function setRole (string) {

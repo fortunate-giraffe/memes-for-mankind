@@ -39,8 +39,8 @@
 
     // user setting their name and revealing the start game button
     function setUser() { // event
-      // set username in playerUser factory
-      playerUser.setUser(vm.userName);
+      // initializing the messaging system once we know a user's name
+      playerMessenger.init(vm.userName);
       vm.nameSubmitted = !vm.nameSubmitted;
       playerMessenger.join();
     }

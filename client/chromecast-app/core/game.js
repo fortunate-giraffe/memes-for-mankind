@@ -3,9 +3,9 @@
   angular.module('app.game', [])
     .factory('game', game);
 
-    game.$inject = ['$rootScope', 'gameMessenger'];
+    game.$inject = ['$rootScope', 'gameMessenger', 'dataService'];
 
-    function game ($rootScope, gameMessenger) {
+    function game ($rootScope, gameMessenger, dataService) {
 
       // setup once per game
       var players = [];
@@ -63,17 +63,26 @@
         }
         if (data.meme) {
           trigger('memeSubmitted', sender);
-          for (var k=0; k<players.length; k++) {
-            if (players[k].name === sender) {
-              players[k].meme = data.meme;
-              currentRound.memes.push({ name: players[k].name, meme: data.meme });
-              break;
-            }
-          }
-          if (currentRound.memes.length === players.length-1) {
-            trigger('allSubmitted');
-            gameMessenger.startJudging(currentRound.judge.name, { memes: currentRound.memes });
-          }
+
+          var memeRequestObj = data.meme;
+
+          dataService
+            .createMeme(memeRequestObj.topText, memeRequestObj.bottomText, memeRequestObj.generatorID, memeRequestObj.imageID)
+            .then(function(data){
+              // loop through players and find the one who sent this meme
+              // then add the player's name and the meme to the current round's memes
+              for (var k=0; k<players.length; k++) {
+                if (players[k].name === sender) {
+                  players[k].meme = data.result;
+                  currentRound.memes.push({ name: players[k].name, meme: data.result });
+                  break;
+                }
+              }
+              if (currentRound.memes.length === players.length-1) {
+                trigger('allSubmitted');
+                gameMessenger.startJudging(currentRound.judge.name, { memes: currentRound.memes });
+              }
+            });
         }
       });
 
