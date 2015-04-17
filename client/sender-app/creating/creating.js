@@ -21,12 +21,14 @@
 
         var generatorID = playerUser.getMemeChoice().generatorID;
         var imageID = retrieveImageID(playerUser.getMemeChoice().imageUrl);
-
-        dataService
-          .createMeme(vm.topText, vm.bottomText, generatorID, imageID)
-          .then(function(data){
-            playerMessenger.submit({meme: data.result});
-          });
+        var memeRequestObj = {
+          imageID: imageID,
+          generatorID: generatorID,
+          bottomText: vm.bottomText,
+          topText: vm.topText
+        };
+        // send meme to chromecast so it can request creation from the server
+        playerMessenger.submit({meme: memeRequestObj});
 
         $state.go('home.waiting');
       }

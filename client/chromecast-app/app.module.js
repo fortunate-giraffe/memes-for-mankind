@@ -20,6 +20,10 @@
       'app.cast-receiver',
       'app.messaging',
 
+      // player logic
+      'app.player-user',
+      'app.data-service',
+
       // core
       'app.config',
       'app.core'
