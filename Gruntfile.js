@@ -7,8 +7,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-env');
   grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-jasmine-node');
   grunt.loadNpmTasks('grunt-ng-constant');
   grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-shell');
+
 
   grunt.initConfig({
     concurrent: {
@@ -48,6 +51,11 @@ module.exports = function(grunt) {
         reporter: require('jshint-stylish')
       }
     },
+
+    jasmine_node: {
+      projectRoot: 'test/server'
+    },
+
     karma: {
 
       options: {
@@ -60,6 +68,9 @@ module.exports = function(grunt) {
           'bower_components/jquery/dist/jquery.js',
           'bower_components/bootstrap/dist/js/bootstrap.js',
           'bower_components/toastr/toastr.js',
+
+          // node modules
+
 
           // shared app files
           'client/core/*.js',
@@ -160,8 +171,7 @@ module.exports = function(grunt) {
 
   // checking value of input parameters to determine which API to use (local or production)
   var apiEnv = grunt.option('api') || 'dev'; // if running grunt task with --api=prod then look at the production API
-
-  grunt.registerTask('test', ['jshint', 'karma:sender', 'karma:receiver']);
+  grunt.registerTask('test', ['jshint', 'karma:sender', 'karma:receiver', 'jasmine_node']);
   // run server with socket comms
   grunt.registerTask('devSocket', ['env:all', 'ngconstant:devSocket' + apiEnv + 'Api', 'test', 'concurrent:socketServer']);
   // run server with chromecast
@@ -170,5 +180,4 @@ module.exports = function(grunt) {
   grunt.registerTask('prod', ['env:all', 'ngconstant:prod', 'nodemon:regServer']);
   // default to the dev server with chromecast
   grunt.registerTask('default', ['devCc']);
-
 };

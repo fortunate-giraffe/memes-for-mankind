@@ -69,15 +69,16 @@ module.exports = {
       }).on('close', function () {
         console.log('STREAM IS CLOSED');
       });
-
-      function createUrl(genID, urlName){
-        var host = 'http://version1.api.memegenerator.net/';
-        var path = 'Generator_Select_ByUrlNameOrGeneratorID?';
-        var query = querystring.stringify({
-          generatorID: genID,
-          urlName: urlName
-        });
-        return host + path + query;
-      }
-    }
+    },
 };
+
+
+function createUrl(genID, urlName){
+  var host = 'http://version1.api.memegenerator.net/';
+  var path = 'Generator_Select_ByUrlNameOrGeneratorID?';
+  var query = querystring.stringify({
+    generatorID: genID,
+    urlName: urlName
+  });
+  return host + path + query;
+}

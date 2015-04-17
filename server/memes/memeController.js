@@ -2,6 +2,7 @@
 var http = require('http');
 var querystring = require('querystring');
 var Meme = require('./memeModel.js');
+var apiCalls = require('../utils/apiCalls.js');
 
 module.exports = {
 
@@ -98,8 +99,3 @@ module.exports = {
     req.end();
   },
 };
-
-
-
-
-
