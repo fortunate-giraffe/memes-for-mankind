@@ -65,7 +65,7 @@ using the wget command
 
 `export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig`
 
-... if you're still having issues, check out the install instructions [here](https://github.com/Automattic/node-canvas/wiki/Installation---OSX)
+... if you're still having issues, check out the install instructions [here](https://github.com/Automattic/node-canvas/wiki/Installation---OSX)... and be mindful of version #s as they have a habit of becoming obsolete
 
 
 ### Roadmap
