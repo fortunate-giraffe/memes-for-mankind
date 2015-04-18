@@ -89,7 +89,7 @@
       gameMessenger.on('selectWinner', function(data) { // sender
         currentRound.winner = data;
         trigger('winnerSelected', data);
-        gameMessenger.done();
+        gameMessenger.done(data);
       });
 
       gameMessenger.on('startNextRound', function () {

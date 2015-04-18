@@ -31,7 +31,8 @@
       });
 
       // on done msg from Chromecast, go to start page
-      playerMessenger.on('done', function() {
+      playerMessenger.on('done', function(winningMeme) {
+        playerUser.setWinner(winningMeme);
         $state.go('home.done');
       });
     }

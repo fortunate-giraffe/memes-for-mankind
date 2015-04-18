@@ -35,8 +35,8 @@
         messenger.send('startJudging', memes, judge);
       }
 
-      function done () {
-        messenger.broadcast('done', 'done');
+      function done (winningMeme) {
+        messenger.broadcast('done', winningMeme);
       }
     }
 })();
