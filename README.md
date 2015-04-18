@@ -44,6 +44,22 @@ npm install
 bower install
 ```
 
+####Installing Cairo and image processing dependencies (for the meme creating server)
+OS X
+#####Install cairo:
+follow instructions from source here
+using the wget command
+wget https://raw.githubusercontent.com/LearnBoost/node-canvas/master/install -O - | sh
+
+(if you run into any issues with freetype, this command should help by putting the correct version in the right place, per this [issue](https://github.com/Automattic/node-canvas/issues/471))
+`cp /opt/X11/lib/libfreetype.6.dylib /usr/local/lib/libfreetype.6.dylib`
+
+#####Install node-canvas:
+npm install canvas
+
+#####Install memecanvas:
+npm install memecanvas
+
 ### Roadmap
 
 View the project roadmap [here](https://waffle.io/fortunate-giraffe/memes-for-mankind)
