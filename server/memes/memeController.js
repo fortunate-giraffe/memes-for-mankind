@@ -1,8 +1,8 @@
 'use strict';
 var http = require('http');
 var querystring = require('querystring');
+var memecanvas = require('memecanvas');
 var Meme = require('./memeModel.js');
-var apiCalls = require('../utils/apiCalls.js');
 
 module.exports = {
 
@@ -30,6 +30,24 @@ module.exports = {
     Meme.findRandom().limit(10).exec(function(err, memes){
       if( err ) { return err; }
       response.status(200).send({ result: memes });
+    });
+  },
+
+  buildMeme: function(request, response){
+    var topText = request.body.topText;
+    var bottomText = request.body.bottomText;
+    // var image = request.body.imageUrl;
+
+    // Create a temporary folder and define a filename suffix
+    memecanvas.init('./tmp', '-meme');
+
+    // If the path is wrong memecanvas will throw a hard error inscrutably called 'error'
+    memecanvas.generate('server/memes/troll.png', topText, bottomText, function(error, memefilename){
+        if(error){
+          console.log('some mysterious ', error);
+        } else {
+          response.send('SUCCESS!!! new meme created at: ' + memefilename);
+        }
     });
   },
 
@@ -99,3 +117,4 @@ module.exports = {
     req.end();
   },
 };
+
