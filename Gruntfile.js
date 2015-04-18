@@ -45,7 +45,12 @@ module.exports = function(grunt) {
       options: {
         force: 'true',
         jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
+        reporter: require('jshint-stylish'),
+        ignores: [
+          'client/sender-app-mobile/www/bower_components/**/*.js',
+          'client/sender-app-mobile/plugins/**/*.js',
+          'client/sender-app-mobile/platforms/**/*.js'
+        ]
       }
     },
     karma: {

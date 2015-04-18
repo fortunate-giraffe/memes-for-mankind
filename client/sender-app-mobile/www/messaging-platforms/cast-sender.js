@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('app.cast-sender', [])
+  angular.module('app.cast-sender-NOT-USED-ON-MOBILE', [])
     .factory('castSenderMessenger', castSenderMessenger);
 
   castSenderMessenger.$inject = ['chromecastNamespace', 'appId'];
