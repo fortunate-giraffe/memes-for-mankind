@@ -23,9 +23,9 @@
       /*
        * Services
        */
-
       'app.data-service',
       'app.player-user',
+
       /*
        * Messaging
        */

@@ -19,6 +19,8 @@ angular
     var memeChoice = '';
     // list of memes for the judge to review
     var judgeMemeList = [];
+    // the winning meme for the round
+    var winningMeme = '';
 
     return {
       // getters
@@ -32,7 +34,9 @@ angular
       setRole: setRole,
       setGameRecipient: setGameRecipient,
       setMemeChoice: setMemeChoice,
-      setJudgeMemeList : setJudgeMemeList
+      setJudgeMemeList : setJudgeMemeList,
+      getWinner: getWinner,
+      setWinner: setWinner
     };
 
     function getUser () {
@@ -73,6 +77,14 @@ angular
 
     function setJudgeMemeList (array) {
       judgeMemeList = array;
+    }
+
+    function getWinner () {
+      return winningMeme;
+    }
+
+    function setWinner (meme) {
+      winningMeme = meme;
     }
 
   }
