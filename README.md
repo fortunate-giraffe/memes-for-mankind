@@ -46,6 +46,11 @@ bower install
 
 ####Installing Cairo and image processing dependencies (for the meme creating server)
 OS X
+
+#####Make sure you have Brew/wget:
+
+[Brew](http://brew.sh/)! (wget instructions on the page)
+
 #####Install cairo:
 follow instructions from source here
 using the wget command
@@ -56,11 +61,10 @@ using the wget command
 
 `cp /opt/X11/lib/libfreetype.6.dylib /usr/local/lib/libfreetype.6.dylib`
 
-#####Install node-canvas:
-npm install canvas
+(if you're having other issues, you can try this command to change the pkg_config_path, so cairo is looking in the right place)
 
-#####Install memecanvas:
-npm install memecanvas
+`export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig`
+
 
 ### Roadmap
 
