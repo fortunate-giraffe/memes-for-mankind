@@ -67,7 +67,7 @@
           var memeRequestObj = data.meme;
 
           dataService
-            .createMeme(memeRequestObj.topText, memeRequestObj.bottomText, memeRequestObj.generatorID, memeRequestObj.imageID)
+            .createMeme(memeRequestObj.topText, memeRequestObj.bottomText, memeRequestObj.generatorID, memeRequestObj.imageID, memeRequestObj.imageUrl, memeRequestObj.displayName)
             .then(function(data){
               // loop through players and find the one who sent this meme
               // then add the player's name and the meme to the current round's memes
