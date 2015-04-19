@@ -213,10 +213,28 @@ CREATING
 
 
 /****************************
-CREATING
+DONE
 *****************************/
 .done-content {
   margin-top: 7%;
+}
+
+.done-content p {
+  display: inline-block;
+}
+
+.done-content img {
+  margin-bottom: 10px;
+}
+
+.done-content button {
+  margin-top: 5px;
+}
+
+.facebook, .twitter {
+  height: 20px;
+  margin: 5px;
+  display: inline-block;
 }
 
 

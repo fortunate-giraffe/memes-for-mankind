@@ -102,6 +102,7 @@ module.exports = function(grunt) {
               'client/sender-app/**/*.module.js',
               'client/sender-app/*.js',
               'client/sender-app/**/*.js',
+              'bower_components/angular-social-links/angular-social-links.js',
 
               // Sender specs
               'test/client/sender-app/*.js'
