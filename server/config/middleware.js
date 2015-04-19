@@ -18,5 +18,4 @@ module.exports = function (app, express) {
 
   app.get('/memes', memeController.getMemes);
   app.post('/memes/create', memeController.createMeme);
-  app.post('/memes/build', memeController.buildMeme);
 };

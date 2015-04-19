@@ -3,6 +3,7 @@ module.exports = {
   // these already exist as environment variables on the server but will need to be added locally
   memegenUsername: process.env.memegenUsername,
   memegenPassword: process.env.memegenPassword,
+  imgurClientID: process.env.imgurClientID,
   dbUsername: process.env.dbUsername,
   dbPassword: process.env.dbPassword,
   devSocketPort: 3434, // whatever your socket port of choice is
