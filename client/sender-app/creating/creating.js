@@ -21,11 +21,15 @@
 
         var generatorID = playerUser.getMemeChoice().generatorID;
         var imageID = retrieveImageID(playerUser.getMemeChoice().imageUrl);
+        var displayName = playerUser.getMemeChoice().displayName;
+        var imageUrl = playerUser.getMemeChoice().imageUrl;
         var memeRequestObj = {
-          imageID: imageID,
-          generatorID: generatorID,
-          bottomText: vm.bottomText,
-          topText: vm.topText
+          imageUrl: imageUrl, // using
+          displayName: displayName, // using
+          bottomText: vm.bottomText, // using
+          topText: vm.topText, // using
+          imageID: imageID, // backwards compatibility with old dbase
+          generatorID: generatorID // backwards compatibility with old dbase
         };
         // send meme to chromecast so it can request creation from the server
         playerMessenger.submit({meme: memeRequestObj});
