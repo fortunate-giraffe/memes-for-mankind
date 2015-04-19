@@ -68,6 +68,7 @@ module.exports = function(grunt) {
           'bower_components/jquery/dist/jquery.js',
           'bower_components/bootstrap/dist/js/bootstrap.js',
           'bower_components/toastr/toastr.js',
+          'bower_components/angular-social-links/angular-social-links.js',
 
           // node modules
 
@@ -102,7 +103,6 @@ module.exports = function(grunt) {
               'client/sender-app/**/*.module.js',
               'client/sender-app/*.js',
               'client/sender-app/**/*.js',
-              'bower_components/angular-social-links/angular-social-links.js',
 
               // Sender specs
               'test/client/sender-app/*.js'
