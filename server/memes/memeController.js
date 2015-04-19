@@ -28,7 +28,7 @@ module.exports = {
     }
    */
   getMemes: function(req, res){
-    Meme.findRandom().limit(10).exec(function(err, memes){
+    Meme.curatedmemes.findRandom().limit(8).exec(function(err, memes){
       if( err ) { return err; }
       res.status(200).send({ result: memes });
     });
