@@ -31,7 +31,9 @@
        */
       'app.player-messenger',
       'app.messaging',
-      'app.cast-sender'
+      'app.cast-sender',
+
+      'socialLinks'
   ])
   .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   //

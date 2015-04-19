@@ -1,7 +1,9 @@
 <section class="container-fluid body-content">
   <div class="done-content">
     <img class="img-responsive center-block" ng-src="{{vm.winningMeme.meme.instanceImageUrl}}">
-    <h3>Another round?</h3>
-    <button ng-click="vm.startNextRound()">Definitely</button>
+    <p>Share this meme!</p>
+    <a social-twitter custom-url="{{vm.winningMeme.meme.instanceImageUrl}}"><img class="twitter" src="content/Twitter_logo_blue_30.png"></a>
+    <a social-facebook custom-url="{{vm.winningMeme.meme.instanceImageUrl}}"><img class="facebook" src="content/FB-f-Logo__white_29.png"></a>
+    <button ng-click="vm.startNextRound()">Another Round?</button>
   </div>
 </section>
