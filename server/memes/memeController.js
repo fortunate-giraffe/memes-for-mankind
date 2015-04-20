@@ -1,6 +1,4 @@
 'use strict';
-var http = require('http');
-var fs = require('fs');
 var request = require('request');
 var memecanvas = require('memecanvas');
 var Meme = require('./memeModel.js');
@@ -28,7 +26,7 @@ module.exports = {
     }
    */
   getMemes: function(req, res){
-    Meme.curatedmemes.findRandom().limit(8).exec(function(err, memes){
+    Meme.curatedmemes.findRandom().limit(8).exec(function(err, memes) {
       if( err ) { return err; }
       res.status(200).send({ result: memes });
     });
@@ -48,66 +46,53 @@ module.exports = {
    */
   createMeme: function(req, res){
     var date = new Date().valueOf();
-    var memeTemplate = 'tmp/generators/' + date + '.jpg';
     var topText = req.body.topText;
     var bottomText = req.body.bottomText;
     var memeTitle = req.body.displayName;
     var imageUrl = req.body.imageUrl;
 
-    download(imageUrl, memeTemplate, function(){
+    download(imageUrl, function(memeTemplate) {
       console.log('successfully downladed image');
 
-      // Create a temporary folder and define a filename suffix
-      memecanvas.init('./tmp/instances', '-instance');
+      memecanvas.generate(memeTemplate, topText, bottomText, function(error, memeData) {
+        if (error) {
+          console.log('error generating meme', error);
+          return;
+        }
 
-      // If the path is wrong memecanvas will throw a hard error inscrutably called 'error'
-      memecanvas.generate(memeTemplate, topText, bottomText, function(error, memefilename){
-          if(error){
-            console.log('some mysterious ', error);
-          } else {
-            console.log('successfully saved template at: ', memefilename);
-
-            var imagePath = './tmp/instances/' + date + '-instance.jpg';
-            var options = {
-              method: 'POST',
-              url: 'https://api.imgur.com/3/image',
-              headers: { Authorization: 'Client-ID ' + process.env.imgurClientID },
-              form: {
-                image: ''
-              }
-            };
-
-            fs.readFile(imagePath, {encoding: 'base64'}, function(err, data) {
-              if( err ) throw err;
-              options.form.image = data;
-
-              // Imgur request
-              request(options, function(err, response, body){
-                if( err ) {
-                  throw err;
-                }
-                body = JSON.parse(body);
-                imageUrl = body.data.link;
-                res.status(200).send({result: {
-                  instanceImageUrl: imageUrl,
-                  displayName: memeTitle
-                }});
-                // Delete the instance
-                fs.unlink('tmp/instances/' + date + '-instance.jpg');
-              });
-            });
+        var options = {
+          method: 'POST',
+          url: 'https://api.imgur.com/3/image',
+          headers: { Authorization: 'Client-ID ' + process.env.imgurClientID },
+          form: {
+            image: new Buffer(memeData, 'binary').toString('base64')
           }
+        };
+
+        // Imgur request
+        request(options, function(err, response, body) {
+          if (err) {
+            throw err;
+          }
+          body = JSON.parse(body);
+          imageUrl = body.data.link;
+          res.status(200).send({result: {
+            instanceImageUrl: imageUrl,
+            displayName: memeTitle
+          }});
+        });
+
       });
-      // Delete the template
-      fs.unlink(memeTemplate);
     });
   },
 };
 
-function download(uri, filename, callback){
-  console.log('made it into download');
-  request.head(uri, function(err, res, body){
-    if( err ) throw err;
-    request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+function download(uri, callback) {
+  var options = {
+    uri: uri,
+    encoding: null
+  };
+  request(options, function (error, response, body) {
+    callback(new Buffer(body, 'binary'));  //encoding?
   });
 }

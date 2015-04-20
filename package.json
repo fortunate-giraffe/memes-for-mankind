@@ -29,7 +29,7 @@
     "karma-chrome-launcher": "^0.1.7",
     "karma-jasmine": "^0.3.5",
     "karma-spec-reporter": "0.0.18",
-    "memecanvas": "^1.0.3",
+    "memecanvas": "git://github.com/fortunate-giraffe/memecanvas.git#stream",
     "mkdirp": "^0.5.0",
     "mongoose": "^4.0.1",
     "mongoose-random": "^0.1.1",
