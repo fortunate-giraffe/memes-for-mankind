@@ -87,8 +87,8 @@ header h1 {
   padding: 2%;
 }
 
-.winner {
-  height: 450px;
+.winner-container {
+  max-height: 80%;
 }
 
 .winning-player {
