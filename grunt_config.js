@@ -6,6 +6,7 @@ module.exports = {
   imgurClientID: process.env.imgurClientID,
   dbUsername: process.env.dbUsername,
   dbPassword: process.env.dbPassword,
+  nytKey: process.env.nytKey,
   devSocketPort: 3434, // whatever your socket port of choice is
   // client ng-constant
   appId: '1FA8E626', // retrieved from google cast developer dashboard
