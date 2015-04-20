@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- <html lang="en" data-ng-app="app" ng-strict-di> -->
+<html lang="en" ng-strict-di>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/toastr/toastr.css" rel="stylesheet"/>
+    <link href="content/styles.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div ui-view></div>
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/toastr/toastr.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+
+    <!-- App Module -->
+    <script src="app.module.js"></script>
+
+    <!-- Core -->
+    <script src="core.module.js"></script>
+    <script src="player-user.js"></script>
+    <script src="data-service.js"></script>
+    <script src="event-handling.js"></script>
+
+    <!-- Sender Messaging -->
+    <script src="messaging-platforms/sockets.js"></script>
+    <script src="messaging-platforms/cast-sender-mobile.js"></script>
+    <script src="core/player-messenger.js"></script>
+    <script src="core/messaging.js"></script>
+
+    <!-- Constants -->
+    <script src="config.js"></script>
+
+    <!-- gameplay views -->
+    <script src="waiting/waiting.module.js"></script>
+    <script src="waiting/waiting.js"></script>
+    <script src="creating/creating.module.js"></script>
+    <script src="creating/creating.js"></script>
+    <script src="choosing/choosing.module.js"></script>
+    <script src="choosing/choosing.js"></script>
+    <script src="start/start.module.js"></script>
+    <script src="start/start.js"></script>
+    <script src="prompt/prompt.module.js"></script>
+    <script src="prompt/prompt.js"></script>
+    <script src="done/done.module.js"></script>
+    <script src="done/done.js"></script>
+
+    <!-- layout -->
+    <script src="layout/layout.module.js"></script>
+    <script src="layout/shell.js"></script>
+    <script src="layout/footer.js"></script>
+    <script src="layout/header.js"></script>
+
+    <!-- Cast Sender API Library -->
+    <!--
+     <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+     -->
+    <!-- Cordova -->
+    <script src="cordova.js"></script>
+    <script type="text/javascript">
+      document.addEventListener('deviceready', function () {
+        console.log('M4M is starting!!');
+        angular.bootstrap(document.getElementsByTagName('html')[0], ["app"]);
+      }, false);
+    </script>
+
+  </body>
+</html>

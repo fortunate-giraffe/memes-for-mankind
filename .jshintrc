@@ -37,6 +37,7 @@
     "beforeEach": false,
     "inject"    : false,
     "expect"    : false,
-    "spyOn"     : false
+    "spyOn"     : false,
+    "ConnectSDK": false
   }
 }
