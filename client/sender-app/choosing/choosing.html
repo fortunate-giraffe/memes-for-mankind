@@ -18,7 +18,7 @@
         </div>
         <!-- these repeat if you're the judge, as their meme objects are one level lower -->
         <div ng-repeat="item in rows">
-          <div ng-if="item.meme.imageUrl" class="col-lg-6 center-block">
+          <div ng-if="item.meme.instanceImageUrl" class="col-lg-6 center-block">
             <img class="img-responsive" ng-src="{{ item.meme.instanceImageUrl }}" draggable="false"  ng-click="vm.clickHandler($event)" ng-bind="{{ item }}">
           </div>
         </div>

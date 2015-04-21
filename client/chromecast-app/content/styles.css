@@ -88,16 +88,13 @@ header h1 {
 }
 
 .winner-container {
-  max-height: 80%;
+  height: 450px;
+  margin: 40px;
 }
 
 .winning-player {
   color: #ffd60a;
   font-weight: bold;
-}
-
-.winner-container {
-  margin: 40px;
 }
 
 .waiting img {
