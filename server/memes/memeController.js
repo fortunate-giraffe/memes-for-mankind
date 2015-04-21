@@ -54,7 +54,7 @@ module.exports = {
     download(imageUrl, function(memeTemplate) {
       console.log('successfully downladed image');
 
-      memecanvas.generate(memeTemplate, topText, bottomText, function(error, memeData) {
+      memecanvas.generate(memeTemplate, topText.toUpperCase(), bottomText.toUpperCase(), function(error, memeData) {
         if (error) {
           console.log('error generating meme', error);
           return;
