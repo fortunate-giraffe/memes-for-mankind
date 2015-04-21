@@ -2,6 +2,7 @@
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var memeController = require('../memes/memeController.js');
+var promptController = require('../prompts/promptController.js');
 
 module.exports = function (app, express) {
 
@@ -16,6 +17,8 @@ module.exports = function (app, express) {
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
 
+  app.get('/prompts/whitecards', promptController.getWhiteCards);
+  app.get('/prompts/headlines', promptController.getHeadlines);
   app.get('/memes', memeController.getMemes);
   app.post('/memes/create', memeController.createMeme);
 };
