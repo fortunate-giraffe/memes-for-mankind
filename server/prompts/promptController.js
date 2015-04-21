@@ -1,8 +1,7 @@
 'use strict';
 var request = require('request');
 var querystring = require('querystring');
-
-console.log(process.env.dbUsername);
+var Prompt = require('./promptModel.js');
 
 module.exports = {
 
@@ -25,7 +24,6 @@ module.exports = {
   getHeadlines: function(req, res){
     var url = createNYTUrl();
     request(url, function (err, response, body) {
-      console.log(body);
       if (!err && response.statusCode === 200) {
         body = JSON.parse(body);
         res.status(200).send(body.response.docs);
@@ -34,8 +32,11 @@ module.exports = {
     });
   },
 
-  getWhiteCard: function(req, res){
-
+  getWhiteCards: function(req, res){
+    Prompt.whitecards.findRandom().limit(10).exec(function(err, cards) {
+      if( err ) { return err; }
+      res.status(200).send({ result: cards });
+    });
   }
 
 };

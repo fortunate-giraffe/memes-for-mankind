@@ -17,6 +17,7 @@ module.exports = function (app, express) {
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
 
+  app.get('/prompts/whitecards', promptController.getWhiteCards);
   app.get('/prompts/headlines', promptController.getHeadlines);
   app.get('/memes', memeController.getMemes);
   app.post('/memes/create', memeController.createMeme);
