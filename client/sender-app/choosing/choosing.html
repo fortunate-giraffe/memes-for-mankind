@@ -8,7 +8,7 @@
           <div ng-if="item.imageUrl" class="col-xs-12 center-block">
             <h4>{{item.displayName}}</h4>
             <img class="img-responsive meme-template" ng-src="{{ item.imageUrl }}" draggable="false"  ng-click="vm.clickHandler($event); button = !button" ng-bind="{{ item }}">
-            <button class="meme-button" ng-if="vm.chosenMeme && button" ng-click="vm.moveOn()">Pick this meme!</button>
+            <button class="meme-button" ng-if="vm.chosenMeme.imageUrl === item.imageUrl" ng-click="vm.moveOn()">Pick this meme!</button>
             <div ng-show="item.context.length > 50">
               <img class="info" src="content/question_mark.png" ng-click="show = !show">
               <img ng-show="show" class="info rich" src="content/rich.jpeg" ng-click="show = !show">
@@ -20,6 +20,7 @@
         <div ng-repeat="item in rows">
           <div ng-if="item.meme.instanceImageUrl" class="col-lg-6 center-block">
             <img class="img-responsive" ng-src="{{ item.meme.instanceImageUrl }}" draggable="false"  ng-click="vm.clickHandler($event)" ng-bind="{{ item }}">
+             <button class="meme-button" ng-if="vm.chosenMeme.meme.instanceImageUrl === item.meme.instanceImageUrl" ng-click="vm.moveOn()">Pick this meme!</button>
           </div>
         </div>
 
