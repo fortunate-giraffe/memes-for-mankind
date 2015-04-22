@@ -12,7 +12,7 @@ module.exports = {
     [
       headline:
       {
-        // USE MAIN
+        // USE main PLEASE
         main:"Tsunami Advisory Lifted",
         // DO NOT USE print_headline NOT ALWAYS PRESENT
         print_headline:"Tsunami Advisory Lifted",

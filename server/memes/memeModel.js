@@ -33,7 +33,7 @@ schemasObj.curatedmemes = mongoose.model('curatedMeme', CuratedMemeSchema);
 for (var key in schemasObj) {
   schemasObj[key].syncRandom(function (err) { // result
     if(err) {console.log('schema err', err);}
-    console.log('random sync of schema complete');
+    console.log('random sync of meme schemas complete');
   }); // jshint ignore:line
 }
 
