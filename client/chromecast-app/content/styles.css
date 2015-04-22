@@ -87,17 +87,14 @@ header h1 {
   padding: 2%;
 }
 
-.winner {
+.winner-container {
   height: 450px;
+  margin: 40px;
 }
 
 .winning-player {
   color: #ffd60a;
   font-weight: bold;
-}
-
-.winner-container {
-  margin: 40px;
 }
 
 .waiting img {
