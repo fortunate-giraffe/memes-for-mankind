@@ -5,9 +5,9 @@
       .module('app.start')
       .controller('Start', Start);
 
-  Start.$inject = ['playerMessenger', 'playerUser', '$state'];
+  Start.$inject = ['playerMessenger', 'playerUser', '$state', 'chromeDetect'];
 
-  function Start(playerMessenger, playerUser, $state) {
+  function Start(playerMessenger, playerUser, $state, chromeDetect) {
     /*jshint validthis: true */
     var vm = this;
 
@@ -18,6 +18,8 @@
     vm.nameSubmitted = false;
     vm.playerStarted = false;
     vm.setUser = setUser;
+    vm.hasExtension = true;
+    vm.onChrome = true;
 
     changeStateListener();
 
@@ -26,8 +28,14 @@
       console.log('connection status updated', vm.connectionStatus);
     });
 
+    // change to a listener so that when connect is called if it's not ready
+    // we'll trigger the listener to change the needsExtension status to show the message
     vm.connect = function () {
-      playerMessenger.connect();
+      vm.onChrome = chromeDetect.checkBrowser();
+      vm.hasExtension = chromeDetect.checkExtension();
+      if (vm.hasExtension && vm.onChrome) {
+        playerMessenger.connect();
+      }
     };
 
     vm.keyPress = function(e){

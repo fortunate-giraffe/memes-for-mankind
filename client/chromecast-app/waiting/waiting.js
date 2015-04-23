@@ -13,7 +13,7 @@
       vm.mainContent = {
         waitingForPlayers: {
           text: 'Where are your friends? You\'ve gotta have at least 3!',
-          image: 'http://cdn.meme.am/instances/500x/60894524.jpg'
+          image: 'https://i.imgflip.com/kj7ry.jpg'
         },
         readyToPlay: {
           text: 'Press your button when all players are ready to play!',

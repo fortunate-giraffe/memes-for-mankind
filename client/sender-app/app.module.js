@@ -25,6 +25,7 @@
        */
       'app.data-service',
       'app.player-user',
+      'app.chrome-detect',
 
       /*
        * Messaging

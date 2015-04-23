@@ -142,6 +142,9 @@ START CONTROLS
   cursor: pointer;
 }
 
+.start-modal {
+  color: black;
+}
 
 
 /****************************
