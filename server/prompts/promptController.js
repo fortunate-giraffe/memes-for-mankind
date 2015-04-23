@@ -5,7 +5,6 @@ var Prompt = require('./promptModel.js');
 
 module.exports = {
 
-
   /*
   method: getHeadlines retrieves 10 random headlines from New York Times API
   return: JSON array of headline objects
@@ -32,13 +31,28 @@ module.exports = {
     });
   },
 
+  /*
+  method: getWhiteCards retrieves 10 random white cards from our COH database collection
+  return: 'result' object containing an array of whitecard objects
+    { result:
+      [
+        {
+          _id: "55358ebf7f52880e7007fd9d",
+          card_id: 840,
+          card: "Ironic facial hair",
+          r: { // coordinate info for mongoose-random module }
+        },
+
+        ...more whitecards
+      ]
+    }
+  */
   getWhiteCards: function(req, res){
     Prompt.whitecards.findRandom().limit(10).exec(function(err, cards) {
       if( err ) { return err; }
       res.status(200).send({ result: cards });
     });
   }
-
 };
 
 function randomPage(){
