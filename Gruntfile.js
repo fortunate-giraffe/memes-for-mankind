@@ -11,7 +11,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ng-constant');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-shell');
-
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   grunt.initConfig({
     concurrent: {
@@ -171,8 +172,28 @@ module.exports = function(grunt) {
         ],
         tasks: ['jshint']
       },
+    },
+    clean: ['client/sender-app-mobile/www'],
+    copy: {
+      mobile: {
+        files: [
+          { expand: true, cwd: 'client/core', src: ['**'], dest: 'client/sender-app-mobile/www' },
+          { expand: true, cwd: 'client/sender-app', src: ['**'], dest: 'client/sender-app-mobile/www' },
+          { expand: true, cwd: 'client/sender-app-mobile/copy-to-www', src: ['**'], dest: 'client/sender-app-mobile/www' },
+          { expand: true, src: ['bower_components/**'], dest: 'client/sender-app-mobile/www' }
+        ]
+      }
+    },
+    shell: {
+      cordovaPrepare: {
+        command: 'cordova prepare',
+        options: {
+          execOptions: {
+            cwd: 'client/sender-app-mobile',
+          }
+        }
+      }
     }
-
   });
 
   // checking value of input parameters to determine which API to use (local or production)
@@ -182,6 +203,9 @@ module.exports = function(grunt) {
   grunt.registerTask('devSocket', ['env:all', 'ngconstant:devSocket' + apiEnv + 'Api', 'test', 'concurrent:socketServer']);
   // run server with chromecast
   grunt.registerTask('devCc', ['env:all', 'ngconstant:devCc' + apiEnv + 'Api', 'test', 'nodemon:regServer']);
+
+  grunt.registerTask('mobile', ['clean', 'copy:mobile', 'shell:cordovaPrepare']);
+
   // this should only be run by the server in production
   grunt.registerTask('prod', ['env:all', 'ngconstant:prod', 'nodemon:regServer']);
   // default to the dev server with chromecast
