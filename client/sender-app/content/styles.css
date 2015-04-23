@@ -46,6 +46,10 @@ input {
   display: block;
 }
 
+.img-responsive {
+  box-shadow: 0px 3px 10px 1px black;
+}
+
 /*centers vertically and horizontally*/
 .small-center {
   width: 300px;
