@@ -1,10 +1,9 @@
 <header data-ng-controller="Header as vm">
   <div>
-    <!-- <span> {{ vm.test }} </span> -->
     <h1>Memes For Mankind</h1>
     <div id="icon">
-      <img src="content/ic_cast_grey_24dp.png" ng-if="!vm.castButtonState" alt="Chromecast icon" ng-click="vm.connect()">
-      <img src="content/ic_cast_connected_black_24dp.png" ng-if="vm.castButtonState" alt="Chromecast icon" ng-click="vm.connect()">
+      <img src="content/ic_cast_grey_24dp.png" ng-if="!vm.castButtonState" alt="Chromecast icon" ng-click="vm.hasExtension && vm.onChrome && vm.connect()" draggable="false">
+      <img src="content/ic_cast_connected_black_24dp.png" ng-if="vm.castButtonState" alt="Chromecast icon" ng-click="vm.hasExtension && vm.onChrome && vm.connect()" draggable="false">
     </div>
   </div>
 </header>

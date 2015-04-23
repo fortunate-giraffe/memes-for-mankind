@@ -68,7 +68,7 @@
         initializeCastApi();
       }
 
-      chrome.cast.requestSession(
+      window.chrome.cast.requestSession(
         sessionListener,
         function(err) { console.dir(err); }
       );
@@ -109,14 +109,14 @@
     }
 
     function initializeCastApi () {
-      var sessionRequest = new chrome.cast.SessionRequest(appId);
-      var apiConfig = new chrome.cast.ApiConfig(
+      var sessionRequest = new window.chrome.cast.SessionRequest(appId);
+      var apiConfig = new window.chrome.cast.ApiConfig(
                               sessionRequest,
                               sessionListener,
                               receiverListener
                               );
 
-      chrome.cast.initialize(
+      window.chrome.cast.initialize(
         apiConfig,
         function() {
           console.log('init success!');
@@ -127,7 +127,7 @@
     }
 
     function receiverListener (e) {
-      if( e === chrome.cast.ReceiverAvailability.AVAILABLE) {
+      if( e === window.chrome.cast.ReceiverAvailability.AVAILABLE) {
         console.log('Found a receiver!!!');
       }
     }
