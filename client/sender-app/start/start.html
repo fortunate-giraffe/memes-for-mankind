@@ -11,14 +11,16 @@
       <p class="start-modal">Please visit the <a href="https://chrome.google.com/webstore/detail/google-cast/boadgeojelhgndaghljhdicfkmllpafd?hl=en" target="_blank">Chrome Web Store</a> to install it.  Then try refreshing the page.</p>
     </div>
     <div ng-show="vm.connectionStatus">
-      <h4>WARNING:</h4>
-      <h4> {{ vm.title }} </h4>
+      <div ng-hide="!vm.playerStarted">
+        <h4>WARNING:</h4>
+        <h4> {{ vm.title }} </h4>
+      </div>
       <div ng-if="!vm.nameSubmitted">
         <input ng-keydown="vm.keyPress($event)" type="text" ng-model="vm.userName" placeholder="What's your name?"></input>
-        <button class="username-button" ng-click="vm.setUser()">Set Username</button>
+        <button class="username-button" ng-click="vm.setUser()">Join Game</button>
       </div>
-      <div class="row" ng-if="vm.nameSubmitted">
-        <button id="start" ng-click="vm.startGame()" ng-class="{{ vm.playerStarted ? 'start-button-clicked' : 'start-button' }}" ng-disabled="vm.playerStarted">{{ vm.playerStarted === false ? 'Press here to start the game!' : 'Ready to play!' }}</button>
+      <div class="row" ng-if="vm.nameSubmitted" ng-hide="vm.playerStarted">
+        <button id="start" ng-click="vm.startGame()" ng-class="{{ vm.playerStarted ? 'start-button-clicked' : 'start-button' }}" ng-disabled="vm.playerStarted">{{ vm.playerStarted === false ? 'Start the game!' : 'Ready to play!' }}</button>
       </div>
     </div>
   </div>
