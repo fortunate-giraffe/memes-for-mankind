@@ -18,8 +18,8 @@
     vm.nameSubmitted = false;
     vm.playerStarted = false;
     vm.setUser = setUser;
-    vm.hasExtension = true;
-    vm.onChrome = true;
+    vm.hasExtension = true; // these start as true and only change when the cast icon is clicked
+    vm.onChrome = true; // these start as true and only change when the cast icon is clicked
 
     changeStateListener();
 
@@ -28,9 +28,8 @@
       console.log('connection status updated', vm.connectionStatus);
     });
 
-    // change to a listener so that when connect is called if it's not ready
-    // we'll trigger the listener to change the needsExtension status to show the message
     vm.connect = function () {
+      // checking for the extension and chrome
       vm.onChrome = chromeDetect.checkBrowser();
       vm.hasExtension = chromeDetect.checkExtension();
       if (vm.hasExtension && vm.onChrome) {
