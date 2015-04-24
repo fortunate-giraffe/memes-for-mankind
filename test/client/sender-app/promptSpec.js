@@ -37,6 +37,7 @@ describe('Prompt Controller', function() {
 
   describe('the submitPrompt function', function() {
     it('should call playerMessenger.submit', function() {
+      ctrl.prompt = 'test prompt';
       ctrl.submitPrompt();
       expect(playerMessenger.submit).toHaveBeenCalled();
     });
