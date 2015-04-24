@@ -179,6 +179,7 @@ CHOOSING
 
 .meme-template {
   margin: 0 auto;
+  max-height: 400px;
   margin-bottom: 2%;
 }
 
