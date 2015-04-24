@@ -238,7 +238,7 @@ DONE
   margin-top: 5px;
 }
 
-.facebook, .twitter {
+.facebook, .twitter, .share {
   height: 20px;
   margin: 5px;
   display: inline-block;
