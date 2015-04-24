@@ -9,7 +9,7 @@
             <h4>{{item.displayName}}</h4>
             <img class="img-responsive meme-template" ng-src="{{ item.imageUrl }}" draggable="false"  ng-click="vm.clickHandler($event); button = !button" ng-bind="{{ item }}">
             <button class="meme-button" ng-if="vm.chosenMeme.imageUrl === item.imageUrl" ng-click="vm.moveOn()">Pick this meme!</button>
-            <div ng-show="item.context.length > 50">
+            <div ng-show="item.context">
               <img class="info" src="content/question_mark.png" ng-click="show = !show">
               <img ng-show="show" class="info rich" src="content/rich.jpeg" ng-click="show = !show">
             </div>
