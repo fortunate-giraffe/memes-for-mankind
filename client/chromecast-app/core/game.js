@@ -43,7 +43,9 @@
         }
       });
 
-      gameMessenger.on('ready', function() { // data, sender
+      gameMessenger.on('ready', function(data) { // data, sender
+        console.log(data);
+        trigger('playerReady', data);
         playersReady++;
         if (playersReady >= 3 && playersReady === players.length) {
           startRound();
@@ -127,6 +129,10 @@
         return currentRound.winner;
       };
 
+      var getJudge = function() {
+        return currentRound.judge;
+      };
+
       var started = function() {
         return rounds.length > 0;
       };
@@ -136,6 +142,7 @@
         getPrompt: getPrompt,
         getMemes: getMemes,
         getWinner: getWinner,
+        getJudge: getJudge,
         started: started
       };
 

@@ -45,8 +45,13 @@ header h1 {
 }
 
 .player {
+  color: #4c5858;
   margin: 40px 20px;
   font-size: 1.5em;
+}
+
+.player-ready {
+  color: white;
 }
 
 .content {
