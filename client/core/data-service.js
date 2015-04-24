@@ -14,7 +14,9 @@
 
     return {
       getMemes: getMemes,
-      createMeme: createMeme
+      createMeme: createMeme,
+      getHeadlinePrompts: getHeadlinePrompts,
+      getWhiteCardPrompts: getWhiteCardPrompts
     };
 
     // function for getting 10 meme templates from our server (or player submissions)
@@ -71,5 +73,26 @@
 
       return postDeferred.promise;
     }
+
+    function getHeadlinePrompts() {
+      var deferred = $q.defer();
+      $http.get(serverPath + '/prompts/headlines')
+        .success(function(data) {
+          deferred.resolve(data);
+        })
+        .error(deferred.resolve);
+      return deferred.promise;
+    }
+
+    function getWhiteCardPrompts() {
+      var deferred = $q.defer();
+      $http.get(serverPath + '/prompts/whitecards')
+        .success(function(data) {
+          deferred.resolve(data);
+        })
+        .error(deferred.resolve);
+      return deferred.promise;
+    }
+
   }
 })();

@@ -5,13 +5,25 @@
       .module('app.prompt')
       .controller('Prompt', Prompt);
 
-  Prompt.$inject = ['playerMessenger','$state'];
+  Prompt.$inject = ['playerMessenger', 'dataService', '$state'];
 
-  function Prompt(playerMessenger, $state) {
+  function Prompt(playerMessenger, dataService, $state) {
     /*jshint validthis: true */
     var vm = this;
+    vm.headlines;
+    vm.whiteCards;
+    vm.showHeadlines = false;
+    vm.showCards = false;
     vm.prompt = '';
     vm.submitPrompt = submitPrompt;
+
+    dataService.getHeadlinePrompts().then(function(data) {
+      vm.headlines = data;
+    });
+
+    dataService.getWhiteCardPrompts().then(function(data) {
+      vm.whiteCards = data.result;
+    })
 
     // example to handle prompt submission
     function submitPrompt() {
@@ -22,5 +34,6 @@
       $state.go('home.waiting');
       toastr.info('submitted this prompt: ' + vm.prompt);
     }
+
   }
 })();
