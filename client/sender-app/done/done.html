@@ -2,8 +2,14 @@
   <div class="done-content">
     <img class="img-responsive center-block" ng-src="{{vm.winningMeme.meme.instanceImageUrl}}">
     <p>Share this meme!</p>
-    <a social-twitter custom-url="{{vm.winningMeme.meme.instanceImageUrl}}"><img class="twitter" src="content/Twitter_logo_blue_30.png"></a>
-    <a social-facebook custom-url="{{vm.winningMeme.meme.instanceImageUrl}}"><img class="facebook" src="content/FB-f-Logo__white_29.png"></a>
+    <!-- Adding ng-if to control if you see the desktop version of the cordova version -->
+    <div ng-if="vm.cordova">
+      <img class="share" src="content/share-512.png" ng-click="vm.mobileShare()">
+    </div>
+    <div ng-if="!vm.cordova">
+      <a social-twitter custom-url="{{vm.winningMeme.meme.instanceImageUrl}}"><img class="twitter" src="content/Twitter_logo_blue_30.png"></a>
+      <a social-facebook custom-url="{{vm.winningMeme.meme.instanceImageUrl}}"><img class="facebook" src="content/FB-f-Logo__white_29.png"></a>
+    </div>
     <button ng-click="vm.startNextRound()">Another Round?</button>
   </div>
 </section>
