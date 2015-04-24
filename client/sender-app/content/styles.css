@@ -12,6 +12,7 @@ html body {
   color: #fff;
   font-size: 1.5em;
   text-align: center;
+  font-family: 'Montserrat', sans-serif;;
 }
 
 html body .container-fluid.body-content {
@@ -95,6 +96,7 @@ header {
 header h1 {
   font-size: 1.75em;
   margin: 8px;
+  letter-spacing: -0.04em;
 }
 
 header img {
