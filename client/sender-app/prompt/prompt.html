@@ -1,8 +1,26 @@
 <section class="container-fluid body-content">
-  <div class="">
-    <div class="row small-center">
+    <div class="prompt-container ">
+      <h4>You're the judge! Enter a prompt.</h4>
       <input id="prompt" ng-model="vm.prompt" placeholder="Enter your prompt here!"></input>
       <button id="submit" ng-click="vm.submitPrompt()">Submit</button>
+
+      <div class="prompts">
+        <h4>If you can't think of your own:</h4>
+
+        <div class="panel panel-default">
+          <div class="panel-heading" ng-click="vm.showHeadlines = !vm.showHeadlines">Headlines</div>
+          <ul ng-if="vm.showHeadlines" class="list-group">
+              <li class="list-group-item" ng-click="vm.prompt = headline.headline.main" ng-class="{ 'selected-prompt': vm.prompt === headline.headline.main }" ng-repeat="headline in vm.headlines">{{headline.headline.main}}</li>
+          </ul>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading" ng-click="vm.showCards = !vm.showCards">Click at Your Own Risk</div>
+          <ul ng-if="vm.showCards" class="list-group">
+              <li class="list-group-item" ng-click="vm.prompt = card.card" ng-class="{ 'selected-prompt': vm.prompt === card.card }" ng-repeat="card in vm.whiteCards">{{card.card}}</li>
+          </ul>
+        </div>
+
+      </div>
     </div>
-  </div>
 </section>

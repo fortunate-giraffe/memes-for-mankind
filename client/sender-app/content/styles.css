@@ -245,3 +245,36 @@ DONE
 }
 
 
+
+/****************************
+PROMPT
+*****************************/
+.prompts li {
+  color: black;
+  text-align: left;
+}
+
+.selected-prompt {
+  background-color: #FAD96B;
+}
+
+.panel {
+  max-width: 600px;
+  margin: 20px auto;
+  cursor: pointer;
+}
+
+.panel-heading {
+  font-weight: bold;
+}
+
+.prompt-container {
+  margin-top: 10px;
+}
+
+#prompt {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
