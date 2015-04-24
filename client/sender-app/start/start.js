@@ -12,6 +12,7 @@
     var vm = this;
 
     vm.title = 'Great fun is about to ensue.';
+    vm.imgsrc = 'content/cast_disconnected_black-512.png';
     vm.connectionStatus = playerMessenger.getConnectionStatus();
     vm.startGame = startGame;
     vm.userName = '';
