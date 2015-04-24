@@ -51,19 +51,26 @@ SIDEBAR
 }
 
 .players {
-  margin: 20px;
+  margin-top: 20px;
+  margin-left: 20px;
   padding: 5px;
+  display: relative;
 }
 
 .player {
-  color: #4c5858;
-  margin: 40px 20px;
-  font-size: 1.5em;
+  font-size: 1.25em;
+  margin: 15px 0;
 }
 
 .player-ready {
-  color: white;
+  color: #ffd60a;
 }
+
+.player-list {
+  margin-top: 20px;
+}
+
+
 
 /****************************
 LAYOUT
@@ -112,15 +119,16 @@ CREATING
 /****************************
 CHOOSING
 *****************************/
-
 .container-container {
   max-height: 100%;
 }
 
-
 .submissions {
-  height: 250px;
+  max-height: 100%;
+  max-width: 500px;
+  width: auto;
   padding: 2%;
+  float: none;
 }
 
 

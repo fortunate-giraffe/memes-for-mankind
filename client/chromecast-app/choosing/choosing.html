@@ -2,7 +2,9 @@
   <h2>Hey, Judge. Choose the winner!</h2>
   <div class="container-container">
     <div class="container-fluid">
-      <img class="col-lg-4 submissions" data-ng-repeat="player in vm.submissions" src="{{player.meme.instanceImageUrl}}">
+      <div class="row" style="height: {{vm.height}}">
+        <img class="col-xs-4 submissions" data-ng-repeat="player in vm.submissions" src="{{player.meme.instanceImageUrl}}">
+      </div>
     </div>
   </div>
 </div>

@@ -1,11 +1,12 @@
 <div data-ng-controller="Sidebar as vm">
   <div class="players">
     <h3>Players</h3>
-
-    <div class="player" ng-repeat="player in vm.players">
-      <span ng-if="vm.judge && vm.judge.name === player.name" class="glyphicon glyphicon-hand-right player-ready">
-      </span>
-      <span ng-class="{ 'player-ready': player.status }">{{player.name}}</span>
+    <div class="player-list">
+      <div class="player" ng-repeat="player in vm.players">
+        <span ng-if="vm.judge && vm.judge.name === player.name" class="glyphicon glyphicon-hand-right player-ready">
+        </span>
+        <span ng-class="{ 'player-ready': player.status }">{{player.name}}</span>
+      </div>
     </div>
   </div>
 </div>
