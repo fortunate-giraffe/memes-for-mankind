@@ -93,6 +93,47 @@ module.exports = function(grunt) {
             'client/sender-app/core/messaging.js'
           ]
         }
+      },
+      senderMobile: {
+        files: {
+          'client/sender-app/dist/mobile-src.min.js': [
+            'client/sender-app/app.module.js', // app module
+            // sender diretive
+            'client/sender-app/core/directives.module.js',
+            'client/sender-app/core/directives.js',
+            // core across sender/receiver
+            'client/core/core.module.js',
+            'client/core/config.js',
+            'client/core/event-handling.js',
+            'client/core/chrome-detect.js',
+            'client/core/data-service.js',
+            'client/core/player-user.js',
+            // cast-sender-mobile is the only difference between the site and the mobile app
+            'client/core/messaging-platforms/cast-sender-mobile.js',
+            'client/core/messaging-platforms/sockets.js',
+            // sender game views
+            'client/sender-app/layout/layout.module.js', // layout module
+            'client/sender-app/layout/sidebar.js',
+            'client/sender-app/layout/shell.js',
+            'client/sender-app/layout/footer.js',
+            'client/sender-app/layout/header.js',
+            'client/sender-app/prompt/prompt.module.js', // prompt module
+            'client/sender-app/prompt/prompt.js',
+            'client/sender-app/waiting/waiting.module.js', // waiting module
+            'client/sender-app/waiting/waiting.js',
+            'client/sender-app/creating/creating.module.js', // creating module
+            'client/sender-app/creating/creating.js',
+            'client/sender-app/choosing/choosing.module.js', // choosing module
+            'client/sender-app/choosing/choosing.js',
+            'client/sender-app/done/done.module.js', // done module
+            'client/sender-app/done/done.js',
+            'client/sender-app/start/start.module.js',
+            'client/sender-app/start/start.js',
+            // core to the sender app
+            'client/sender-app/core/player-messenger.js',
+            'client/sender-app/core/messaging.js'
+          ]
+        }
       }
     },
 
@@ -327,7 +368,7 @@ module.exports = function(grunt) {
   // checking value of input parameters to determine which API to use (local or production)
   var apiEnv = grunt.option('api') || 'dev'; // if running grunt task with --api=prod then look at the production API
   // task to uglify our own js
-  grunt.registerTask('srcjs', ['uglify:chromecast', 'uglify:sender']);
+  grunt.registerTask('srcjs', ['uglify:chromecast', 'uglify:sender', 'uglify:senderMobile']);
   // task to compile vendor js into one file, separate for chromecast vs sender
   grunt.registerTask('vendorjs', ['concat:chromecast', 'concat:chromecastStyle', 'concat:sender', 'concat:senderStyle']);
   // task to run jshint, compile vendor js, run tests
