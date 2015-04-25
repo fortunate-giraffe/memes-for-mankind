@@ -15,7 +15,7 @@
         <h4>WARNING:</h4>
         <h4> {{ vm.title }} </h4>
       </div>
-      <div ng-if="!vm.nameSubmitted">
+      <div ng-if="!vm.nameSubmitted" ng-enter-key="vm.setUser()">
         <input ng-keydown="vm.keyPress($event)" type="text" ng-model="vm.userName" placeholder="What's your name?"></input>
         <button class="username-button" ng-click="vm.setUser()">Join Game</button>
       </div>
