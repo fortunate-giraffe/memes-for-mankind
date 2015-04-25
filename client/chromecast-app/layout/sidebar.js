@@ -20,8 +20,8 @@
       });
 
       game.on('gameStart', function() {
+        console.log('gameStart event heard');
         vm.judge = game.getJudge();
-        console.log(vm.judge);
       });
 
       game.on('playerReady', function(player) {
