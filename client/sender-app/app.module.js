@@ -28,6 +28,11 @@
       'app.chrome-detect',
 
       /*
+       * Directives
+       */
+      'app.directives',
+
+      /*
        * Messaging
        */
       'app.player-messenger',
