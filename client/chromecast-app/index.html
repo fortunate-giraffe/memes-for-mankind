@@ -1,66 +1,21 @@
 <!DOCTYPE html>
-<html data-ng-app="app" ng-strict-di>
-<head>
-    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <html lang="en" data-ng-app="app" ng-strict-di>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="content/styles.css">
-    <link href="../../bower_components/toastr/toastr.min.css" rel="stylesheet"/>
-</head>
+    <link href="dist/compiled.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div>
+      <div ui-view></div>
+    </div>
+
+    <!-- vendor dependencies -->
+    <script src="dist/vendor.min.js"></script>
+    <!-- source -->
+    <script src="dist/src.min.js"></script>
+    <!-- Cast Receiver API -->
+    <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
+  </body>
 </html>
-<body>
-  <div>
-    <div ui-view></div>
-  </div>
-
-  <!-- vendor dependencies -->
-  <!--
-  <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="../../bower_components/toastr/toastr.min.js"></script>
-  <script src="../../bower_components/angular/angular.min.js"></script>
-  <script src="../../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-  -->
-  <script src="dist/vendor.js"></script>
-
-  <!-- app module -->
-  <script src="app.module.js"></script>
-
-  <!-- shared services -->
-  <script src="core/game.js"></script>
-
-  <!-- Constants -->
-  <script src="../core/config.js"></script>
-
-  <!-- messaging -->
-  <script src="../core/core.module.js"></script>
-  <script src="../core/event-handling.js"></script>
-  <script src="../core/messaging-platforms/sockets.js"></script>
-  <script src="../core/messaging-platforms/cast-receiver.js"></script>
-  <script src="core/game-messenger.js"></script>
-  <script src="core/messaging.js"></script>
-
-  <!-- player deps -->
-  <script src="../core/data-service.js"></script>
-  <script src="../core/player-user.js"></script>
-
-  <!-- layout -->
-  <script src="layout/layout.module.js"></script>
-  <script src="layout/sidebar.js"></script>
-  <script src="layout/shell.js"></script>
-
-  <!-- gameplay views -->
-  <script src="prompt/prompt.module.js"></script>
-  <script src="prompt/prompt.js"></script>
-  <script src="waiting/waiting.module.js"></script>
-  <script src="waiting/waiting.js"></script>
-  <script src="creating/creating.module.js"></script>
-  <script src="creating/creating.js"></script>
-  <script src="choosing/choosing.module.js"></script>
-  <script src="choosing/choosing.js"></script>
-  <script src="winner/winner.module.js"></script>
-  <script src="winner/winner.js"></script>
-
-  <!-- Cast Receiver API -->
-  <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
-</body>

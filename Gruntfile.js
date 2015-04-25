@@ -7,6 +7,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-env');
   grunt.loadNpmTasks('grunt-karma');
@@ -16,6 +17,85 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-shell');
 
   grunt.initConfig({
+    uglify: {
+      options: {
+        sourceMap: true
+      },
+      chromecast: {
+        files: {
+          'client/chromecast-app/dist/src.min.js': [
+            'client/chromecast-app/app.module.js', // app module
+            // sender game views
+            'client/chromecast-app/layout/layout.module.js',
+            'client/chromecast-app/layout/sidebar.js',
+            'client/chromecast-app/layout/shell.js',
+            'client/chromecast-app/prompt/prompt.module.js',
+            'client/chromecast-app/prompt/prompt.js',
+            'client/chromecast-app/waiting/waiting.module.js',
+            'client/chromecast-app/waiting/waiting.js',
+            'client/chromecast-app/creating/creating.module.js',
+            'client/chromecast-app/creating/creating.js',
+            'client/chromecast-app/choosing/choosing.module.js',
+            'client/chromecast-app/choosing/choosing.js',
+            'client/chromecast-app/winner/winner.module.js',
+            'client/chromecast-app/winner/winner.js',
+            // core to the chromecast app
+            'client/chromecast-app/core/game.js',
+            'client/chromecast-app/core/game-messenger.js',
+            'client/chromecast-app/core/messaging.js',
+            // core across sender/receiver
+            'client/core/core.module.js',
+            'client/core/config.js',
+            'client/core/event-handling.js',
+            'client/core/data-service.js',
+            'client/core/player-user.js',
+            'client/core/messaging-platforms/cast-receiver.js',
+            'client/core/messaging-platforms/sockets.js'
+          ]
+        }
+      },
+      sender: {
+        files: {
+          'client/sender-app/dist/src.min.js': [
+            'client/sender-app/app.module.js', // app module
+            // sender diretive
+            'client/sender-app/core/directives.module.js',
+            'client/sender-app/core/directives.js',
+            // core across sender/receiver
+            'client/core/core.module.js',
+            'client/core/config.js',
+            'client/core/event-handling.js',
+            'client/core/chrome-detect.js',
+            'client/core/data-service.js',
+            'client/core/player-user.js',
+            'client/core/messaging-platforms/cast-sender.js',
+            'client/core/messaging-platforms/sockets.js',
+            // sender game views
+            'client/sender-app/layout/layout.module.js', // layout module
+            'client/sender-app/layout/sidebar.js',
+            'client/sender-app/layout/shell.js',
+            'client/sender-app/layout/footer.js',
+            'client/sender-app/layout/header.js',
+            'client/sender-app/prompt/prompt.module.js', // prompt module
+            'client/sender-app/prompt/prompt.js',
+            'client/sender-app/waiting/waiting.module.js', // waiting module
+            'client/sender-app/waiting/waiting.js',
+            'client/sender-app/creating/creating.module.js', // creating module
+            'client/sender-app/creating/creating.js',
+            'client/sender-app/choosing/choosing.module.js', // choosing module
+            'client/sender-app/choosing/choosing.js',
+            'client/sender-app/done/done.module.js', // done module
+            'client/sender-app/done/done.js',
+            'client/sender-app/start/start.module.js',
+            'client/sender-app/start/start.js',
+            // core to the sender app
+            'client/sender-app/core/player-messenger.js',
+            'client/sender-app/core/messaging.js'
+          ]
+        }
+      }
+    },
+
     concat: {
       options: {
         sourceMap: true
@@ -27,7 +107,15 @@ module.exports = function(grunt) {
           'bower_components/angular/angular.min.js',
           'bower_components/angular-ui-router/release/angular-ui-router.min.js'
         ],
-        dest: 'client/chromecast-app/dist/vendor.js',
+        dest: 'client/chromecast-app/dist/vendor.min.js',
+      },
+      chromecastStyle: {
+        src: [
+          'bower_components/bootstrap/dist/css/bootstrap.min.css',
+          'bower_components/toastr/toastr.min.css',
+          'client/chromecast-app/content/styles.css'
+        ],
+        dest: 'client/chromecast-app/dist/compiled.css'
       },
       sender: {
         src: [
@@ -38,7 +126,15 @@ module.exports = function(grunt) {
           'bower_components/angular-ui-router/release/angular-ui-router.min.js',
           'bower_components/angular-social-links/angular-social-links.js'
         ],
-        dest: 'client/sender-app/dist/vendor.js',
+        dest: 'client/sender-app/dist/vendor.min.js',
+      },
+      senderStyle: {
+        src: [
+          'bower_components/bootstrap/dist/css/bootstrap.min.css',
+          'bower_components/toastr/toastr.min.css',
+          'client/sender-app/content/styles.css'
+        ],
+        dest: 'client/sender-app/dist/compiled.css'
       },
     },
 
@@ -50,6 +146,7 @@ module.exports = function(grunt) {
         }
       }
     },
+
     env: {
       all: {
         add: {
@@ -57,6 +154,7 @@ module.exports = function(grunt) {
         }
       }
     },
+
     nodemon: {
       regServer: {
         script: 'index.js'
@@ -65,6 +163,7 @@ module.exports = function(grunt) {
         script: './server/dev-socket.js'
       }
     },
+
     jshint: {
       files: [
         'Gruntfile.js',
@@ -79,6 +178,7 @@ module.exports = function(grunt) {
         reporter: require('jshint-stylish'),
         ignores: [
           'client/sender-app-mobile/www/bower_components/**/*.js',
+          'client/sender-app-mobile/www/dist/*.js',
           'client/sender-app-mobile/plugins/**/*.js',
           'client/sender-app-mobile/platforms/**/*.js',
           'client/sender-app/dist/*', // vendor js
@@ -92,7 +192,6 @@ module.exports = function(grunt) {
     },
 
     karma: {
-
       options: {
         configFile: 'karma.conf.js',
         files: [
@@ -105,16 +204,12 @@ module.exports = function(grunt) {
           'bower_components/toastr/toastr.js',
           'bower_components/angular-social-links/angular-social-links.js',
 
-          // node modules
-
-
           // shared app files
           'client/core/*.js',
           'client/core/**/*.js',
           'client/core/*.module.js',
         ]
       },
-
       receiver: {
         files: [
           { src:
@@ -129,7 +224,6 @@ module.exports = function(grunt) {
           }
         ]
       },
-
       sender: {
         files: [
           { src:
@@ -146,6 +240,7 @@ module.exports = function(grunt) {
         ]
       }
     },
+
     ngconstant: {
       options: {
         name: 'app.config',
@@ -192,6 +287,7 @@ module.exports = function(grunt) {
         }
       }
     },
+
     watch: {
       gruntfile: {
         files: [
@@ -202,7 +298,9 @@ module.exports = function(grunt) {
         tasks: ['jshint']
       },
     },
+
     clean: ['client/sender-app-mobile/www'],
+
     copy: {
       mobile: {
         files: [
@@ -213,6 +311,7 @@ module.exports = function(grunt) {
         ]
       }
     },
+
     shell: {
       cordovaPrepare: {
         command: 'cordova prepare',
@@ -227,17 +326,18 @@ module.exports = function(grunt) {
 
   // checking value of input parameters to determine which API to use (local or production)
   var apiEnv = grunt.option('api') || 'dev'; // if running grunt task with --api=prod then look at the production API
+  // task to uglify our own js
+  grunt.registerTask('srcjs', ['uglify:chromecast', 'uglify:sender']);
   // task to compile vendor js into one file, separate for chromecast vs sender
-  grunt.registerTask('vendorjs', ['concat:chromecast', 'concat:sender']);
+  grunt.registerTask('vendorjs', ['concat:chromecast', 'concat:chromecastStyle', 'concat:sender', 'concat:senderStyle']);
   // task to run jshint, compile vendor js, run tests
-  grunt.registerTask('test_n_stuff', ['jshint', 'vendorjs', 'karma:sender', 'karma:receiver', 'jasmine_node']);
+  grunt.registerTask('test_n_stuff', ['jshint', 'vendorjs', 'srcjs', 'karma:sender', 'karma:receiver', 'jasmine_node']);
   // run server with socket comms
   grunt.registerTask('devSocket', ['env:all', 'ngconstant:devSocket' + apiEnv + 'Api', 'test_n_stuff', 'concurrent:socketServer']);
   // run server with chromecast
   grunt.registerTask('devCc', ['env:all', 'ngconstant:devCc' + apiEnv + 'Api', 'test_n_stuff', 'nodemon:regServer']);
-
+  // cleans/copies directories for mobile app creation w/ cordova & xCode or android studio
   grunt.registerTask('mobile', ['clean', 'copy:mobile', 'shell:cordovaPrepare']);
-
   // this should only be run by the server in production
   grunt.registerTask('prod', ['env:all', 'ngconstant:prod', 'nodemon:regServer']);
   // default to the dev server with chromecast
