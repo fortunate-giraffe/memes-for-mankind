@@ -9,7 +9,7 @@
 
     function Sidebar(game) {
       var vm = this;
-      vm.judge;
+      vm.judge = '';
       vm.players = [];
 
       game.on('playerJoined', function(player) {
@@ -20,7 +20,6 @@
       });
 
       game.on('gameStart', function() {
-        console.log('gameStart event heard');
         vm.judge = game.getJudge();
       });
 
