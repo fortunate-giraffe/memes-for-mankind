@@ -56,7 +56,7 @@
     // player clicking the start button indicating they're ready
     function startGame() {
       playerMessenger.ready();
-      toastr.info(playerUser.getUser() + ' wants to play!');
+      // toastr.info(playerUser.getUser() + ' wants to play!');
       vm.playerStarted = !vm.playerStarted;
     }
 

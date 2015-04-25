@@ -49,7 +49,7 @@
       $(e.target).addClass('selected');
       vm.chosenMeme = JSON.parse(e.target.attributes['ng-bind'].nodeValue);
       playerUser.setMemeChoice(vm.chosenMeme);
-      toastr.info('you picked: ' + vm.chosenMeme);
+      // toastr.info('you picked: ' + vm.chosenMeme);
     }
 
   }
