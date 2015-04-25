@@ -3,7 +3,7 @@
   <div class="container-container">
     <div class="container-fluid">
       <div class="row" style="height: {{vm.height}}">
-        <img class="col-xs-4 submissions" data-ng-repeat="player in vm.submissions" src="{{player.meme.instanceImageUrl}}">
+        <img class="col-xs-4 submissions" data-ng-repeat="player in vm.submissions" ng-src="{{player.meme.instanceImageUrl}}">
       </div>
     </div>
   </div>
