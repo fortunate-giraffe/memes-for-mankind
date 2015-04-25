@@ -6,17 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../bower_components/toastr/toastr.css" rel="stylesheet"/>
+    <link href="../../bower_components/toastr/toastr.min.css" rel="stylesheet"/>
     <link href="content/styles.css" rel="stylesheet"/>
   </head>
   <body>
     <div ui-view></div>
 
-    <script src="../../bower_components/jquery/dist/jquery.js"></script>
-    <script src="../../bower_components/toastr/toastr.js"></script>
-    <script src="../../bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="../../bower_components/angular/angular.js"></script>
-    <script src="../../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <!--
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../bower_components/toastr/toastr.min.js"></script>
+    <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../../bower_components/angular/angular.min.js"></script>
+    <script src="../../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="../../bower_components/angular-social-links/angular-social-links.js"></script>
+    -->
+    <script src="dist/vendor.js"></script>
+
 
     <!-- App Module -->
     <script src="app.module.js"></script>
@@ -61,9 +66,6 @@
     <script src="layout/shell.js"></script>
     <script src="layout/footer.js"></script>
     <script src="layout/header.js"></script>
-
-    <!-- Social -->
-    <script src="../../bower_components/angular-social-links/angular-social-links.js"></script>
 
     <!-- Cast Sender API Library -->
      <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
