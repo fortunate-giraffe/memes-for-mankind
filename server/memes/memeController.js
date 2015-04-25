@@ -74,8 +74,16 @@ module.exports = {
           if (err) {
             throw err;
           }
-          body = JSON.parse(body);
-          imageUrl = body.data.link;
+          // handling error from Imgur... occasionally get these
+          try {
+            body = JSON.parse(body);
+            imageUrl = body.data.link;
+          } catch (err) {
+            console.log('error sending to imgur', err);
+            console.log('using default error meme');
+            imageUrl = 'http://i.imgur.com/Es0OowO.png';
+          }
+
           res.status(200).send({result: {
             instanceImageUrl: imageUrl,
             displayName: memeTitle
