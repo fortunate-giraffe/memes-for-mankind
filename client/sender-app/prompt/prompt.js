@@ -23,16 +23,18 @@
 
     dataService.getWhiteCardPrompts().then(function(data) {
       vm.whiteCards = data.result;
-    })
+    });
 
     // example to handle prompt submission
     function submitPrompt() {
-      var prompt = {
-        prompt: vm.prompt
-      };
-      playerMessenger.submit(prompt);
-      $state.go('home.waiting');
-      toastr.info('submitted this prompt: ' + vm.prompt);
+      if(vm.prompt) {
+        var prompt = {
+          prompt: vm.prompt
+        };
+        playerMessenger.submit(prompt);
+        $state.go('home.waiting');
+        toastr.info('submitted this prompt: ' + vm.prompt);
+      }
     }
 
   }

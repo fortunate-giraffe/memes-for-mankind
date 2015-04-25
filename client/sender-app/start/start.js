@@ -12,6 +12,7 @@
     var vm = this;
 
     vm.title = 'Great fun is about to ensue.';
+    vm.imgsrc = 'content/cast_disconnected_black-512.png';
     vm.connectionStatus = playerMessenger.getConnectionStatus();
     vm.startGame = startGame;
     vm.userName = '';
@@ -55,7 +56,7 @@
     // player clicking the start button indicating they're ready
     function startGame() {
       playerMessenger.ready();
-      toastr.info(playerUser.getUser() + ' wants to play!');
+      // toastr.info(playerUser.getUser() + ' wants to play!');
       vm.playerStarted = !vm.playerStarted;
     }
 

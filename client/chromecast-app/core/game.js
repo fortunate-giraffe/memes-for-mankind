@@ -43,9 +43,8 @@
         }
       });
 
-      gameMessenger.on('ready', function(data) { // data, sender
-        console.log(data);
-        trigger('playerReady', data);
+      gameMessenger.on('ready', function(data, sender) { // data, sender
+        trigger('playerReady', sender);
         playersReady++;
         if (playersReady >= 3 && playersReady === players.length) {
           startRound();
@@ -102,18 +101,26 @@
       // Event handling
       var eventHandlers = {};
       var registerEventHandler = function(event, handler) {
-        eventHandlers[event] = handler;
+        eventHandlers[event] = eventHandlers[event] || [];
+        eventHandlers[event].push(handler);
       };
 
       var trigger = function(event, data) {
-        if (eventHandlers[event]) {
-          if (!$rootScope.$$phase) {  // don't use $apply if already in a digest cycle
-            $rootScope.$apply(function() {
-              eventHandlers[event](data);
+        var handlers = eventHandlers[event];
+        if (handlers) {
+          if (!$rootScope.$$phase) { // don't use $apply if already in a digest cycle
+            $rootScope.$apply(function () {
+              runHandlers(handlers);
             });
           } else {
-            eventHandlers[event](data);
+            runHandlers(handlers);
           }
+        }
+
+        function runHandlers () {
+          handlers.forEach(function (fn) {
+            fn(data);
+          });
         }
       };
 
@@ -130,6 +137,7 @@
       };
 
       var getJudge = function() {
+        console.log('getJudge Called');
         return currentRound.judge;
       };
 

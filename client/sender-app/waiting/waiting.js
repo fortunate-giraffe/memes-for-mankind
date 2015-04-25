@@ -8,7 +8,7 @@
   Waiting.$inject = ['playerMessenger', 'playerUser', '$state'];
 
   function Waiting(playerMessenger, playerUser, $state) {
-    toastr.info(playerUser.getUser());
+    // toastr.info(playerUser.getUser());
 
     changeStateListener();
 

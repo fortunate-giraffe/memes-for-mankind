@@ -37,11 +37,11 @@
       };
 
       castReceiverManager.onSenderConnected = function(event) {
-        toastr.info('Received Sender Connected event: ' + event.data);
+        // toastr.info('Received Sender Connected event: ' + event.data);
       };
 
       castReceiverManager.onSenderDisconnected = function(event) {
-        toastr.info('Received Sender Disconnected event: ' + event.data);
+        // toastr.info('Received Sender Disconnected event: ' + event.data);
         if (window.castReceiverManager.getSenders().length === 0 &&
           event.reason === cast.receiver.system.DisconnectReason.REQUESTED_BY_SENDER) {
         window.close();

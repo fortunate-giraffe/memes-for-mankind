@@ -1,8 +1,12 @@
 deployment:
-  prod:
+  staging:
     branch: master
     heroku:
       appname: thawing-eyrie-5425
+  prod:
+    branch: production
+    heroku:
+      appname: memesformankind-prod
 checkout:
   post:
     - grunt ngconstant:prod
