@@ -43,9 +43,8 @@
         }
       });
 
-      gameMessenger.on('ready', function(data) { // data, sender
-        console.log(data);
-        trigger('playerReady', data);
+      gameMessenger.on('ready', function(data, sender) { // data, sender
+        trigger('playerReady', sender);
         playersReady++;
         if (playersReady >= 3 && playersReady === players.length) {
           startRound();
@@ -130,6 +129,7 @@
       };
 
       var getJudge = function() {
+        console.log('getJudge Called');
         return currentRound.judge;
       };
 
