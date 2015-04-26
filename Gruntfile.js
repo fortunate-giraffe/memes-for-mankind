@@ -380,7 +380,7 @@ module.exports = function(grunt) {
   // cleans/copies directories for mobile app creation w/ cordova & xCode or android studio
   grunt.registerTask('mobile', ['clean', 'copy:mobile', 'shell:cordovaPrepare']);
   // this should only be run by the server in production
-  grunt.registerTask('prod', ['env:all', 'ngconstant:prod', 'nodemon:regServer']);
+  grunt.registerTask('prod', ['env:all', 'ngconstant:prod', 'vendorjs', 'srcjs' ,'nodemon:regServer']);
   // default to the dev server with chromecast
   grunt.registerTask('default', ['devCc']);
 };
