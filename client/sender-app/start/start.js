@@ -38,19 +38,14 @@
       }
     };
 
-    vm.keyPress = function(e){
-      if( e.which === 13 ){
-        setUser();
-        e.preventDefault();
-      }
-    };
-
     // user setting their name and revealing the start game button
     function setUser() { // event
       // initializing the messaging system once we know a user's name
-      playerMessenger.init(vm.userName);
-      vm.nameSubmitted = !vm.nameSubmitted;
-      playerMessenger.join();
+      if( vm.userName ){
+        playerMessenger.init(vm.userName);
+        vm.nameSubmitted = !vm.nameSubmitted;
+        playerMessenger.join();
+      }
     }
 
     // player clicking the start button indicating they're ready

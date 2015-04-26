@@ -9,5 +9,40 @@
     </author>
     <content src="mobile.html" />
     <icon src="www/content/memes_mobile_icon_512.png" />
+    <platform name="ios">
+        <splash src="www/MobileImages/Default~iphone.png" width="320" height="480" />
+        <splash src="www/MobileImages/Default@2x~iphone_640x960.png" width="640" height="960" />
+        <splash src="www/MobileImages/Default-568h@2x~iphone_640x1136.png" width="640" height="1136" />
+        <splash src="www/MobileImages/Default-Landscape~ipad_1024x748.png" width="1024" height="748" />
+        <splash src="www/MobileImages/Default-Landscape~ipad_1024x768.png" width="1024" height="768" />
+        <splash src="www/MobileImages/Default-Landscape@2x~ipad_2048x1496.png" width="2048" height="1496" />
+        <splash src="www/MobileImages/Default-Landscape@2x~ipad_2048x1536.png" width="2048" height="1536" />
+        <splash src="www/MobileImages/Default~ipad.png" width="1536" height="2008" />
+        <splash src="www/MobileImages/Default-Portrait@2x~ipad_1536x2048.png" width="1536" height="2048" />
+        <splash src="www/MobileImages/Default-Portrait@2x~ipad_1536x2008.png" width="1536" height="2008" />
+        <splash src="www/MobileImages/Default.png" width="768" height="1004" />
+        <splash src="www/MobileImages/Default-Portrait~ipad_768x1024.png" width="768" height="1024" />
+        <splash src="www/MobileImages/Default-750@2x~iphone6-portrait_750x1334.png" width="750" height="1334" />
+        <splash src="www/MobileImages/Default-750@2x~iphone6-landscape_1334x750.png" width="1334" height="750" />
+        <splash src="www/MobileImages/Default-1242@3x~iphone6s-portrait_1242x2208.png" width="1242" height="2208" />
+        <splash src="www/MobileImages/Default-1242@3x~iphone6s-landscape_2208x1242.png" width="2208" height="1242" />
+    </platform>
+    <platform name="android">
+        <splash src="drawable-screen.png" width="480" height="800" />
+        <splash src="drawable-land-screen.png" width="800" height="480" />
+        <splash src="drawable-ldpi-screen.png" width="200" height="320" />
+        <splash src="drawable-land-ldpi-screen.png" width="320" height="200" />
+        <splash src="drawable-mdpi-screen.png" width="320" height="480" />
+        <splash src="drawable-land-mdpi-screen.png" width="480" height="320" />
+        <splash src="drawable-hdpi-screen.png" width="480" height="800" />
+        <splash src="drawable-land-hdpi-screen.png" width="800" height="480" />
+        <splash src="drawable-xhdpi-screen.png" width="720" height="1280" />
+        <splash src="drawable-land-xhdpi-screen.png" width="1280" height="720" />
+        <splash src="drawable-xxhdpi-screen.png" width="640" height="960" />
+        <splash src="drawable-land-xxhdpi-screen.png" width="960" height="640" />
+    </platform>
+    <preference name="StatusBarOverlaysWebView" value="false"/>
+    <preference name="StatusBarBackgroundColor" value="#000000"/>
+    <preference name="StatusBarStyle" value="lightcontent" />
     <access origin="*" />
 </widget>

@@ -1,7 +1,7 @@
 <section class="container-fluid body-content">
     <div class="prompt-container ">
       <h4>You're the judge! Enter a prompt.</h4>
-      <input id="prompt" ng-model="vm.prompt" placeholder="Enter your prompt here!"></input>
+      <input id="prompt" ng-model="vm.prompt" ng-enter-key="vm.submitPrompt()"placeholder="Enter your prompt here!"></input>
       <button id="submit" ng-click="vm.submitPrompt()">Submit</button>
 
       <div class="prompts">

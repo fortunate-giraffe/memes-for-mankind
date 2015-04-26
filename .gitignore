@@ -36,6 +36,6 @@ bower_components/
 
 # Mobile
 client/sender-app-mobile/platforms/
-client/sender-app-mobile/plugins/
+client/sender-app-mobile/plugins/**/
 client/sender-app-mobile/Connect-SDK-iOS/
 client/sender-app-mobile/www

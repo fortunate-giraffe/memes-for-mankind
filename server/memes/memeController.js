@@ -45,7 +45,6 @@ module.exports = {
     }
    */
   createMeme: function(req, res){
-    var date = new Date().valueOf();
     var topText = req.body.topText;
     var bottomText = req.body.bottomText;
     var memeTitle = req.body.displayName;
