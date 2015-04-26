@@ -9,7 +9,7 @@
 
     function Choosing(game, $state) {
       var vm = this;
-      vm.height;
+      vm.height = '400px';
 
       vm.submissions = game.getMemes();
 

@@ -36,7 +36,7 @@
         }
       };
 
-      castReceiverManager.onSenderConnected = function(event) {
+      castReceiverManager.onSenderConnected = function() { // event
         // toastr.info('Received Sender Connected event: ' + event.data);
       };
 

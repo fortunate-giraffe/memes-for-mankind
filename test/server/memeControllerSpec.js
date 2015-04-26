@@ -1,6 +1,6 @@
 'use strict';
 
-var assert = require('assert');
+var assert = require('assert'); // jshint ignore:line
 var memeController = require('../../server/memes/memeController.js');
 
 describe('memeController', function(){

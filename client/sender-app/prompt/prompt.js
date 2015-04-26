@@ -10,8 +10,8 @@
   function Prompt(playerMessenger, dataService, $state) {
     /*jshint validthis: true */
     var vm = this;
-    vm.headlines;
-    vm.whiteCards;
+    vm.headlines; // jshint ignore:line
+    vm.whiteCards; // jshint ignore:line
     vm.showHeadlines = false;
     vm.showCards = false;
     vm.prompt = '';
