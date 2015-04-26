@@ -79,6 +79,9 @@ module.exports = {
             imageUrl = body.data.link;
           } catch (err) {
             console.log('error sending to imgur', err);
+            console.log('response', JSON.stringify(response));
+            console.log('body', JSON.stringify(body));
+            console.log('options', JSON.stringify(options));
             console.log('using default error meme');
             imageUrl = 'http://i.imgur.com/Es0OowO.png';
           }
