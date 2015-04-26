@@ -24,7 +24,7 @@ Circle CI [![Circle CI](https://circleci.com/gh/fortunate-giraffe/memes-for-mank
 ## Usage
 
 > Use this repo to develop and extend the original game, or use the links below to play the current version.
-> [Link to Chromecast app], [Link to webapp]
+> Currently there is a webapp, Android client, and iOS client, all should be linked via the main site page [MemesForMankind.com](http://www.memesformankind.com/)
 
 ## Requirements
 
@@ -44,14 +44,14 @@ npm install
 bower install
 ```
 
-####Installing Cairo and image processing dependencies (for the meme creating server)
+#### Installing Cairo and image processing dependencies (for the meme creating server)
 OS X
 
-#####Make sure you have Brew/wget:
+##### Make sure you have Brew/wget:
 
 [Brew](http://brew.sh/)! (wget instructions on the page)
 
-#####Install cairo:
+##### Install cairo:
 follow instructions from source here
 using the wget command
 
@@ -67,6 +67,63 @@ using the wget command
 
 ... if you're still having issues, check out the install instructions [here](https://github.com/Automattic/node-canvas/wiki/Installation---OSX)... and be mindful of version #s as they have a habit of becoming obsolete
 
+#### Set Up for Android Development
+
+- Make sure you have [Android Studio](http://developer.android.com/tools/studio/index.html) and all the suggested add-ons
+- Make sure you download all the listed dependencies for the [Cordova ConnectSDK Android plugin](https://github.com/ConnectSDK/Connect-SDK-Android#dependencies)
+- [Set up Cordova](https://cordova.apache.org/docs/en/4.0.0/guide_cli_index.md.html)
+- The client/sender-app-mobile/ directory is where the Cordova project lives
+- Create a Cordova project in that directory
+- You'll likely need to download all the plugins included in the repsective ios and android json files
+- After you set up Android Studio, create a new Android Studio project in and point it to the directory sender-app-mobile/ directory
+- In your Android Studio's build.gradle file make sure the sourceSets include the following otherwise Android Studio won't be able to build your app because it won't have the ConnectSDK otherwise
+
+```
+sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src', 'CordovaLib/src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+    }
+```
+
+- Finally, you'll need to edit one of the Android libraries to change the behavior when connecting. Out of the box the Android chromecast libraries disconnect whatever is using the Chromecast in order to instantiate their own session. We changed that in the following file so that you can actually join without kicking others off... sadly it's not included in the repo- just documented below:
+In CastWebAppSession.java, lines 55-57, which we found at the following path (from within our sender-app-mobile dir) platforms/android/Connect-SDK-Android/modules/google_cast/src/com/connectsdk/service/sessions/CastWebAppSession.java
+
+```
+@Override
+    public void connect(final ResponseListener<Object> listener) {
+        // COMMENT THESE THREE LINES OUT!
+        // if (castServiceChannel != null) {
+        //     disconnectFromWebApp();
+        // }
+
+        castServiceChannel = new CastServiceChannel(launchSession.getAppId(), this);
+
+        try {
+            Cast.CastApi.setMessageReceivedCallbacks(service.getApiClient(),
+                    castServiceChannel.getNamespace(),
+                    castServiceChannel);
+
+            Util.postSuccess(listener, null);
+        } catch (IOException e) {
+            castServiceChannel = null;
+
+            Util.postError(listener, new ServiceCommandError(0, "Failed to create channel", null));
+        }
+    }
+```
+
+- Building the project in Cordova had issues, but building via the Android Studio worked just fine
+
+
+
+#### Set Up for iOS Development
 
 ### Roadmap
 
