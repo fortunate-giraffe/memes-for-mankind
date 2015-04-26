@@ -33,7 +33,7 @@
         };
         playerMessenger.submit(prompt);
         $state.go('home.waiting');
-        toastr.info('submitted this prompt: ' + vm.prompt);
+        // toastr.info('submitted this prompt: ' + vm.prompt);
       }
     }
 
