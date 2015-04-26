@@ -41,5 +41,8 @@
         <splash src="drawable-xxhdpi-screen.png" width="640" height="960" />
         <splash src="drawable-land-xxhdpi-screen.png" width="960" height="640" />
     </platform>
+    <preference name="StatusBarOverlaysWebView" value="false"/>
+    <preference name="StatusBarBackgroundColor" value="#000000"/>
+    <preference name="StatusBarStyle" value="lightcontent" />
     <access origin="*" />
 </widget>

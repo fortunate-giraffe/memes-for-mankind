@@ -12,4 +12,4 @@ checkout:
     - grunt ngconstant:prod
 test:
   override:
-    - grunt test
+    - grunt test_n_stuff
