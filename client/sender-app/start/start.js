@@ -21,6 +21,7 @@
     vm.setUser = setUser;
     vm.hasExtension = true; // these start as true and only change when the cast icon is clicked
     vm.onChrome = true; // these start as true and only change when the cast icon is clicked
+    vm.onMobile = false; // starts as false and we'll only update once the cast icon is clicked
 
     changeStateListener();
 
@@ -33,7 +34,8 @@
       // checking for the extension and chrome
       vm.onChrome = chromeDetect.checkBrowser();
       vm.hasExtension = chromeDetect.checkExtension();
-      if (vm.hasExtension && vm.onChrome) {
+      vm.onMobile = chromeDetect.checkMobile();
+      if (vm.hasExtension && vm.onChrome && !vm.onMobile) {
         playerMessenger.connect();
       }
     };
