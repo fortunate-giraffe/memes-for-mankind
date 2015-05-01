@@ -16,6 +16,10 @@
       <p class="start-modal">Whoa there, you need the Google Cast extension to play this game!</p>
       <p class="start-modal">Please visit the <a href="https://chrome.google.com/webstore/detail/google-cast/boadgeojelhgndaghljhdicfkmllpafd?hl=en" target="_blank">Chrome Web Store</a> to install it.  Then try refreshing the page.</p>
     </div>
+    <div class="modal-content" ng-show="!vm.ccAvailable" >
+      <p class="start-modal">Easy now, looks like you don't have a Chromecast on your wifi!</p>
+      <p class="start-modal">Make sure you're on the same wifi, your Chromecast is powered up, and your cast extension shows it as available when you click on it.  Then try refreshing the page.</p>
+    </div>
     <div ng-show="vm.connectionStatus">
       <div ng-hide="!vm.playerStarted">
         <h4>WARNING:</h4>
