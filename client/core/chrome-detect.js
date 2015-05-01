@@ -9,10 +9,12 @@
   function chromeDetect (events, socketDev) {
     var browserIsChrome;
     var browserHasExtension;
+    var browserIsMobile;
 
     return {
       checkBrowser: checkBrowser,
-      checkExtension: checkExtension
+      checkExtension: checkExtension,
+      checkMobile: checkMobile
     };
 
     function checkBrowser () {
@@ -29,6 +31,21 @@
       browserHasExtension = (window.cordova || window.chrome.cast.extensionId || socketDev);
       return browserHasExtension;
     }
+
+    function checkMobile () {
+      // if the user is on mobile, direct them to our site to get the native clients
+      browserIsMobile = ( !window.cordova &&
+                          (window.navigator.userAgent.match(/Android/i) ||
+                          window.navigator.userAgent.match(/webOS/i) ||
+                          window.navigator.userAgent.match(/iPhone/i) ||
+                          window.navigator.userAgent.match(/iPad/i) ||
+                          window.navigator.userAgent.match(/iPod/i) ||
+                          window.navigator.userAgent.match(/BlackBerry/i) ||
+                          window.navigator.userAgent.match(/Windows Phone/i)) );
+
+      return browserIsMobile;
+    }
+
   }
 
 })();
