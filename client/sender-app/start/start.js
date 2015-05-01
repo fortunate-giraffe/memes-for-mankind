@@ -5,9 +5,9 @@
       .module('app.start')
       .controller('Start', Start);
 
-  Start.$inject = ['playerMessenger', 'playerUser', '$state', 'chromeDetect'];
+  Start.$inject = ['playerMessenger', 'playerUser', '$state', 'chromeDetect', 'events'];
 
-  function Start(playerMessenger, playerUser, $state, chromeDetect) {
+  function Start(playerMessenger, playerUser, $state, chromeDetect, events) {
     /*jshint validthis: true */
     var vm = this;
 
@@ -19,6 +19,7 @@
     vm.nameSubmitted = false;
     vm.playerStarted = false;
     vm.setUser = setUser;
+    vm.ccAvailable = true;
     vm.hasExtension = true; // these start as true and only change when the cast icon is clicked
     vm.onChrome = true; // these start as true and only change when the cast icon is clicked
     vm.onMobile = false; // starts as false and we'll only update once the cast icon is clicked
@@ -28,6 +29,12 @@
     playerMessenger.on('chromecastConnection', function(){
       vm.connectionStatus = playerMessenger.getConnectionStatus();
       console.log('connection status updated', vm.connectionStatus);
+    });
+
+    // this event is triggered when cast-sender.js determines no CC's are available on the wifi
+    events.on('ReceiverUnavailable', function() {
+      console.log('receiverunavailable triggered!');
+      vm.ccAvailable = false;
     });
 
     vm.connect = function () {

@@ -4,9 +4,9 @@
   angular.module('app.cast-sender', [])
     .factory('castSenderMessenger', castSenderMessenger);
 
-  castSenderMessenger.$inject = ['chromecastNamespace', 'appId'];
+  castSenderMessenger.$inject = ['chromecastNamespace', 'appId', 'events'];
 
-  function castSenderMessenger (chromecastNamespace, appId) {
+  function castSenderMessenger (chromecastNamespace, appId, events) {
     var gameRecipient = 'ChromeCast';
     var username;
     var session;
@@ -70,7 +70,13 @@
 
       window.chrome.cast.requestSession(
         sessionListener,
-        function(err) { console.dir(err); }
+        function(err) {
+          console.log('error connecting');
+          console.dir(err);
+          if (err.code === 'receiver_unavailable') {
+            events.trigger('ReceiverUnavailable');
+          }
+        }
       );
     }
 
