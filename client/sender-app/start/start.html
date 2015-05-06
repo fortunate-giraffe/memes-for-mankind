@@ -12,7 +12,7 @@
       <p class="start-modal">You'll need Google Chrome to play this on a laptop/desktop...  <a href="https://www.google.com/chrome/browser/desktop/index.html" target="_blank">Download Chrome</a> to get it.  Or just open Chrome, if you already have it.</p>
       <p class="start-modal">Once you've downloaded Chrome head over to the <a href="https://chrome.google.com/webstore/detail/google-cast/boadgeojelhgndaghljhdicfkmllpafd?hl=en" target="_blank">Chrome Web Store</a> and download the Google Cast Extension, you'll need that too!</p>
     </div>
-    <div class="modal-content" ng-show="!vm.hasExtension && vm.onChrome" >
+    <div class="modal-content" ng-show="!vm.hasExtension && !vm.onMobile && vm.onChrome" >
       <p class="start-modal">Whoa there, you need the Google Cast extension to play this game!</p>
       <p class="start-modal">Please visit the <a href="https://chrome.google.com/webstore/detail/google-cast/boadgeojelhgndaghljhdicfkmllpafd?hl=en" target="_blank">Chrome Web Store</a> to install it.  Then try refreshing the page.</p>
     </div>
