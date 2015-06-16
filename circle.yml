@@ -9,6 +9,7 @@ deployment:
       appname: memesformankind-prod
 checkout:
   post:
+    - npm install
     - grunt ngconstant:prod
 test:
   override:
