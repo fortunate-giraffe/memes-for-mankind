@@ -28,7 +28,7 @@
       // if the user doesn't have the chrome extension, tell them to get the cast extension
       // only actually check if they also don't have cordova and haven't loaded up the socket version
       // check browser first to avoid getting a null reference on cast.extensionId
-      browserHasExtension = (window.cordova || window.chrome.cast.extensionId || socketDev);
+      browserHasExtension = (window.cordova || window.chrome.cast || socketDev);
       return browserHasExtension;
     }
 
